@@ -1,0 +1,37 @@
+
+	    if {[catch {
+		::JobServer::listFiles
+	    } msg]} {
+		puts "Cannot load JobServer::listFiles -- $msg"
+		proc ::JobServer::listFiles {} {
+		    puts "\nFiles:"
+		    foreach file [lsort [glob -nocomplain *]] {
+			if {[catch {file mtime $file} T]} {
+			    set T "--- -- --:--:--"
+			} else {
+			    set T [clock format $T -format "%b %d %T"]
+			}
+			puts [format "%15d %s %s" [file size $file] $T $file]
+		    }
+		    puts ""
+		}
+		::JobServer::listFiles
+	    }
+
+	    if {[catch {
+		puts "Starting LAMMPS at [clock format [clock seconds]]"
+		package require LAMMPS 3.0
+
+		::LAMMPS::execute -out LAMMPS.out
+
+		puts "Finished LAMMPS [clock format [clock seconds]]"
+		::JobServer::listFiles
+	    } msg]} {
+		puts "Error executing LAMMPS [clock format [clock seconds]]: $msg\n\n$::errorInfo"
+		global errorInfo
+		puts ""
+		puts $errorInfo
+		::JobServer::listFiles
+		return
+	    }
+	

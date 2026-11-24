@@ -1,0 +1,6 @@
+LAMMPS (7 Jan 2022)
+  using 1 OpenMP thread(s) per MPI task
+#  This is the control script for LAMMPS.
+
+echo			both
+log	    		7.1_Initialize.out

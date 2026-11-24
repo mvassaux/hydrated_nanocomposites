@@ -1,0 +1,44 @@
+cd /home/werner/MD/TaskServer/Tasks/localhost-32000-task01184
+source /home/werner/MD/bin/generic/TaskServer.kit
+source /home/werner/MD/bin/generic/tcllib.kit
+lappend auto_path /home/werner/MD/TaskServer/Tools
+namespace eval ::task {variable id 1184.localhost-32000}
+namespace eval ::JobServer {variable JobServer http://localhost:32000}
+namespace eval ::TaskServer {variable InstallDir /home/werner/MD}
+array set Options {finishedtasks {} -remote 0 -ntasks 1 -id http://werner-Tower:23000/taskserver -port 23000 wd /home/werner/MD/TaskServer -batch_queue {} -delay 0 interval 60 -core_limit_type 0 -machines {} -ruser {} -rdir {} -css {SmallFontSizePixels 14 FontFamily {"Palatino Linotype", "Book Antiqua", "Palatino", "Georgia", "serif"} BannerHighlightColor #A0B01E AdminBannerColor #0A4A54 BackgroundColor #FFFFFF AdminHighlightColor #3B8993 SmallestFontSizePixels 12 BannerColor #202020 FontColor #202020 TableColor #202020 TaskServerBannerColor #3D2527 FontSizePixels 16} tasks {1084.localhost-32000 1099.localhost-32000 1162.localhost-32000 1164.localhost-32000 1166.localhost-32000 1167.localhost-32000 1171.localhost-32000 1172.localhost-32000 1173.localhost-32000 1175.localhost-32000 1174.localhost-32000 1176.localhost-32000 1181.localhost-32000 1182.localhost-32000 1183.localhost-32000} InstallDir /home/werner/MD -control_type 0 -path {} -queue_type direct -batch_project {} -usehttps 0 -displayloglevel notice -rhost {} -rwdir {} -nprocessors 16 -webmaster Support@MaterialsDesign.com -type {} -loglevel notice}
+set Options(taskdir) /home/werner/MD/TaskServer/Tasks/localhost-32000-task01184
+set Options(-nprocessors) 1
+#
+# The MedeA environment
+#
+set ::MedeA::platform Linux-x86_64
+set ::MDPriv {path /home/werner/MD/TaskServer logfile /home/werner/MD/TaskServer/logs/werner-Tower.log}
+array set ::MedeA::Directory {bin /home/werner/MD/bin/Linux-x86_64 TaskServer /home/werner/MD/bin/generic/TaskServer.kit tcllib /home/werner/MD/bin/generic/tcllib.kit wd /home/werner/MD/TaskServer generic /home/werner/MD/bin/generic mpibin /home/werner/MD/bin/Linux-x86_64/*/bin data /home/werner/MD/data medealib /home/werner/MD/bin/generic/MedeALib.kit root /home/werner/MD MedeA /home/werner/MD binarylib /home/werner/MD/bin/Linux-x86_64/Linux-x86_64.kit forcefields /home/werner/MD/data/Forcefields}
+namespace eval job {
+	variable id 680
+	variable url http://localhost:32000
+	variable dir /home/werner/MD/Jobs/dir500/680
+	variable useSecurity 0
+}
+
+	if {[catch {
+	    puts "Starting background task at [clock format [clock seconds]]"
+	    package require MD::Background 1.0
+
+	    ::MD::Background::execute -out Background.out
+
+	    puts "Finished background task [clock format [clock seconds]]"
+	} msg]} {
+	    puts "Error executing background task [clock format [clock seconds]]: $msg\n\n$::errorInfo"
+	    global errorInfo
+	    puts ""
+	    puts $errorInfo
+	    return
+	}
+    
+	    # Temporarily delete WAVECAR until Job server changes propagate through
+	    if {[file exists VASP_WAVECAR.txt] && [file exists WAVECAR]} {
+		file delete -force WAVECAR
+	    }
+	
+exit

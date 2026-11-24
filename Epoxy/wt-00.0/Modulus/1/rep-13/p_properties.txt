@@ -1,0 +1,2 @@
+youngs_modulus,bulk_modulus,shear_modulus_1,shear_modulus_2,poissons_ratio
+2.54419659449071,4.3114511109032,0.907458259532791,0.9075722350888,0.40164964072627

@@ -1,0 +1,117 @@
+# variables
+
+variable rep world 0 1 2 3 4 5 6 7 8 9
+variable vseed world 331577 522262 28588 211974 25592 536058 437840 388248 729231 693545
+
+#-------------------------------------------------------------------------------
+# Variables
+#-------------------------------------------------------------------------------
+
+
+variable        T0 equal 700
+variable        TNew equal 700
+
+shell cd Insertion-Output/${rep}
+
+#-------------------------------------------------------------------------------
+# Initialize LAMMPS run for 3-d periodic
+#-------------------------------------------------------------------------------
+
+units			real
+boundary		p p p
+atom_style		full
+
+pair_style		lj/class2/coul/long 9.5
+pair_modify             mix sixthpower
+pair_modify		tail yes
+bond_style		class2
+angle_style		class2
+dihedral_style		class2
+improper_style		class2
+special_bonds           lj 0.0 0.0 1.0 coul 0.0 0.0 1.0
+
+box                     tilt large
+read_data		data.polymer
+
+include			polymer.coeff
+
+neighbor		2.0 bin
+neigh_modify		delay 0 every 1 check yes
+kspace_style		pppm 0.00001
+
+variable		R		equal 0.00198722
+variable		sysvol		equal vol
+variable		sysmass		equal mass(all)/6.0221367e+23
+variable		sysdensity	equal v_sysmass/v_sysvol/1.0e-24
+variable		coulomb		equal ecoul+elong
+variable		etotal		equal etotal
+variable		pe		equal pe
+variable		ke		equal ke
+variable		evdwl		equal evdwl
+variable		epair		equal epair
+variable		ebond		equal ebond
+variable		eangle		equal eangle
+variable		edihed		equal edihed
+variable		eimp		equal eimp
+variable		lx		equal lx
+variable		ly		equal ly
+variable		lz		equal lz
+variable		Nthermo		equal 0
+variable		cella		equal lx
+variable		cellb		equal sqrt(ly*ly+xy*xy)
+variable		cellc		equal sqrt(lz*lz+xz*xz+yz*yz)
+variable		cellalpha	equal acos((xy*xz+ly*yz)/(v_cellb*v_cellc))
+variable		cellbeta	equal acos(xz/v_cellc)
+variable		cellgamma	equal acos(xy/v_cellb)
+variable		p		equal press
+variable		pxx		equal pxx
+variable		pyy		equal pyy
+variable		pzz		equal pzz
+variable		pyz		equal pyz
+variable		pxz		equal pxz
+variable		pxy		equal pxy
+variable		sxx		equal -pxx
+variable		syy		equal -pyy
+variable		szz		equal -pzz
+variable		syz		equal -pyz
+variable		sxz		equal -pxz
+variable		sxy		equal -pxy
+variable		fmax		equal fmax
+variable	        fnorm		equal fnorm
+variable		time equal step*dt+0.000001
+variable		surfacetension equal 0.5*v_lz*(0.5*(v_sxx+v_syy)-v_szz)
+
+thermo_style		custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+thermo_modify		flush yes
+
+
+#
+# Set up the fixed and movable groups
+#
+
+group		    	movable union all
+group		    	fixed subtract all movable
+
+compute 		sum_f1 movable reduce sum fx fy fz
+variable 		sum_fx equal c_sum_f1[1]
+variable 		sum_fy equal c_sum_f1[2]
+variable  		sum_fz equal c_sum_f1[3]
+
+#
+# Subsets
+#
+
+ndx2group               groups_index.ndx
+
+shell cd ../..
+
+#-------------------------------------------------------------------------------
+# Variabless
+#-------------------------------------------------------------------------------
+
+velocity     	    	all create ${T0} ${vseed} dist gaussian mom yes rot no
+
+shell mkdir ${rep}
+shell cd ${rep}
+
+jump ../input-loop.dat loop

@@ -1,0 +1,164 @@
+# variables
+
+variable rep world 0 1 2 3 4 5 6 7 8 9
+variable                T0 index 300
+shell cd ${rep}/${T0}K
+
+#-------------------------------------------------------------------------------
+# Initialize LAMMPS run for 3-d periodic
+#-------------------------------------------------------------------------------
+
+units			real
+boundary		p p p
+atom_style		full
+
+pair_style		lj/class2/coul/long 9.5
+pair_modify             mix sixthpower
+pair_modify		tail yes
+bond_style		class2
+angle_style		class2
+dihedral_style		class2
+improper_style		class2
+special_bonds           lj 0.0 0.0 1.0 coul 0.0 0.0 1.0
+
+read_data		data.polymer
+
+include			polymer.coeff
+
+neighbor		2.0 bin
+neigh_modify		delay 0 every 1 check yes
+kspace_style		pppm 0.00001
+
+variable		R		equal 0.00198722
+variable		sysvol		equal vol
+variable		sysmass		equal mass(all)/6.0221367e+23
+variable		sysdensity	equal v_sysmass/v_sysvol/1.0e-24
+variable		coulomb		equal ecoul+elong
+variable		etotal		equal etotal
+variable		pe		equal pe
+variable		ke		equal ke
+variable		evdwl		equal evdwl
+variable		epair		equal epair
+variable		ebond		equal ebond
+variable		eangle		equal eangle
+variable		edihed		equal edihed
+variable		eimp		equal eimp
+variable		lx		equal lx
+variable		ly		equal ly
+variable		lz		equal lz
+variable		Nthermo		equal 0
+variable		cella		equal lx
+variable		cellb		equal sqrt(ly*ly+xy*xy)
+variable		cellc		equal sqrt(lz*lz+xz*xz+yz*yz)
+variable		cellalpha	equal acos((xy*xz+ly*yz)/(v_cellb*v_cellc))
+variable		cellbeta	equal acos(xz/v_cellc)
+variable		cellgamma	equal acos(xy/v_cellb)
+variable		p		equal press
+variable		pxx		equal pxx
+variable		pyy		equal pyy
+variable		pzz		equal pzz
+variable		pyz		equal pyz
+variable		pxz		equal pxz
+variable		pxy		equal pxy
+variable		sxx		equal -pxx
+variable		syy		equal -pyy
+variable		szz		equal -pzz
+variable		syz		equal -pyz
+variable		sxz		equal -pxz
+variable		sxy		equal -pxy
+variable		fmax		equal fmax
+variable	        fnorm		equal fnorm
+variable		time equal step*dt+0.000001
+variable		surfacetension equal 0.5*v_lz*(0.5*(v_sxx+v_syy)-v_szz)
+
+thermo_style		custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+thermo_modify		flush yes
+
+
+#
+# Set up the fixed and movable groups
+#
+
+group		    	movable union all
+group		    	fixed subtract all movable
+
+compute 		sum_f1 movable reduce sum fx fy fz
+variable 		sum_fx equal c_sum_f1[1]
+variable 		sum_fy equal c_sum_f1[2]
+variable  		sum_fz equal c_sum_f1[3]
+
+#
+# Subsets
+#
+
+ndx2group               groups_index.ndx
+
+shell cd ..
+
+#-------------------------------------------------------------------------------
+# TP
+#-------------------------------------------------------------------------------
+
+reset_timestep		0
+
+thermo                  100000
+
+group                   WaterO type 12
+group                   WaterH type 9
+group                   c2 type 1	
+group                   c2oe type 2	
+group                   c3 type 3	
+group                   c43o type 4	
+group                   cp type 5	
+group                   hc type 6      
+group                   hn type 7      
+group                   ho type 8      
+group                   na2 type 10	
+group                   nb type 11	
+group                   oc type 13	
+group                   oh type 14	
+
+# Fix shake is needed for water in pcff+
+fix			shaken all shake .0001 20 0 a 39 b 20
+
+fix			1 all nvt temp ${T0} ${T0} 100 drag 1.0
+fix			2 all ave/time 1 10000 10000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_etotal v_pe v_ke v_evdwl v_coulomb file TP_averages.txt off 1
+dump                    dmp all atom 1000 dump.lammpstrj
+
+compute r01 all rdf 100 12 1
+compute r02 all rdf 100 12 2
+compute r03 all rdf 100 12 3
+compute r04 all rdf 100 12 4
+compute r05 all rdf 100 12 5
+compute r06 all rdf 100 12 6
+compute r07 all rdf 100 12 7
+compute r08 all rdf 100 12 8
+compute r09 all rdf 100 12 9
+compute r10 all rdf 100 12 10
+compute r11 all rdf 100 12 11
+compute r12 all rdf 100 12 12
+compute r13 all rdf 100 12 13
+compute r14 all rdf 100 12 14
+
+fix rf01 all ave/time 10000 1 10000 c_r01[*] file at-01.rdf mode vector
+fix rf02 all ave/time 10000 1 10000 c_r02[*] file at-02.rdf mode vector
+fix rf03 all ave/time 10000 1 10000 c_r03[*] file at-03.rdf mode vector
+fix rf04 all ave/time 10000 1 10000 c_r04[*] file at-04.rdf mode vector
+fix rf05 all ave/time 10000 1 10000 c_r05[*] file at-05.rdf mode vector
+fix rf06 all ave/time 10000 1 10000 c_r06[*] file at-06.rdf mode vector
+fix rf07 all ave/time 10000 1 10000 c_r07[*] file at-07.rdf mode vector
+fix rf08 all ave/time 10000 1 10000 c_r08[*] file at-08.rdf mode vector
+fix rf09 all ave/time 10000 1 10000 c_r09[*] file at-09.rdf mode vector
+fix rf10 all ave/time 10000 1 10000 c_r10[*] file at-10.rdf mode vector
+fix rf11 all ave/time 10000 1 10000 c_r11[*] file at-11.rdf mode vector
+fix rf12 all ave/time 10000 1 10000 c_r12[*] file at-12.rdf mode vector
+fix rf13 all ave/time 10000 1 10000 c_r13[*] file at-13.rdf mode vector
+fix rf14 all ave/time 10000 1 10000 c_r14[*] file at-14.rdf mode vector
+
+timestep		1
+run			200000
+
+undump			dmp
+unfix			1
+unfix			2
+unfix			shaken

@@ -1,0 +1,1637 @@
+#  This is the control script for LAMMPS.
+
+echo			both
+
+# Variables
+
+variable        T0 index 700
+variable        vseed index 1234
+
+variable        graphene world 0 1
+shell cd Cross-Out
+
+#-------------------------------------------------------------------------------
+# Initialize LAMMPS run for 3-d periodic
+#-------------------------------------------------------------------------------
+
+units			real
+boundary		p p p
+atom_style		full
+
+pair_style		lj/class2/coul/long 9.5
+pair_modify             mix sixthpower
+pair_modify		tail yes
+bond_style		class2
+angle_style		class2
+dihedral_style		class2
+improper_style		class2
+special_bonds           lj 0.0 0.0 1.0 coul 0.0 0.0 1.0
+
+box                     tilt large
+read_data		data.polymer
+
+include			polymer.coeff
+
+neighbor		2.0 bin
+neigh_modify		delay 0 every 1 check yes
+kspace_style		pppm 0.00001
+
+variable		R		equal 0.00198722
+variable		sysvol		equal vol
+variable		sysmass		equal mass(all)/6.0221367e+23
+variable		sysdensity	equal v_sysmass/v_sysvol/1.0e-24
+variable		coulomb		equal ecoul+elong
+variable		etotal		equal etotal
+variable		pe		equal pe
+variable		ke		equal ke
+variable		evdwl		equal evdwl
+variable		epair		equal epair
+variable		ebond		equal ebond
+variable		eangle		equal eangle
+variable		edihed		equal edihed
+variable		eimp		equal eimp
+variable		lx		equal lx
+variable		ly		equal ly
+variable		lz		equal lz
+variable		Nthermo		equal 0
+variable		cella		equal lx
+variable		cellb		equal sqrt(ly*ly+xy*xy)
+variable		cellc		equal sqrt(lz*lz+xz*xz+yz*yz)
+variable		cellalpha	equal acos((xy*xz+ly*yz)/(v_cellb*v_cellc))
+variable		cellbeta	equal acos(xz/v_cellc)
+variable		cellgamma	equal acos(xy/v_cellb)
+variable		p		equal press
+variable		pxx		equal pxx
+variable		pyy		equal pyy
+variable		pzz		equal pzz
+variable		pyz		equal pyz
+variable		pxz		equal pxz
+variable		pxy		equal pxy
+variable		sxx		equal -pxx
+variable		syy		equal -pyy
+variable		szz		equal -pzz
+variable		syz		equal -pyz
+variable		sxz		equal -pxz
+variable		sxy		equal -pxy
+variable		fmax		equal fmax
+variable	        fnorm		equal fnorm
+variable		time equal step*dt+0.000001
+variable		surfacetension equal 0.5*v_lz*(0.5*(v_sxx+v_syy)-v_szz)
+
+thermo_style		custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+thermo_modify		flush yes
+
+
+#
+# Set up the fixed and movable groups
+#
+
+group		    	movable union all
+group		    	fixed subtract all movable
+
+compute 		sum_f1 movable reduce sum fx fy fz
+variable 		sum_fx equal c_sum_f1[1]
+variable 		sum_fy equal c_sum_f1[2]
+variable  		sum_fz equal c_sum_f1[3]
+
+#
+# Subsets
+#
+
+group		    	subset_graphene id 1 2 3 4 5 6 7 8 9 10
+group		    	subset_graphene id 11 12 13 14 15 16 17 18 19 20
+group		    	subset_graphene id 21 22 23 24 25 26 27 28 29 30
+group		    	subset_graphene id 31 32 33 34 35 36 37 38 39 40
+group		    	subset_graphene id 41 42 43 44 45 46 47 48 49 50
+group		    	subset_graphene id 51 52 53 54 55 56 57 58 59 60
+group		    	subset_graphene id 61 62 63 64 65 66 67 68 69 70
+group		    	subset_graphene id 71 72 73 74 75 76 77 78 79 80
+group		    	subset_graphene id 81 82 83 84 85 86 87 88 89 90
+group		    	subset_graphene id 91 92 93 94 95 96 97 98 99 100
+group		    	subset_graphene id 101 102 103 104 105 106 107 108 109 110
+group		    	subset_graphene id 111 112 113 114 115 116 117 118 119 120
+group		    	subset_graphene id 121 122 123 124 125 126 127 128 129 130
+group		    	subset_graphene id 131 132 133 134 135 136 137 138 139 140
+group		    	subset_graphene id 141 142 143 144 145 146 147 148 149 150
+group		    	subset_graphene id 151 152 153 154 155 156 157 158 159 160
+group		    	subset_graphene id 161 162 163 164 165 166 167 168 169 170
+group		    	subset_graphene id 171 172 173 174 175 176 177 178 179 180
+group		    	subset_graphene id 181 182 183 184 185 186 187 188 189 190
+group		    	subset_graphene id 191 192 193 194 195 196 197 198 199 200
+group		    	subset_graphene id 201 202 203 204 205 206 207 208 209 210
+group		    	subset_graphene id 211 212 213 214 215 216 217 218 219 220
+group		    	subset_graphene id 221 222 223 224 225 226 227 228 229 230
+group		    	subset_graphene id 231 232 233 234 235 236 237 238 239 240
+group		    	subset_graphene id 241 242 243 244 245 246 247 248 249 250
+group		    	subset_graphene id 251 252 253 254 255 256 257 258 259 260
+group		    	subset_graphene id 261 262 263 264 265 266 267 268 269 270
+group		    	subset_graphene id 271 272 273 274 275 276 277 278 279 280
+group		    	subset_graphene id 281 282 283 284 285 286 287 288 289 290
+group		    	subset_graphene id 291 292 293 294 295 296 297 298 299 300
+group		    	subset_graphene id 301 302 303 304 305 306 307 308 309 310
+group		    	subset_graphene id 311 312 313 314 315 316 317 318 319 320
+group		    	subset_graphene id 321 322 323 324 325 326 327 328 329 330
+group		    	subset_graphene id 331 332 333 334 335 336 337 338 339 340
+group		    	subset_graphene id 341 342 343 344 345 346 347 348 349 350
+group		    	subset_graphene id 351 352 353 354 355 356 357 358 359 360
+group		    	subset_graphene id 361 362 363 364 365 366 367 368 369 370
+group		    	subset_graphene id 371 372 373 374 375 376 377 378 379 380
+group		    	subset_graphene id 381 382 383 384 385 386 387 388 389 390
+group		    	subset_graphene id 391 392 393 394 395 396 397 398 399 400
+group		    	subset_graphene id 401 402 403 404 405 406 407 408 409 410
+group		    	subset_graphene id 411 412 413 414 415 416 417 418 419 420
+group		    	subset_graphene id 421 422 423 424 425 426 427 428 429 430
+group		    	subset_graphene id 431 432 433 434 435 436 437 438 439 440
+group		    	subset_graphene id 441 442 443 444 445 446 447 448 449 450
+group		    	subset_graphene id 451 452 453 454 455 456 457 458 459 460
+group		    	subset_graphene id 461 462 463 464 465 466 467 468 469 470
+group		    	subset_graphene id 471 472 473 474 475 476 477 478 479 480
+group		    	subset_graphene id 481 482 483 484 485 486 487 488 489 490
+group		    	subset_graphene id 491 492 493 494 495 496 497 498 499 500
+group		    	subset_graphene id 501 502 503 504 505 506 507 508 509 510
+group		    	subset_graphene id 511 512 513 514 515 516 517 518 519 520
+group		    	subset_graphene id 521 522 523 524 525 526 527 528 529 530
+group		    	subset_graphene id 531 532 533 534 535 536 537 538 539 540
+group		    	subset_graphene id 541 542 543 544 545 546 547 548 549 550
+group		    	subset_graphene id 551 552 553 554 555 556 557 558 559 560
+group		    	subset_graphene id 561 562 563 564 565 566 567 568 569 570
+group		    	subset_graphene id 571 572 573 574 575 576 577 578 579 580
+group		    	subset_graphene id 581 582 583 584 585 586 587 588 589 590
+group		    	subset_graphene id 591 592 593 594 595 596 597 598 599 600
+group		    	subset_graphene id 601 602 603 604 605 606 607 608 609 610
+group		    	subset_graphene id 611 612 613 614 615 616 617 618 619 620
+group		    	subset_graphene id 621 622 623 624 625 626 627 628 629 630
+group		    	subset_graphene id 631 632 633 634 635 636 637 638 639 640
+group		    	subset_graphene id 641 642 643 644 645 646 647 648 649 650
+group		    	subset_graphene id 651 652 653 654 655 656 657 658 659 660
+group		    	subset_graphene id 661 664 663 662 669 668 667 666 665 676
+group		    	subset_graphene id 675 674 673 672 671 670 685 684 683 682
+group		    	subset_graphene id 681 680 679 678 677 696 695 694 693 692
+group		    	subset_graphene id 691 690 689 688 687 686 709 708 707 706
+group		    	subset_graphene id 705 704 703 702 701 700 699 698 697 724
+group		    	subset_graphene id 723 722 721 720 719 718 717 716 715 714
+group		    	subset_graphene id 713 712 711 710 741 740 739 738 737 736
+group		    	subset_graphene id 735 734 733 732 731 730 729 728 727 726
+group		    	subset_graphene id 725 760 759 758 757 756 755 754 753 752
+group		    	subset_graphene id 751 750 749 748 747 746 745 744 743 742
+group		    	subset_graphene id 770 769 768 767 766 765 764 763 762 761
+group		    	subset_graphene id 1211 1214 1213 1212 1219 1218 1217 1216 1215 1226
+group		    	subset_graphene id 1225 1224 1223 1222 1221 1220 1235 1234 1233 1232
+group		    	subset_graphene id 1231 1230 1229 1228 1227 1246 1245 1244 1243 1242
+group		    	subset_graphene id 1241 1240 1239 1238 1237 1236 1259 1258 1257 1256
+group		    	subset_graphene id 1255 1254 1253 1252 1251 1250 1249 1248 1247 1274
+group		    	subset_graphene id 1273 1272 1271 1270 1269 1268 1267 1266 1265 1264
+group		    	subset_graphene id 1263 1262 1261 1260 1291 1290 1289 1288 1287 1286
+group		    	subset_graphene id 1285 1284 1283 1282 1281 1280 1279 1278 1277 1276
+group		    	subset_graphene id 1275 1310 1309 1308 1307 1306 1305 1304 1303 1302
+group		    	subset_graphene id 1301 1300 1299 1298 1297 1296 1295 1294 1293 1292
+group		    	subset_graphene id 1320 1319 1318 1317 1316 1315 1314 1313 1312 1311
+group		    	subset_graphene id 1101 1104 1103 1102 1109 1108 1107 1106 1105 1116
+group		    	subset_graphene id 1115 1114 1113 1112 1111 1110 1125 1124 1123 1122
+group		    	subset_graphene id 1121 1120 1119 1118 1117 1136 1135 1134 1133 1132
+group		    	subset_graphene id 1131 1130 1129 1128 1127 1126 1149 1148 1147 1146
+group		    	subset_graphene id 1145 1144 1143 1142 1141 1140 1139 1138 1137 1164
+group		    	subset_graphene id 1163 1162 1161 1160 1159 1158 1157 1156 1155 1154
+group		    	subset_graphene id 1153 1152 1151 1150 1181 1180 1179 1178 1177 1176
+group		    	subset_graphene id 1175 1174 1173 1172 1171 1170 1169 1168 1167 1166
+group		    	subset_graphene id 1165 1200 1199 1198 1197 1196 1195 1194 1193 1192
+group		    	subset_graphene id 1191 1190 1189 1188 1187 1186 1185 1184 1183 1182
+group		    	subset_graphene id 1210 1209 1208 1207 1206 1205 1204 1203 1202 1201
+group		    	subset_graphene id 991 994 993 992 999 998 997 996 995 1006
+group		    	subset_graphene id 1005 1004 1003 1002 1001 1000 1015 1014 1013 1012
+group		    	subset_graphene id 1011 1010 1009 1008 1007 1026 1025 1024 1023 1022
+group		    	subset_graphene id 1021 1020 1019 1018 1017 1016 1039 1038 1037 1036
+group		    	subset_graphene id 1035 1034 1033 1032 1031 1030 1029 1028 1027 1054
+group		    	subset_graphene id 1053 1052 1051 1050 1049 1048 1047 1046 1045 1044
+group		    	subset_graphene id 1043 1042 1041 1040 1071 1070 1069 1068 1067 1066
+group		    	subset_graphene id 1065 1064 1063 1062 1061 1060 1059 1058 1057 1056
+group		    	subset_graphene id 1055 1090 1089 1088 1087 1086 1085 1084 1083 1082
+group		    	subset_graphene id 1081 1080 1079 1078 1077 1076 1075 1074 1073 1072
+group		    	subset_graphene id 1100 1099 1098 1097 1096 1095 1094 1093 1092 1091
+group		    	subset_graphene id 881 884 883 882 889 888 887 886 885 896
+group		    	subset_graphene id 895 894 893 892 891 890 905 904 903 902
+group		    	subset_graphene id 901 900 899 898 897 916 915 914 913 912
+group		    	subset_graphene id 911 910 909 908 907 906 929 928 927 926
+group		    	subset_graphene id 925 924 923 922 921 920 919 918 917 944
+group		    	subset_graphene id 943 942 941 940 939 938 937 936 935 934
+group		    	subset_graphene id 933 932 931 930 961 960 959 958 957 956
+group		    	subset_graphene id 955 954 953 952 951 950 949 948 947 946
+group		    	subset_graphene id 945 980 979 978 977 976 975 974 973 972
+group		    	subset_graphene id 971 970 969 968 967 966 965 964 963 962
+group		    	subset_graphene id 990 989 988 987 986 985 984 983 982 981
+group		    	subset_graphene id 771 774 773 772 779 778 777 776 775 786
+group		    	subset_graphene id 785 784 783 782 781 780 795 794 793 792
+group		    	subset_graphene id 791 790 789 788 787 806 805 804 803 802
+group		    	subset_graphene id 801 800 799 798 797 796 819 818 817 816
+group		    	subset_graphene id 815 814 813 812 811 810 809 808 807 834
+group		    	subset_graphene id 833 832 831 830 829 828 827 826 825 824
+group		    	subset_graphene id 823 822 821 820 851 850 849 848 847 846
+group		    	subset_graphene id 845 844 843 842 841 840 839 838 837 836
+group		    	subset_graphene id 835 870 869 868 867 866 865 864 863 862
+group		    	subset_graphene id 861 860 859 858 857 856 855 854 853 852
+group		    	subset_graphene id 880 879 878 877 876 875 874 873 872 871
+group		    	subset_graphene id 1321 1324 1323 1322 1329 1328 1327 1326 1325 1336
+group		    	subset_graphene id 1335 1334 1333 1332 1331 1330 1345 1344 1343 1342
+group		    	subset_graphene id 1341 1340 1339 1338 1337 1356 1355 1354 1353 1352
+group		    	subset_graphene id 1351 1350 1349 1348 1347 1346 1369 1368 1367 1366
+group		    	subset_graphene id 1365 1364 1363 1362 1361 1360 1359 1358 1357 1384
+group		    	subset_graphene id 1383 1382 1381 1380 1379 1378 1377 1376 1375 1374
+group		    	subset_graphene id 1373 1372 1371 1370 1401 1400 1399 1398 1397 1396
+group		    	subset_graphene id 1395 1394 1393 1392 1391 1390 1389 1388 1387 1386
+group		    	subset_graphene id 1385 1420 1419 1418 1417 1416 1415 1414 1413 1412
+group		    	subset_graphene id 1411 1410 1409 1408 1407 1406 1405 1404 1403 1402
+group		    	subset_graphene id 1430 1429 1428 1427 1426 1425 1424 1423 1422 1421
+group		    	subset_graphene id 1871 1874 1873 1872 1879 1878 1877 1876 1875 1886
+group		    	subset_graphene id 1885 1884 1883 1882 1881 1880 1895 1894 1893 1892
+group		    	subset_graphene id 1891 1890 1889 1888 1887 1906 1905 1904 1903 1902
+group		    	subset_graphene id 1901 1900 1899 1898 1897 1896 1919 1918 1917 1916
+group		    	subset_graphene id 1915 1914 1913 1912 1911 1910 1909 1908 1907 1934
+group		    	subset_graphene id 1933 1932 1931 1930 1929 1928 1927 1926 1925 1924
+group		    	subset_graphene id 1923 1922 1921 1920 1951 1950 1949 1948 1947 1946
+group		    	subset_graphene id 1945 1944 1943 1942 1941 1940 1939 1938 1937 1936
+group		    	subset_graphene id 1935 1970 1969 1968 1967 1966 1965 1964 1963 1962
+group		    	subset_graphene id 1961 1960 1959 1958 1957 1956 1955 1954 1953 1952
+group		    	subset_graphene id 1980 1979 1978 1977 1976 1975 1974 1973 1972 1971
+group		    	subset_graphene id 1761 1764 1763 1762 1769 1768 1767 1766 1765 1776
+group		    	subset_graphene id 1775 1774 1773 1772 1771 1770 1785 1784 1783 1782
+group		    	subset_graphene id 1781 1780 1779 1778 1777 1796 1795 1794 1793 1792
+group		    	subset_graphene id 1791 1790 1789 1788 1787 1786 1809 1808 1807 1806
+group		    	subset_graphene id 1805 1804 1803 1802 1801 1800 1799 1798 1797 1824
+group		    	subset_graphene id 1823 1822 1821 1820 1819 1818 1817 1816 1815 1814
+group		    	subset_graphene id 1813 1812 1811 1810 1841 1840 1839 1838 1837 1836
+group		    	subset_graphene id 1835 1834 1833 1832 1831 1830 1829 1828 1827 1826
+group		    	subset_graphene id 1825 1860 1859 1858 1857 1856 1855 1854 1853 1852
+group		    	subset_graphene id 1851 1850 1849 1848 1847 1846 1845 1844 1843 1842
+group		    	subset_graphene id 1870 1869 1868 1867 1866 1865 1864 1863 1862 1861
+group		    	subset_graphene id 1651 1654 1653 1652 1659 1658 1657 1656 1655 1666
+group		    	subset_graphene id 1665 1664 1663 1662 1661 1660 1675 1674 1673 1672
+group		    	subset_graphene id 1671 1670 1669 1668 1667 1686 1685 1684 1683 1682
+group		    	subset_graphene id 1681 1680 1679 1678 1677 1676 1699 1698 1697 1696
+group		    	subset_graphene id 1695 1694 1693 1692 1691 1690 1689 1688 1687 1714
+group		    	subset_graphene id 1713 1712 1711 1710 1709 1708 1707 1706 1705 1704
+group		    	subset_graphene id 1703 1702 1701 1700 1731 1730 1729 1728 1727 1726
+group		    	subset_graphene id 1725 1724 1723 1722 1721 1720 1719 1718 1717 1716
+group		    	subset_graphene id 1715 1750 1749 1748 1747 1746 1745 1744 1743 1742
+group		    	subset_graphene id 1741 1740 1739 1738 1737 1736 1735 1734 1733 1732
+group		    	subset_graphene id 1760 1759 1758 1757 1756 1755 1754 1753 1752 1751
+group		    	subset_graphene id 1541 1544 1543 1542 1549 1548 1547 1546 1545 1556
+group		    	subset_graphene id 1555 1554 1553 1552 1551 1550 1565 1564 1563 1562
+group		    	subset_graphene id 1561 1560 1559 1558 1557 1576 1575 1574 1573 1572
+group		    	subset_graphene id 1571 1570 1569 1568 1567 1566 1589 1588 1587 1586
+group		    	subset_graphene id 1585 1584 1583 1582 1581 1580 1579 1578 1577 1604
+group		    	subset_graphene id 1603 1602 1601 1600 1599 1598 1597 1596 1595 1594
+group		    	subset_graphene id 1593 1592 1591 1590 1621 1620 1619 1618 1617 1616
+group		    	subset_graphene id 1615 1614 1613 1612 1611 1610 1609 1608 1607 1606
+group		    	subset_graphene id 1605 1640 1639 1638 1637 1636 1635 1634 1633 1632
+group		    	subset_graphene id 1631 1630 1629 1628 1627 1626 1625 1624 1623 1622
+group		    	subset_graphene id 1650 1649 1648 1647 1646 1645 1644 1643 1642 1641
+group		    	subset_graphene id 1431 1434 1433 1432 1439 1438 1437 1436 1435 1446
+group		    	subset_graphene id 1445 1444 1443 1442 1441 1440 1455 1454 1453 1452
+group		    	subset_graphene id 1451 1450 1449 1448 1447 1466 1465 1464 1463 1462
+group		    	subset_graphene id 1461 1460 1459 1458 1457 1456 1479 1478 1477 1476
+group		    	subset_graphene id 1475 1474 1473 1472 1471 1470 1469 1468 1467 1494
+group		    	subset_graphene id 1493 1492 1491 1490 1489 1488 1487 1486 1485 1484
+group		    	subset_graphene id 1483 1482 1481 1480 1511 1510 1509 1508 1507 1506
+group		    	subset_graphene id 1505 1504 1503 1502 1501 1500 1499 1498 1497 1496
+group		    	subset_graphene id 1495 1530 1529 1528 1527 1526 1525 1524 1523 1522
+group		    	subset_graphene id 1521 1520 1519 1518 1517 1516 1515 1514 1513 1512
+group		    	subset_graphene id 1540 1539 1538 1537 1536 1535 1534 1533 1532 1531
+group		    	subset_graphene id 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990
+group		    	subset_graphene id 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000
+group		    	subset_graphene id 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010
+group		    	subset_graphene id 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020
+group		    	subset_graphene id 2021 2022 2023 2024 2025 2026 2027 2028 2029 2030
+group		    	subset_graphene id 2031 2032 2033 2034 2035 2036 2037 2038 2039 2040
+group		    	subset_graphene id 2041 2042 2043 2044 2045 2046 2047 2048 2049 2050
+group		    	subset_graphene id 2051 2052 2053 2054 2055 2056 2057 2058 2059 2060
+group		    	subset_graphene id 2061 2062 2063 2064 2065 2066 2067 2068 2069 2070
+group		    	subset_graphene id 2071 2072 2073 2074 2075 2076 2077 2078 2079 2080
+group		    	subset_graphene id 2081 2082 2083 2084 2085 2086 2087 2088 2089 2090
+group		    	subset_graphene id 2091 2092 2093 2094 2095 2096 2097 2098 2099 2100
+group		    	subset_graphene id 2101 2102 2103 2104 2105 2106 2107 2108 2109 2110
+group		    	subset_graphene id 2111 2112 2113 2114 2115 2116 2117 2118 2119 2120
+group		    	subset_graphene id 2121 2122 2123 2124 2125 2126 2127 2128 2129 2130
+group		    	subset_graphene id 2131 2132 2133 2134 2135 2136 2137 2138 2139 2140
+group		    	subset_graphene id 2141 2142 2143 2144 2145 2146 2147 2148 2149 2150
+group		    	subset_graphene id 2151 2152 2153 2154 2155 2156 2157 2158 2159 2160
+group		    	subset_graphene id 2161 2162 2163 2164 2165 2166 2167 2168 2169 2170
+group		    	subset_graphene id 2171 2172 2173 2174 2175 2176 2177 2178 2179 2180
+group		    	subset_graphene id 2181 2182 2183 2184 2185 2186 2187 2188 2189 2190
+group		    	subset_graphene id 2191 2192 2193 2194 2195 2196 2197 2198 2199 2200
+group		    	subset_graphene id 2201 2202 2203 2204 2205 2206 2207 2208 2209 2210
+group		    	subset_graphene id 2211 2212 2213 2214 2215 2216 2217 2218 2219 2220
+group		    	subset_graphene id 2221 2222 2223 2224 2225 2226 2227 2228 2229 2230
+group		    	subset_graphene id 2231 2232 2233 2234 2235 2236 2237 2238 2239 2240
+group		    	subset_graphene id 2241 2242 2243 2244 2245 2246 2247 2248 2249 2250
+group		    	subset_graphene id 2251 2252 2253 2254 2255 2256 2257 2258 2259 2260
+group		    	subset_graphene id 2261 2262 2263 2264 2265 2266 2267 2268 2269 2270
+group		    	subset_graphene id 2271 2272 2273 2274 2275 2276 2277 2278 2279 2280
+group		    	subset_graphene id 2281 2282 2283 2284 2285 2286 2287 2288 2289 2290
+group		    	subset_graphene id 2291 2292 2293 2294 2295 2296 2297 2298 2299 2300
+group		    	subset_graphene id 2301 2302 2303 2304 2305 2306 2307 2308 2309 2310
+group		    	subset_graphene id 2311 2312 2313 2314 2315 2316 2317 2318 2319 2320
+group		    	subset_graphene id 2321 2322 2323 2324 2325 2326 2327 2328 2329 2330
+group		    	subset_graphene id 2331 2332 2333 2334 2335 2336 2337 2338 2339 2340
+group		    	subset_graphene id 2341 2342 2343 2344 2345 2346 2347 2348 2349 2350
+group		    	subset_graphene id 2351 2352 2353 2354 2355 2356 2357 2358 2359 2360
+group		    	subset_graphene id 2361 2362 2363 2364 2365 2366 2367 2368 2369 2370
+group		    	subset_graphene id 2371 2372 2373 2374 2375 2376 2377 2378 2379 2380
+group		    	subset_graphene id 2381 2382 2383 2384 2385 2386 2387 2388 2389 2390
+group		    	subset_graphene id 2391 2392 2393 2394 2395 2396 2397 2398 2399 2400
+group		    	subset_graphene id 2401 2402 2403 2404 2405 2406 2407 2408 2409 2410
+group		    	subset_graphene id 2411 2412 2413 2414 2415 2416 2417 2418 2419 2420
+group		    	subset_graphene id 2421 2422 2423 2424 2425 2426 2427 2428 2429 2430
+group		    	subset_graphene id 2431 2432 2433 2434 2435 2436 2437 2438 2439 2440
+group		    	subset_graphene id 2441 2442 2443 2444 2445 2446 2447 2448 2449 2450
+group		    	subset_graphene id 2451 2452 2453 2454 2455 2456 2457 2458 2459 2460
+group		    	subset_graphene id 2461 2462 2463 2464 2465 2466 2467 2468 2469 2470
+group		    	subset_graphene id 2471 2472 2473 2474 2475 2476 2477 2478 2479 2480
+group		    	subset_graphene id 2481 2482 2483 2484 2485 2486 2487 2488 2489 2490
+group		    	subset_graphene id 2491 2492 2493 2494 2495 2496 2497 2498 2499 2500
+group		    	subset_graphene id 2501 2502 2503 2504 2505 2506 2507 2508 2509 2510
+group		    	subset_graphene id 2511 2512 2513 2514 2515 2516 2517 2518 2519 2520
+group		    	subset_graphene id 2521 2522 2523 2524 2525 2526 2527 2528 2529 2530
+group		    	subset_graphene id 2531 2532 2533 2534 2535 2536 2537 2538 2539 2540
+group		    	subset_graphene id 2541 2542 2543 2544 2545 2546 2547 2548 2549 2550
+group		    	subset_graphene id 2551 2552 2553 2554 2555 2556 2557 2558 2559 2560
+group		    	subset_graphene id 2561 2562 2563 2564 2565 2566 2567 2568 2569 2570
+group		    	subset_graphene id 2571 2572 2573 2574 2575 2576 2577 2578 2579 2580
+group		    	subset_graphene id 2581 2582 2583 2584 2585 2586 2587 2588 2589 2590
+group		    	subset_graphene id 2591 2592 2593 2594 2595 2596 2597 2598 2599 2600
+group		    	subset_graphene id 2601 2602 2603 2604 2605 2606 2607 2608 2609 2610
+group		    	subset_graphene id 2611 2612 2613 2614 2615 2616 2617 2618 2619 2620
+group		    	subset_graphene id 2621 2622 2623 2624 2625 2626 2627 2628 2629 2630
+group		    	subset_graphene id 2631 2632 2633 2634 2635 2636 2637 2638 2639 2640
+group		    	subset_graphene id 2641 2642 2643 2644 2645 2646 2647 2648 2649 2650
+group		    	subset_graphene id 2651 2652 2653 2654 2655 2656 2657 2658 2659 2660
+group		    	subset_graphene id 2661 2662 2663 2664 2665 2666 2667 2668 2669 2670
+group		    	subset_graphene id 2671 2672 2673 2674 2675 2676 2677 2678 2679 2680
+group		    	subset_graphene id 2681 2682 2683 2684 2685 2686 2687 2688 2689 2690
+group		    	subset_graphene id 2691 2692 2693 2694 2695 2696 2697 2698 2699 2700
+group		    	subset_graphene id 2701 2702 2703 2704 2705 2706 2707 2708 2709 2710
+group		    	subset_graphene id 2711 2712 2713 2714 2715 2716 2717 2718 2719 2720
+group		    	subset_graphene id 2721 2722 2723 2724 2725 2726 2727 2728 2729 2730
+group		    	subset_graphene id 2731 2732 2733 2734 2735 2736 2737 2738 2739 2740
+group		    	subset_graphene id 2741 2742 2743 2744 2745 2746 2747 2748 2749 2750
+group		    	subset_graphene id 2751 2752 2753 2754 2755 2756 2757 2758 2759 2760
+group		    	subset_graphene id 2761 2762 2763 2764 2765 2766 2767 2768 2769 2770
+group		    	subset_graphene id 2771 2772 2773 2774 2775 2776 2777 2778 2779 2780
+group		    	subset_graphene id 2781 2782 2783 2784 2785 2786 2787 2788 2789 2790
+group		    	subset_graphene id 2791 2792 2793 2794 2795 2796 2797 2798 2799 2800
+group		    	subset_graphene id 2801 2802 2803 2804 2805 2806 2807 2808 2809 2810
+group		    	subset_graphene id 2811 2812 2813 2814 2815 2816 2817 2818 2819 2820
+group		    	subset_graphene id 2821 2822 2823 2824 2825 2826 2827 2828 2829 2830
+group		    	subset_graphene id 2831 2832 2833 2834 2835 2836 2837 2838 2839 2840
+group		    	subset_graphene id 2841 2842 2843 2844 2845 2846 2847 2848 2849 2850
+group		    	subset_graphene id 2851 2852 2853 2854 2855 2856 2857 2858 2859 2860
+group		    	subset_graphene id 2861 2862 2863 2864 2865 2866 2867 2868 2869 2870
+group		    	subset_graphene id 2871 2872 2873 2874 2875 2876 2877 2878 2879 2880
+group		    	subset_graphene id 2881 2882 2883 2884 2885 2886 2887 2888 2889 2890
+group		    	subset_graphene id 2891 2892 2893 2894 2895 2896 2897 2898 2899 2900
+group		    	subset_graphene id 2901 2902 2903 2904 2905 2906 2907 2908 2909 2910
+group		    	subset_graphene id 2911 2912 2913 2914 2915 2916 2917 2918 2919 2920
+group		    	subset_graphene id 2921 2922 2923 2924 2925 2926 2927 2928 2929 2930
+group		    	subset_graphene id 2931 2932 2933 2934 2935 2936 2937 2938 2939 2940
+group		    	subset_graphene id 2941 2942 2943 2944 2945 2946 2947 2948 2949 2950
+group		    	subset_graphene id 2951 2952 2953 2954 2955 2956 2957 2958 2959 2960
+group		    	subset_graphene id 2961 2962 2963 2964 2965 2966 2967 2968 2969 2970
+group		    	subset_graphene id 2971 2972 2973 2974 2975 2976 2977 2978 2979 2980
+group		    	subset_graphene id 2981 2982 2983 2984 2985 2986 2987 2988 2989 2990
+group		    	subset_graphene id 2991 2992 2993 2994 2995 2996 2997 2998 2999 3000
+group		    	subset_graphene id 3001 3002 3003 3004 3005 3006 3007 3008 3009 3010
+group		    	subset_graphene id 3011 3012 3013 3014 3015 3016 3017 3018 3019 3020
+group		    	subset_graphene id 3021 3022 3023 3024 3025 3026 3027 3028 3029 3030
+group		    	subset_graphene id 3031 3032 3033 3034 3035 3036 3037 3038 3039 3040
+group		    	subset_graphene id 3041 3042 3043 3044 3045 3046 3047 3048 3049 3050
+group		    	subset_graphene id 3051 3052 3053 3054 3055 3056 3057 3058 3059 3060
+group		    	subset_graphene id 3061 3062 3063 3064 3065 3066 3067 3068 3069 3070
+group		    	subset_graphene id 3071 3072 3073 3074 3075 3076 3077 3078 3079 3080
+group		    	subset_graphene id 3081 3082 3083 3084 3085 3086 3087 3088 3089 3090
+group		    	subset_graphene id 3091 3092 3093 3094 3095 3096 3097 3098 3099 3100
+group		    	subset_graphene id 3101 3102 3103 3104 3105 3106 3107 3108 3109 3110
+group		    	subset_graphene id 3111 3112 3113 3114 3115 3116 3117 3118 3119 3120
+group		    	subset_graphene id 3121 3122 3123 3124 3125 3126 3127 3128 3129 3130
+group		    	subset_graphene id 3131 3132 3133 3134 3135 3136 3137 3138 3139 3140
+group		    	subset_graphene id 3141 3142 3143 3144 3145 3146 3147 3148 3149 3150
+group		    	subset_graphene id 3151 3152 3153 3154 3155 3156 3157 3158 3159 3160
+group		    	subset_graphene id 3161 3162 3163 3164 3165 3166 3167 3168 3169 3170
+group		    	subset_graphene id 3171 3172 3173 3174 3175 3176 3177 3178 3179 3180
+group		    	subset_graphene id 3181 3182 3183 3184 3185 3186 3187 3188 3189 3190
+group		    	subset_graphene id 3191 3192 3193 3194 3195 3196 3197 3198 3199 3200
+group		    	subset_graphene id 3201 3202 3203 3204 3205 3206 3207 3208 3209 3210
+group		    	subset_graphene id 3211 3212 3213 3214 3215 3216 3217 3218 3219 3220
+group		    	subset_graphene id 3221 3222 3223 3224 3225 3226 3227 3228 3229 3230
+group		    	subset_graphene id 3231 3232 3233 3234 3235 3236 3237 3238 3239 3240
+group		    	subset_graphene id 3241 3242 3243 3244 3245 3246 3247 3248 3249 3250
+group		    	subset_graphene id 3251 3252 3253 3254 3255 3256 3257 3258 3259 3260
+group		    	subset_graphene id 3261 3262 3263 3264 3265 3266 3267 3268 3269 3270
+group		    	subset_graphene id 3271 3272 3273 3274 3275 3276 3277 3278 3279 3280
+group		    	subset_graphene id 3281 3282 3283 3284 3285 3286 3287 3288 3289 3290
+group		    	subset_graphene id 3291 3292 3293 3294 3295 3296 3297 3298 3299 3300
+group		    	subset_graphene id 3301 3304 3303 3302 3309 3308 3307 3306 3305 3316
+group		    	subset_graphene id 3315 3314 3313 3312 3311 3310 3325 3324 3323 3322
+group		    	subset_graphene id 3321 3320 3319 3318 3317 3336 3335 3334 3333 3332
+group		    	subset_graphene id 3331 3330 3329 3328 3327 3326 3349 3348 3347 3346
+group		    	subset_graphene id 3345 3344 3343 3342 3341 3340 3339 3338 3337 3364
+group		    	subset_graphene id 3363 3362 3361 3360 3359 3358 3357 3356 3355 3354
+group		    	subset_graphene id 3353 3352 3351 3350 3381 3380 3379 3378 3377 3376
+group		    	subset_graphene id 3375 3374 3373 3372 3371 3370 3369 3368 3367 3366
+group		    	subset_graphene id 3365 3400 3399 3398 3397 3396 3395 3394 3393 3392
+group		    	subset_graphene id 3391 3390 3389 3388 3387 3386 3385 3384 3383 3382
+group		    	subset_graphene id 3410 3409 3408 3407 3406 3405 3404 3403 3402 3401
+group		    	subset_graphene id 3851 3854 3853 3852 3859 3858 3857 3856 3855 3866
+group		    	subset_graphene id 3865 3864 3863 3862 3861 3860 3875 3874 3873 3872
+group		    	subset_graphene id 3871 3870 3869 3868 3867 3886 3885 3884 3883 3882
+group		    	subset_graphene id 3881 3880 3879 3878 3877 3876 3899 3898 3897 3896
+group		    	subset_graphene id 3895 3894 3893 3892 3891 3890 3889 3888 3887 3914
+group		    	subset_graphene id 3913 3912 3911 3910 3909 3908 3907 3906 3905 3904
+group		    	subset_graphene id 3903 3902 3901 3900 3931 3930 3929 3928 3927 3926
+group		    	subset_graphene id 3925 3924 3923 3922 3921 3920 3919 3918 3917 3916
+group		    	subset_graphene id 3915 3950 3949 3948 3947 3946 3945 3944 3943 3942
+group		    	subset_graphene id 3941 3940 3939 3938 3937 3936 3935 3934 3933 3932
+group		    	subset_graphene id 3960 3959 3958 3957 3956 3955 3954 3953 3952 3951
+group		    	subset_graphene id 3741 3744 3743 3742 3749 3748 3747 3746 3745 3756
+group		    	subset_graphene id 3755 3754 3753 3752 3751 3750 3765 3764 3763 3762
+group		    	subset_graphene id 3761 3760 3759 3758 3757 3776 3775 3774 3773 3772
+group		    	subset_graphene id 3771 3770 3769 3768 3767 3766 3789 3788 3787 3786
+group		    	subset_graphene id 3785 3784 3783 3782 3781 3780 3779 3778 3777 3804
+group		    	subset_graphene id 3803 3802 3801 3800 3799 3798 3797 3796 3795 3794
+group		    	subset_graphene id 3793 3792 3791 3790 3821 3820 3819 3818 3817 3816
+group		    	subset_graphene id 3815 3814 3813 3812 3811 3810 3809 3808 3807 3806
+group		    	subset_graphene id 3805 3840 3839 3838 3837 3836 3835 3834 3833 3832
+group		    	subset_graphene id 3831 3830 3829 3828 3827 3826 3825 3824 3823 3822
+group		    	subset_graphene id 3850 3849 3848 3847 3846 3845 3844 3843 3842 3841
+group		    	subset_graphene id 3631 3634 3633 3632 3639 3638 3637 3636 3635 3646
+group		    	subset_graphene id 3645 3644 3643 3642 3641 3640 3655 3654 3653 3652
+group		    	subset_graphene id 3651 3650 3649 3648 3647 3666 3665 3664 3663 3662
+group		    	subset_graphene id 3661 3660 3659 3658 3657 3656 3679 3678 3677 3676
+group		    	subset_graphene id 3675 3674 3673 3672 3671 3670 3669 3668 3667 3694
+group		    	subset_graphene id 3693 3692 3691 3690 3689 3688 3687 3686 3685 3684
+group		    	subset_graphene id 3683 3682 3681 3680 3711 3710 3709 3708 3707 3706
+group		    	subset_graphene id 3705 3704 3703 3702 3701 3700 3699 3698 3697 3696
+group		    	subset_graphene id 3695 3730 3729 3728 3727 3726 3725 3724 3723 3722
+group		    	subset_graphene id 3721 3720 3719 3718 3717 3716 3715 3714 3713 3712
+group		    	subset_graphene id 3740 3739 3738 3737 3736 3735 3734 3733 3732 3731
+group		    	subset_graphene id 3521 3524 3523 3522 3529 3528 3527 3526 3525 3536
+group		    	subset_graphene id 3535 3534 3533 3532 3531 3530 3545 3544 3543 3542
+group		    	subset_graphene id 3541 3540 3539 3538 3537 3556 3555 3554 3553 3552
+group		    	subset_graphene id 3551 3550 3549 3548 3547 3546 3569 3568 3567 3566
+group		    	subset_graphene id 3565 3564 3563 3562 3561 3560 3559 3558 3557 3584
+group		    	subset_graphene id 3583 3582 3581 3580 3579 3578 3577 3576 3575 3574
+group		    	subset_graphene id 3573 3572 3571 3570 3601 3600 3599 3598 3597 3596
+group		    	subset_graphene id 3595 3594 3593 3592 3591 3590 3589 3588 3587 3586
+group		    	subset_graphene id 3585 3620 3619 3618 3617 3616 3615 3614 3613 3612
+group		    	subset_graphene id 3611 3610 3609 3608 3607 3606 3605 3604 3603 3602
+group		    	subset_graphene id 3630 3629 3628 3627 3626 3625 3624 3623 3622 3621
+group		    	subset_graphene id 3411 3414 3413 3412 3419 3418 3417 3416 3415 3426
+group		    	subset_graphene id 3425 3424 3423 3422 3421 3420 3435 3434 3433 3432
+group		    	subset_graphene id 3431 3430 3429 3428 3427 3446 3445 3444 3443 3442
+group		    	subset_graphene id 3441 3440 3439 3438 3437 3436 3459 3458 3457 3456
+group		    	subset_graphene id 3455 3454 3453 3452 3451 3450 3449 3448 3447 3474
+group		    	subset_graphene id 3473 3472 3471 3470 3469 3468 3467 3466 3465 3464
+group		    	subset_graphene id 3463 3462 3461 3460 3491 3490 3489 3488 3487 3486
+group		    	subset_graphene id 3485 3484 3483 3482 3481 3480 3479 3478 3477 3476
+group		    	subset_graphene id 3475 3510 3509 3508 3507 3506 3505 3504 3503 3502
+group		    	subset_graphene id 3501 3500 3499 3498 3497 3496 3495 3494 3493 3492
+group		    	subset_graphene id 3520 3519 3518 3517 3516 3515 3514 3513 3512 3511
+group		    	subset_graphene id 3961 3962 3963 3964 3965 3966 3967 3968 3969 3970
+group		    	subset_graphene id 3971 3972 3973 3974 3975 3976 3977 3978 3979 3980
+group		    	subset_graphene id 3981 3982 3983 3984 3985 3986 3987 3988 3989 3990
+group		    	subset_graphene id 3991 3992 3993 3994 3995 3996 3997 3998 3999 4000
+group		    	subset_graphene id 4001 4002 4003 4004 4005 4006 4007 4008 4009 4010
+group		    	subset_graphene id 4011 4012 4013 4014 4015 4016 4017 4018 4019 4020
+group		    	subset_graphene id 4021 4022 4023 4024 4025 4026 4027 4028 4029 4030
+group		    	subset_graphene id 4031 4032 4033 4034 4035 4036 4037 4038 4039 4040
+group		    	subset_graphene id 4041 4042 4043 4044 4045 4046 4047 4048 4049 4050
+group		    	subset_graphene id 4051 4052 4053 4054 4055 4056 4057 4058 4059 4060
+group		    	subset_graphene id 4061 4062 4063 4064 4065 4066 4067 4068 4069 4070
+group		    	subset_graphene id 4071 4072 4073 4074 4075 4076 4077 4078 4079 4080
+group		    	subset_graphene id 4081 4082 4083 4084 4085 4086 4087 4088 4089 4090
+group		    	subset_graphene id 4091 4092 4093 4094 4095 4096 4097 4098 4099 4100
+group		    	subset_graphene id 4101 4102 4103 4104 4105 4106 4107 4108 4109 4110
+group		    	subset_graphene id 4111 4112 4113 4114 4115 4116 4117 4118 4119 4120
+group		    	subset_graphene id 4121 4122 4123 4124 4125 4126 4127 4128 4129 4130
+group		    	subset_graphene id 4131 4132 4133 4134 4135 4136 4137 4138 4139 4140
+group		    	subset_graphene id 4141 4142 4143 4144 4145 4146 4147 4148 4149 4150
+group		    	subset_graphene id 4151 4152 4153 4154 4155 4156 4157 4158 4159 4160
+group		    	subset_graphene id 4161 4162 4163 4164 4165 4166 4167 4168 4169 4170
+group		    	subset_graphene id 4171 4172 4173 4174 4175 4176 4177 4178 4179 4180
+group		    	subset_graphene id 4181 4182 4183 4184 4185 4186 4187 4188 4189 4190
+group		    	subset_graphene id 4191 4192 4193 4194 4195 4196 4197 4198 4199 4200
+group		    	subset_graphene id 4201 4202 4203 4204 4205 4206 4207 4208 4209 4210
+group		    	subset_graphene id 4211 4212 4213 4214 4215 4216 4217 4218 4219 4220
+group		    	subset_graphene id 4221 4222 4223 4224 4225 4226 4227 4228 4229 4230
+group		    	subset_graphene id 4231 4232 4233 4234 4235 4236 4237 4238 4239 4240
+group		    	subset_graphene id 4241 4242 4243 4244 4245 4246 4247 4248 4249 4250
+group		    	subset_graphene id 4251 4252 4253 4254 4255 4256 4257 4258 4259 4260
+group		    	subset_graphene id 4261 4262 4263 4264 4265 4266 4267 4268 4269 4270
+group		    	subset_graphene id 4271 4272 4273 4274 4275 4276 4277 4278 4279 4280
+group		    	subset_graphene id 4281 4282 4283 4284 4285 4286 4287 4288 4289 4290
+group		    	subset_graphene id 4291 4292 4293 4294 4295 4296 4297 4298 4299 4300
+group		    	subset_graphene id 4301 4302 4303 4304 4305 4306 4307 4308 4309 4310
+group		    	subset_graphene id 4311 4312 4313 4314 4315 4316 4317 4318 4319 4320
+group		    	subset_graphene id 4321 4322 4323 4324 4325 4326 4327 4328 4329 4330
+group		    	subset_graphene id 4331 4332 4333 4334 4335 4336 4337 4338 4339 4340
+group		    	subset_graphene id 4341 4342 4343 4344 4345 4346 4347 4348 4349 4350
+group		    	subset_graphene id 4351 4352 4353 4354 4355 4356 4357 4358 4359 4360
+group		    	subset_graphene id 4361 4362 4363 4364 4365 4366 4367 4368 4369 4370
+group		    	subset_graphene id 4371 4372 4373 4374 4375 4376 4377 4378 4379 4380
+group		    	subset_graphene id 4381 4382 4383 4384 4385 4386 4387 4388 4389 4390
+group		    	subset_graphene id 4391 4392 4393 4394 4395 4396 4397 4398 4399 4400
+group		    	subset_graphene id 4401 4402 4403 4404 4405 4406 4407 4408 4409 4410
+group		    	subset_graphene id 4411 4412 4413 4414 4415 4416 4417 4418 4419 4420
+group		    	subset_graphene id 4421 4422 4423 4424 4425 4426 4427 4428 4429 4430
+group		    	subset_graphene id 4431 4432 4433 4434 4435 4436 4437 4438 4439 4440
+group		    	subset_graphene id 4441 4442 4443 4444 4445 4446 4447 4448 4449 4450
+group		    	subset_graphene id 4451 4452 4453 4454 4455 4456 4457 4458 4459 4460
+group		    	subset_graphene id 4461 4462 4463 4464 4465 4466 4467 4468 4469 4470
+group		    	subset_graphene id 4471 4472 4473 4474 4475 4476 4477 4478 4479 4480
+group		    	subset_graphene id 4481 4482 4483 4484 4485 4486 4487 4488 4489 4490
+group		    	subset_graphene id 4491 4492 4493 4494 4495 4496 4497 4498 4499 4500
+group		    	subset_graphene id 4501 4502 4503 4504 4505 4506 4507 4508 4509 4510
+group		    	subset_graphene id 4511 4512 4513 4514 4515 4516 4517 4518 4519 4520
+group		    	subset_graphene id 4521 4522 4523 4524 4525 4526 4527 4528 4529 4530
+group		    	subset_graphene id 4531 4532 4533 4534 4535 4536 4537 4538 4539 4540
+group		    	subset_graphene id 4541 4542 4543 4544 4545 4546 4547 4548 4549 4550
+group		    	subset_graphene id 4551 4552 4553 4554 4555 4556 4557 4558 4559 4560
+group		    	subset_graphene id 4561 4562 4563 4564 4565 4566 4567 4568 4569 4570
+group		    	subset_graphene id 4571 4572 4573 4574 4575 4576 4577 4578 4579 4580
+group		    	subset_graphene id 4581 4582 4583 4584 4585 4586 4587 4588 4589 4590
+group		    	subset_graphene id 4591 4592 4593 4594 4595 4596 4597 4598 4599 4600
+group		    	subset_graphene id 4601 4602 4603 4604 4605 4606 4607 4608 4609 4610
+group		    	subset_graphene id 4611 4612 4613 4614 4615 4616 4617 4618 4619 4620
+group		    	subset_graphene id 4621 4624 4623 4622 4629 4628 4627 4626 4625 4636
+group		    	subset_graphene id 4635 4634 4633 4632 4631 4630 4645 4644 4643 4642
+group		    	subset_graphene id 4641 4640 4639 4638 4637 4656 4655 4654 4653 4652
+group		    	subset_graphene id 4651 4650 4649 4648 4647 4646 4669 4668 4667 4666
+group		    	subset_graphene id 4665 4664 4663 4662 4661 4660 4659 4658 4657 4684
+group		    	subset_graphene id 4683 4682 4681 4680 4679 4678 4677 4676 4675 4674
+group		    	subset_graphene id 4673 4672 4671 4670 4701 4700 4699 4698 4697 4696
+group		    	subset_graphene id 4695 4694 4693 4692 4691 4690 4689 4688 4687 4686
+group		    	subset_graphene id 4685 4720 4719 4718 4717 4716 4715 4714 4713 4712
+group		    	subset_graphene id 4711 4710 4709 4708 4707 4706 4705 4704 4703 4702
+group		    	subset_graphene id 4730 4729 4728 4727 4726 4725 4724 4723 4722 4721
+group		    	subset_graphene id 5171 5174 5173 5172 5179 5178 5177 5176 5175 5186
+group		    	subset_graphene id 5185 5184 5183 5182 5181 5180 5195 5194 5193 5192
+group		    	subset_graphene id 5191 5190 5189 5188 5187 5206 5205 5204 5203 5202
+group		    	subset_graphene id 5201 5200 5199 5198 5197 5196 5219 5218 5217 5216
+group		    	subset_graphene id 5215 5214 5213 5212 5211 5210 5209 5208 5207 5234
+group		    	subset_graphene id 5233 5232 5231 5230 5229 5228 5227 5226 5225 5224
+group		    	subset_graphene id 5223 5222 5221 5220 5251 5250 5249 5248 5247 5246
+group		    	subset_graphene id 5245 5244 5243 5242 5241 5240 5239 5238 5237 5236
+group		    	subset_graphene id 5235 5270 5269 5268 5267 5266 5265 5264 5263 5262
+group		    	subset_graphene id 5261 5260 5259 5258 5257 5256 5255 5254 5253 5252
+group		    	subset_graphene id 5280 5279 5278 5277 5276 5275 5274 5273 5272 5271
+group		    	subset_graphene id 5061 5064 5063 5062 5069 5068 5067 5066 5065 5076
+group		    	subset_graphene id 5075 5074 5073 5072 5071 5070 5085 5084 5083 5082
+group		    	subset_graphene id 5081 5080 5079 5078 5077 5096 5095 5094 5093 5092
+group		    	subset_graphene id 5091 5090 5089 5088 5087 5086 5109 5108 5107 5106
+group		    	subset_graphene id 5105 5104 5103 5102 5101 5100 5099 5098 5097 5124
+group		    	subset_graphene id 5123 5122 5121 5120 5119 5118 5117 5116 5115 5114
+group		    	subset_graphene id 5113 5112 5111 5110 5141 5140 5139 5138 5137 5136
+group		    	subset_graphene id 5135 5134 5133 5132 5131 5130 5129 5128 5127 5126
+group		    	subset_graphene id 5125 5160 5159 5158 5157 5156 5155 5154 5153 5152
+group		    	subset_graphene id 5151 5150 5149 5148 5147 5146 5145 5144 5143 5142
+group		    	subset_graphene id 5170 5169 5168 5167 5166 5165 5164 5163 5162 5161
+group		    	subset_graphene id 4951 4954 4953 4952 4959 4958 4957 4956 4955 4966
+group		    	subset_graphene id 4965 4964 4963 4962 4961 4960 4975 4974 4973 4972
+group		    	subset_graphene id 4971 4970 4969 4968 4967 4986 4985 4984 4983 4982
+group		    	subset_graphene id 4981 4980 4979 4978 4977 4976 4999 4998 4997 4996
+group		    	subset_graphene id 4995 4994 4993 4992 4991 4990 4989 4988 4987 5014
+group		    	subset_graphene id 5013 5012 5011 5010 5009 5008 5007 5006 5005 5004
+group		    	subset_graphene id 5003 5002 5001 5000 5031 5030 5029 5028 5027 5026
+group		    	subset_graphene id 5025 5024 5023 5022 5021 5020 5019 5018 5017 5016
+group		    	subset_graphene id 5015 5050 5049 5048 5047 5046 5045 5044 5043 5042
+group		    	subset_graphene id 5041 5040 5039 5038 5037 5036 5035 5034 5033 5032
+group		    	subset_graphene id 5060 5059 5058 5057 5056 5055 5054 5053 5052 5051
+group		    	subset_graphene id 4841 4844 4843 4842 4849 4848 4847 4846 4845 4856
+group		    	subset_graphene id 4855 4854 4853 4852 4851 4850 4865 4864 4863 4862
+group		    	subset_graphene id 4861 4860 4859 4858 4857 4876 4875 4874 4873 4872
+group		    	subset_graphene id 4871 4870 4869 4868 4867 4866 4889 4888 4887 4886
+group		    	subset_graphene id 4885 4884 4883 4882 4881 4880 4879 4878 4877 4904
+group		    	subset_graphene id 4903 4902 4901 4900 4899 4898 4897 4896 4895 4894
+group		    	subset_graphene id 4893 4892 4891 4890 4921 4920 4919 4918 4917 4916
+group		    	subset_graphene id 4915 4914 4913 4912 4911 4910 4909 4908 4907 4906
+group		    	subset_graphene id 4905 4940 4939 4938 4937 4936 4935 4934 4933 4932
+group		    	subset_graphene id 4931 4930 4929 4928 4927 4926 4925 4924 4923 4922
+group		    	subset_graphene id 4950 4949 4948 4947 4946 4945 4944 4943 4942 4941
+group		    	subset_graphene id 4731 4734 4733 4732 4739 4738 4737 4736 4735 4746
+group		    	subset_graphene id 4745 4744 4743 4742 4741 4740 4755 4754 4753 4752
+group		    	subset_graphene id 4751 4750 4749 4748 4747 4766 4765 4764 4763 4762
+group		    	subset_graphene id 4761 4760 4759 4758 4757 4756 4779 4778 4777 4776
+group		    	subset_graphene id 4775 4774 4773 4772 4771 4770 4769 4768 4767 4794
+group		    	subset_graphene id 4793 4792 4791 4790 4789 4788 4787 4786 4785 4784
+group		    	subset_graphene id 4783 4782 4781 4780 4811 4810 4809 4808 4807 4806
+group		    	subset_graphene id 4805 4804 4803 4802 4801 4800 4799 4798 4797 4796
+group		    	subset_graphene id 4795 4830 4829 4828 4827 4826 4825 4824 4823 4822
+group		    	subset_graphene id 4821 4820 4819 4818 4817 4816 4815 4814 4813 4812
+group		    	subset_graphene id 4840 4839 4838 4837 4836 4835 4834 4833 4832 4831
+group		    	subset_graphene id 5281 5282 5283 5284 5285 5286 5287 5288 5289 5290
+group		    	subset_graphene id 5291 5292 5293 5294 5295 5296 5297 5298 5299 5300
+group		    	subset_graphene id 5301 5302 5303 5304 5305 5306 5307 5308 5309 5310
+group		    	subset_graphene id 5311 5312 5313 5314 5315 5316 5317 5318 5319 5320
+group		    	subset_graphene id 5321 5322 5323 5324 5325 5326 5327 5328 5329 5330
+group		    	subset_graphene id 5331 5332 5333 5334 5335 5336 5337 5338 5339 5340
+group		    	subset_graphene id 5341 5342 5343 5344 5345 5346 5347 5348 5349 5350
+group		    	subset_graphene id 5351 5352 5353 5354 5355 5356 5357 5358 5359 5360
+group		    	subset_graphene id 5361 5362 5363 5364 5365 5366 5367 5368 5369 5370
+group		    	subset_graphene id 5371 5372 5373 5374 5375 5376 5377 5378 5379 5380
+group		    	subset_graphene id 5381 5382 5383 5384 5385 5386 5387 5388 5389 5390
+group		    	subset_graphene id 5391 5392 5393 5394 5395 5396 5397 5398 5399 5400
+group		    	subset_graphene id 5401 5402 5403 5404 5405 5406 5407 5408 5409 5410
+group		    	subset_graphene id 5411 5412 5413 5414 5415 5416 5417 5418 5419 5420
+group		    	subset_graphene id 5421 5422 5423 5424 5425 5426 5427 5428 5429 5430
+group		    	subset_graphene id 5431 5432 5433 5434 5435 5436 5437 5438 5439 5440
+group		    	subset_graphene id 5441 5442 5443 5444 5445 5446 5447 5448 5449 5450
+group		    	subset_graphene id 5451 5452 5453 5454 5455 5456 5457 5458 5459 5460
+group		    	subset_graphene id 5461 5462 5463 5464 5465 5466 5467 5468 5469 5470
+group		    	subset_graphene id 5471 5472 5473 5474 5475 5476 5477 5478 5479 5480
+group		    	subset_graphene id 5481 5482 5483 5484 5485 5486 5487 5488 5489 5490
+group		    	subset_graphene id 5491 5492 5493 5494 5495 5496 5497 5498 5499 5500
+group		    	subset_graphene id 5501 5502 5503 5504 5505 5506 5507 5508 5509 5510
+group		    	subset_graphene id 5511 5512 5513 5514 5515 5516 5517 5518 5519 5520
+group		    	subset_graphene id 5521 5522 5523 5524 5525 5526 5527 5528 5529 5530
+group		    	subset_graphene id 5531 5532 5533 5534 5535 5536 5537 5538 5539 5540
+group		    	subset_graphene id 5541 5542 5543 5544 5545 5546 5547 5548 5549 5550
+group		    	subset_graphene id 5551 5552 5553 5554 5555 5556 5557 5558 5559 5560
+group		    	subset_graphene id 5561 5562 5563 5564 5565 5566 5567 5568 5569 5570
+group		    	subset_graphene id 5571 5572 5573 5574 5575 5576 5577 5578 5579 5580
+group		    	subset_graphene id 5581 5582 5583 5584 5585 5586 5587 5588 5589 5590
+group		    	subset_graphene id 5591 5592 5593 5594 5595 5596 5597 5598 5599 5600
+group		    	subset_graphene id 5601 5602 5603 5604 5605 5606 5607 5608 5609 5610
+group		    	subset_graphene id 5611 5612 5613 5614 5615 5616 5617 5618 5619 5620
+group		    	subset_graphene id 5621 5622 5623 5624 5625 5626 5627 5628 5629 5630
+group		    	subset_graphene id 5631 5632 5633 5634 5635 5636 5637 5638 5639 5640
+group		    	subset_graphene id 5641 5642 5643 5644 5645 5646 5647 5648 5649 5650
+group		    	subset_graphene id 5651 5652 5653 5654 5655 5656 5657 5658 5659 5660
+group		    	subset_graphene id 5661 5662 5663 5664 5665 5666 5667 5668 5669 5670
+group		    	subset_graphene id 5671 5672 5673 5674 5675 5676 5677 5678 5679 5680
+group		    	subset_graphene id 5681 5682 5683 5684 5685 5686 5687 5688 5689 5690
+group		    	subset_graphene id 5691 5692 5693 5694 5695 5696 5697 5698 5699 5700
+group		    	subset_graphene id 5701 5702 5703 5704 5705 5706 5707 5708 5709 5710
+group		    	subset_graphene id 5711 5712 5713 5714 5715 5716 5717 5718 5719 5720
+group		    	subset_graphene id 5721 5722 5723 5724 5725 5726 5727 5728 5729 5730
+group		    	subset_graphene id 5731 5732 5733 5734 5735 5736 5737 5738 5739 5740
+group		    	subset_graphene id 5741 5742 5743 5744 5745 5746 5747 5748 5749 5750
+group		    	subset_graphene id 5751 5752 5753 5754 5755 5756 5757 5758 5759 5760
+group		    	subset_graphene id 5761 5762 5763 5764 5765 5766 5767 5768 5769 5770
+group		    	subset_graphene id 5771 5772 5773 5774 5775 5776 5777 5778 5779 5780
+group		    	subset_graphene id 5781 5782 5783 5784 5785 5786 5787 5788 5789 5790
+group		    	subset_graphene id 5791 5792 5793 5794 5795 5796 5797 5798 5799 5800
+group		    	subset_graphene id 5801 5802 5803 5804 5805 5806 5807 5808 5809 5810
+group		    	subset_graphene id 5811 5812 5813 5814 5815 5816 5817 5818 5819 5820
+group		    	subset_graphene id 5821 5822 5823 5824 5825 5826 5827 5828 5829 5830
+group		    	subset_graphene id 5831 5832 5833 5834 5835 5836 5837 5838 5839 5840
+group		    	subset_graphene id 5841 5842 5843 5844 5845 5846 5847 5848 5849 5850
+group		    	subset_graphene id 5851 5852 5853 5854 5855 5856 5857 5858 5859 5860
+group		    	subset_graphene id 5861 5862 5863 5864 5865 5866 5867 5868 5869 5870
+group		    	subset_graphene id 5871 5872 5873 5874 5875 5876 5877 5878 5879 5880
+group		    	subset_graphene id 5881 5882 5883 5884 5885 5886 5887 5888 5889 5890
+group		    	subset_graphene id 5891 5892 5893 5894 5895 5896 5897 5898 5899 5900
+group		    	subset_graphene id 5901 5902 5903 5904 5905 5906 5907 5908 5909 5910
+group		    	subset_graphene id 5911 5912 5913 5914 5915 5916 5917 5918 5919 5920
+group		    	subset_graphene id 5921 5922 5923 5924 5925 5926 5927 5928 5929 5930
+group		    	subset_graphene id 5931 5932 5933 5934 5935 5936 5937 5938 5939 5940
+group		    	subset_graphene id 5941 5942 5943 5944 5945 5946 5947 5948 5949 5950
+group		    	subset_graphene id 5951 5952 5953 5954 5955 5956 5957 5958 5959 5960
+group		    	subset_graphene id 5961 5962 5963 5964 5965 5966 5967 5968 5969 5970
+group		    	subset_graphene id 5971 5972 5973 5974 5975 5976 5977 5978 5979 5980
+group		    	subset_graphene id 5981 5982 5983 5984 5985 5986 5987 5988 5989 5990
+group		    	subset_graphene id 5991 5992 5993 5994 5995 5996 5997 5998 5999 6000
+group		    	subset_graphene id 6001 6002 6003 6004 6005 6006 6007 6008 6009 6010
+group		    	subset_graphene id 6011 6012 6013 6014 6015 6016 6017 6018 6019 6020
+group		    	subset_graphene id 6021 6022 6023 6024 6025 6026 6027 6028 6029 6030
+group		    	subset_graphene id 6031 6032 6033 6034 6035 6036 6037 6038 6039 6040
+group		    	subset_graphene id 6041 6042 6043 6044 6045 6046 6047 6048 6049 6050
+group		    	subset_graphene id 6051 6052 6053 6054 6055 6056 6057 6058 6059 6060
+group		    	subset_graphene id 6061 6062 6063 6064 6065 6066 6067 6068 6069 6070
+group		    	subset_graphene id 6071 6072 6073 6074 6075 6076 6077 6078 6079 6080
+group		    	subset_graphene id 6081 6082 6083 6084 6085 6086 6087 6088 6089 6090
+group		    	subset_graphene id 6091 6092 6093 6094 6095 6096 6097 6098 6099 6100
+group		    	subset_graphene id 6101 6102 6103 6104 6105 6106 6107 6108 6109 6110
+group		    	subset_graphene id 6111 6112 6113 6114 6115 6116 6117 6118 6119 6120
+group		    	subset_graphene id 6121 6122 6123 6124 6125 6126 6127 6128 6129 6130
+group		    	subset_graphene id 6131 6132 6133 6134 6135 6136 6137 6138 6139 6140
+group		    	subset_graphene id 6141 6142 6143 6144 6145 6146 6147 6148 6149 6150
+group		    	subset_graphene id 6151 6152 6153 6154 6155 6156 6157 6158 6159 6160
+group		    	subset_graphene id 6161 6162 6163 6164 6165 6166 6167 6168 6169 6170
+group		    	subset_graphene id 6171 6172 6173 6174 6175 6176 6177 6178 6179 6180
+group		    	subset_graphene id 6181 6182 6183 6184 6185 6186 6187 6188 6189 6190
+group		    	subset_graphene id 6191 6192 6193 6194 6195 6196 6197 6198 6199 6200
+group		    	subset_graphene id 6201 6202 6203 6204 6205 6206 6207 6208 6209 6210
+group		    	subset_graphene id 6211 6212 6213 6214 6215 6216 6217 6218 6219 6220
+group		    	subset_graphene id 6221 6222 6223 6224 6225 6226 6227 6228 6229 6230
+group		    	subset_graphene id 6231 6232 6233 6234 6235 6236 6237 6238 6239 6240
+group		    	subset_graphene id 6241 6242 6243 6244 6245 6246 6247 6248 6249 6250
+group		    	subset_graphene id 6251 6252 6253 6254 6255 6256 6257 6258 6259 6260
+group		    	subset_graphene id 6261 6262 6263 6264 6265 6266 6267 6268 6269 6270
+group		    	subset_graphene id 6271 6272 6273 6274 6275 6276 6277 6278 6279 6280
+group		    	subset_graphene id 6281 6282 6283 6284 6285 6286 6287 6288 6289 6290
+group		    	subset_graphene id 6291 6292 6293 6294 6295 6296 6297 6298 6299 6300
+group		    	subset_graphene id 6301 6302 6303 6304 6305 6306 6307 6308 6309 6310
+group		    	subset_graphene id 6311 6312 6313 6314 6315 6316 6317 6318 6319 6320
+group		    	subset_graphene id 6321 6322 6323 6324 6325 6326 6327 6328 6329 6330
+group		    	subset_graphene id 6331 6332 6333 6334 6335 6336 6337 6338 6339 6340
+group		    	subset_graphene id 6341 6342 6343 6344 6345 6346 6347 6348 6349 6350
+group		    	subset_graphene id 6351 6352 6353 6354 6355 6356 6357 6358 6359 6360
+group		    	subset_graphene id 6361 6362 6363 6364 6365 6366 6367 6368 6369 6370
+group		    	subset_graphene id 6371 6372 6373 6374 6375 6376 6377 6378 6379 6380
+group		    	subset_graphene id 6381 6382 6383 6384 6385 6386 6387 6388 6389 6390
+group		    	subset_graphene id 6391 6392 6393 6394 6395 6396 6397 6398 6399 6400
+group		    	subset_graphene id 6401 6402 6403 6404 6405 6406 6407 6408 6409 6410
+group		    	subset_graphene id 6411 6412 6413 6414 6415 6416 6417 6418 6419 6420
+group		    	subset_graphene id 6421 6422 6423 6424 6425 6426 6427 6428 6429 6430
+group		    	subset_graphene id 6431 6432 6433 6434 6435 6436 6437 6438 6439 6440
+group		    	subset_graphene id 6441 6442 6443 6444 6445 6446 6447 6448 6449 6450
+group		    	subset_graphene id 6451 6452 6453 6454 6455 6456 6457 6458 6459 6460
+group		    	subset_graphene id 6461 6462 6463 6464 6465 6466 6467 6468 6469 6470
+group		    	subset_graphene id 6471 6472 6473 6474 6475 6476 6477 6478 6479 6480
+group		    	subset_graphene id 6481 6482 6483 6484 6485 6486 6487 6488 6489 6490
+group		    	subset_graphene id 6491 6492 6493 6494 6495 6496 6497 6498 6499 6500
+group		    	subset_graphene id 6501 6502 6503 6504 6505 6506 6507 6508 6509 6510
+group		    	subset_graphene id 6511 6512 6513 6514 6515 6516 6517 6518 6519 6520
+group		    	subset_graphene id 6521 6522 6523 6524 6525 6526 6527 6528 6529 6530
+group		    	subset_graphene id 6531 6532 6533 6534 6535 6536 6537 6538 6539 6540
+group		    	subset_graphene id 6541 6542 6543 6544 6545 6546 6547 6548 6549 6550
+group		    	subset_graphene id 6551 6552 6553 6554 6555 6556 6557 6558 6559 6560
+group		    	subset_graphene id 6561 6562 6563 6564 6565 6566 6567 6568 6569 6570
+group		    	subset_graphene id 6571 6572 6573 6574 6575 6576 6577 6578 6579 6580
+group		    	subset_graphene id 6581 6582 6583 6584 6585 6586 6587 6588 6589 6590
+group		    	subset_graphene id 6591 6592 6593 6594 6595 6596 6597 6598 6599 6600
+
+group		    	subset_CH3 id 6612 6624 6657 6669 6702 6714 6747 6759 6792 6804
+group		    	subset_CH3 id 6837 6849 6882 6894 6927 6939 6972 6984 7019 7031
+group		    	subset_CH3 id 7064 7076 7109 7121 7154 7166 7199 7211 7245 7257
+group		    	subset_CH3 id 7290 7302 7335 7347 7381 7393 7426 7438 7471 7483
+group		    	subset_CH3 id 7516 7528 7561 7573 7607 7619 7652 7664 7698 7710
+group		    	subset_CH3 id 7743 7755 7788 7800 7833 7845 7878 7890 7923 7935
+group		    	subset_CH3 id 7968 7980 8013 8025 8058 8070 8103 8115 8148 8160
+group		    	subset_CH3 id 8193 8205 8238 8250 8283 8295 8329 8341 8374 8386
+group		    	subset_CH3 id 8419 8431 8464 8476 8510 8522 8555 8567 8600 8612
+group		    	subset_CH3 id 8645 8657 8690 8702 8735 8747 8782 8794 8827 8839
+group		    	subset_CH3 id 8872 8884 8917 8929 8962 8974 9007 9019 9052 9064
+group		    	subset_CH3 id 9097 9109 9143 9155 9190 9202 9235 9247 9281 9293
+group		    	subset_CH3 id 9327 9339 9372 9384 9417 9429 9464 9476 9509 9521
+group		    	subset_CH3 id 9554 9566 9599 9611 9645 9657 9690 9702 9735 9747
+group		    	subset_CH3 id 9780 9792 9825 9837 9870 9882 9915 9927 9960 9972
+group		    	subset_CH3 id 10005 10017 10050 10062 10095 10107 10140 10152 10185 10197
+group		    	subset_CH3 id 10230 10242 10275 10287 10320 10332 10366 10378 10411 10423
+group		    	subset_CH3 id 10456 10468 10501 10513 10546 10558 10591 10603 10637 10649
+group		    	subset_CH3 id 10683 10695 10728 10740 10773 10785 10818 10830 10863 10875
+group		    	subset_CH3 id 10908 10920 10953 10965 10998 11010 11043 11055 11088 11100
+group		    	subset_CH3 id 11133 11145 11178 11190 11223 11235 11268 11280 11313 11325
+group		    	subset_CH3 id 11358 11370 11403 11415 11448 11460 11494 11506 11539 11551
+group		    	subset_CH3 id 11584 11596 11630 11642 11675 11687 11720 11732 11765 11777
+group		    	subset_CH3 id 11810 11822 11855 11867 11900 11912 11945 11957 11991 12003
+group		    	subset_CH3 id 12037 12049 12082 12094 12128 12140 12173 12185 12218 12230
+group		    	subset_CH3 id 12263 12275 12308 12320 12355 12367 12401 12413 12446 12458
+group		    	subset_CH3 id 12491 12503 12536 12548 12582 12594 12627 12639 12672 12684
+group		    	subset_CH3 id 12717 12729 12762 12774 12808 12820 12853 12865 12898 12910
+group		    	subset_CH3 id 12943 12955 12988 13000 13033 13045 13078 13090 13123 13135
+group		    	subset_CH3 id 13168 13180 13214 13226 13259 13271 13304 13316 13349 13361
+group		    	subset_CH3 id 13394 13406 13439 13451 13484 13496 13529 13541 13575 13587
+group		    	subset_CH3 id 13620 13632 13665 13677 13710 13722 13755 13767 13800 13812
+group		    	subset_CH3 id 13845 13857 13890 13902 13935 13947 13980 13992 14026 14038
+group		    	subset_CH3 id 14072 14084 14118 14130 14163 14175 14208 14220 14253 14265
+group		    	subset_CH3 id 14298 14310 14343 14355 14389 14401 14434 14446 14479 14491
+group		    	subset_CH3 id 14525 14537 14570 14582 14615 14627 14660 14672 14705 14717
+group		    	subset_CH3 id 14750 14762 14796 14808 14841 14853 14886 14898 14932 14944
+group		    	subset_CH3 id 14978 14990 15023 15035 15068 15080 15113 15125 15158 15170
+group		    	subset_CH3 id 15203 15215 15248 15260 15293 15305 15338 15350 15383 15395
+group		    	subset_CH3 id 15428 15440 15473 15485 15518 15530 15563 15575 15608 15620
+group		    	subset_CH3 id 15654 15666 15699 15711 15744 15756 15789 15801 15834 15846
+group		    	subset_CH3 id 15879 15891 15924 15936 15969 15981 16014 16026 16060 16072
+group		    	subset_CH3 id 16105 16117 16150 16162 16195 16207 16240 16252 16285 16297
+group		    	subset_CH3 id 16330 16342 16375 16387 16420 16432 16465 16477 16510 16522
+group		    	subset_CH3 id 16555 16567 16601 16613 16646 16658 16691 16703 16736 16748
+group		    	subset_CH3 id 16781 16793 16826 16838 16872 16884 16917 16929 16962 16974
+group		    	subset_CH3 id 17008 17020 17053 17065 17099 17111 17144 17156 17189 17201
+group		    	subset_CH3 id 17234 17246 17279 17291 17325 17337 17370 17382 17415 17427
+group		    	subset_CH3 id 17460 17472 17505 17517 17550 17562 17595 17607 17640 17652
+group		    	subset_CH3 id 17685 17697 17730 17742 17776 17788 17822 17834 17867 17879
+group		    	subset_CH3 id 17912 17924 17957 17969 18002 18014 18047 18059 18092 18104
+group		    	subset_CH3 id 18137 18149 18182 18194 18227 18239 18272 18284 18317 18329
+group		    	subset_CH3 id 18362 18374 18407 18419 18452 18464 18497 18509 18542 18554
+group		    	subset_CH3 id 18587 18599 18633 18645 18680 18692 18726 18738 18771 18783
+group		    	subset_CH3 id 18816 18828 18861 18873 18906 18918 18951 18963 18996 19008
+group		    	subset_CH3 id 19042 19054 19087 19099 19132 19144 19177 19189 19222 19234
+group		    	subset_CH3 id 19267 19279 19312 19324 19357 19369 19402 19414 19447 19459
+group		    	subset_CH3 id 19492 19504 19538 19550 19583 19595 19628 19640 19673 19685
+group		    	subset_CH3 id 19719 19731 19764 19776 19809 19821 19854 19866 19899 19911
+group		    	subset_CH3 id 19944 19956 19990 20002 20035 20047 20080 20092 20125 20137
+group		    	subset_CH3 id 20170 20182 20215 20227 20260 20272 20305 20317 20350 20362
+group		    	subset_CH3 id 20395 20407 20440 20452 20485 20497 20530 20542 20575 20587
+group		    	subset_CH3 id 20620 20632 20666 20678 20711 20723 20756 20768 20801 20813
+group		    	subset_CH3 id 20846 20858 20891 20903 20936 20948 20981 20993 21026 21038
+group		    	subset_CH3 id 21072 21084 21117 21129 21162 21174 21207 21219 21252 21264
+group		    	subset_CH3 id 21299 21311 21344 21356 21390 21402 21435 21447 21480 21492
+group		    	subset_CH3 id 21525 21537 21570 21582 21615 21627 21660 21672 21705 21717
+group		    	subset_CH3 id 21751 21763 21796 21808 21841 21853 21886 21898 21931 21943
+group		    	subset_CH3 id 21976 21988 22021 22033 22066 22078 22111 22123 22156 22168
+group		    	subset_CH3 id 22201 22213 22246 22258 22291 22303 22336 22348 22382 22394
+group		    	subset_CH3 id 22427 22439 22473 22485 22518 22530 22563 22575 22608 22620
+group		    	subset_CH3 id 22654 22666 22699 22711 22744 22756 22789 22801 22834 22846
+group		    	subset_CH3 id 22879 22891 22924 22936 22969 22981 23014 23026 23059 23071
+group		    	subset_CH3 id 23105 23117 23150 23162 23195 23207 23240 23252 23287 23299
+group		    	subset_CH3 id 23332 23344 23378 23390 23423 23435 23468 23480 23513 23525
+group		    	subset_CH3 id 23558 23570 23603 23615 23648 23660 23693 23705 23738 23750
+group		    	subset_CH3 id 23783 23795 23828 23840 23873 23885 23918 23930 23963 23975
+group		    	subset_CH3 id 24008 24020 24053 24065 24098 24110 24143 24155 24188 24200
+group		    	subset_CH3 id 24233 24245 24278 24290 24323 24335 24368 24380 24413 24425
+group		    	subset_CH3 id 24458 24470 24504 24516 24549 24561 24594 24606 24639 24651
+group		    	subset_CH3 id 24684 24696 24729 24741 24774 24786 24819 24831 24864 24876
+group		    	subset_CH3 id 24909 24921 24954 24966 24999 25011 25044 25056 25089 25101
+group		    	subset_CH3 id 25135 25147 25180 25192 25225 25237 25270 25282 25315 25327
+group		    	subset_CH3 id 25360 25372 25406 25418 25451 25463 25496 25508 25541 25553
+group		    	subset_CH3 id 25586 25598 25631 25643 25676 25688 25721 25733 25766 25778
+group		    	subset_CH3 id 25811 25823 25856 25868 25901 25913 25946 25958 25991 26003
+group		    	subset_CH3 id 26036 26048 26081 26093 26126 26138 26173 26185 26218 26230
+group		    	subset_CH3 id 26263 26275 26308 26320 26353 26365 26398 26410 26443 26455
+group		    	subset_CH3 id 26488 26500 26534 26546 26579 26591 26624 26636 26669 26681
+group		    	subset_CH3 id 26714 26726 26759 26771 26804 26816 26850 26862 26895 26907
+group		    	subset_CH3 id 26940 26952 26987 26999 27032 27044 27077 27089 27122 27134
+group		    	subset_CH3 id 27167 27179 27212 27224 27257 27269 27302 27314 27347 27359
+group		    	subset_CH3 id 27393 27405 27438 27450 27483 27495 27528 27540 27573 27585
+group		    	subset_CH3 id 27618 27630 27663 27675 27709 27721 27754 27766 27799 27811
+group		    	subset_CH3 id 27844 27856 27889 27901 27934 27946 27979 27991 28024 28036
+group		    	subset_CH3 id 28069 28081 28115 28127 28160 28172 28206 28218 28251 28263
+group		    	subset_CH3 id 28297 28309 28342 28354 28388 28400 28433 28445 28478 28490
+group		    	subset_CH3 id 28523 28535 28568 28580 28613 28625 28659 28671 28704 28716
+group		    	subset_CH3 id 28749 28761 28795 28807 28840 28852 28885 28897 28930 28942
+group		    	subset_CH3 id 28975 28987 29020 29032 29065 29077 29110 29122 29155 29167
+group		    	subset_CH3 id 29200 29212 29246 29258 29291 29303 29336 29348 29381 29393
+group		    	subset_CH3 id 29426 29438 29471 29483 29516 29528 29561 29573 29607 29619
+group		    	subset_CH3 id 29652 29664 29698 29710 29743 29755 29788 29800 29835 29847
+group		    	subset_CH3 id 29880 29892 29925 29937 29970 29982 30015 30027 30060 30072
+group		    	subset_CH3 id 30105 30117 30150 30162 30195 30207 30240 30252 30285 30297
+group		    	subset_CH3 id 30330 30342 30375 30387 30420 30432 30465 30477 30510 30522
+group		    	subset_CH3 id 30555 30567 30600 30612 30645 30657 30690 30702 30735 30747
+group		    	subset_CH3 id 30780 30792 30825 30837 30870 30882 30915 30927 30960 30972
+group		    	subset_CH3 id 31005 31017 31051 31063 31096 31108 31141 31153 31186 31198
+group		    	subset_CH3 id 31231 31243 31276 31288 31321 31333 31366 31378 31411 31423
+group		    	subset_CH3 id 31456 31468 31501 31513 31546 31558 31591 31603 31636 31648
+group		    	subset_CH3 id 31681 31693 31726 31738 31771 31783 31816 31828 31861 31873
+group		    	subset_CH3 id 31906 31918 31951 31963 31996 32008 32041 32053 32086 32098
+group		    	subset_CH3 id 32131 32143 32176 32188 32222 32234 32267 32279 32312 32324
+group		    	subset_CH3 id 32357 32369 32402 32414 32448 32460 32493 32505 32538 32550
+group		    	subset_CH3 id 32583 32595 32628 32640 32673 32685 32718 32730 32763 32775
+group		    	subset_CH3 id 32808 32820 32853 32865 32899 32911 32944 32956 32989 33001
+group		    	subset_CH3 id 33034 33046 33079 33091 33124 33136 33169 33181 33214 33226
+group		    	subset_CH3 id 33259 33271 33304 33316 33349 33361 33394 33406 33439 33451
+group		    	subset_CH3 id 33485 33497 33530 33542 33575 33587 33620 33632 33665 33677
+group		    	subset_CH3 id 33710 33722 33755 33767 33800 33812 33846 33858 33891 33903
+group		    	subset_CH3 id 33936 33948 33981 33993 34026 34038 34071 34083 34117 34129
+group		    	subset_CH3 id 34162 34174 34207 34219 34252 34264 34297 34309 34342 34354
+group		    	subset_CH3 id 34387 34399 34433 34445 34479 34491 34524 34536 34569 34581
+group		    	subset_CH3 id 34615 34627 34661 34673 34706 34718 34751 34763 34798 34810
+group		    	subset_CH3 id 34843 34855 34888 34900 34933 34945 34978 34990 35023 35035
+group		    	subset_CH3 id 35068 35080 35113 35125 35158 35170 35203 35215 35248 35260
+group		    	subset_CH3 id 35293 35305 35338 35350 35383 35395 35428 35440 35473 35485
+group		    	subset_CH3 id 35518 35530 35563 35575 35608 35620 35653 35665 35698 35710
+group		    	subset_CH3 id 35743 35755 35788 35800 35833 35845 35879 35891 35924 35936
+group		    	subset_CH3 id 35969 35981 36014 36026 36059 36071 36106 36118 36151 36163
+group		    	subset_CH3 id 36196 36208 36241 36253 36287 36299 36332 36344 36377 36389
+group		    	subset_CH3 id 36422 36434 36469 36481 36514 36526 36559 36571 36604 36616
+group		    	subset_CH3 id 36649 36661 36694 36706 36740 36752 36785 36797 36830 36842
+group		    	subset_CH3 id 36876 36888 36921 36933 36966 36978 37011 37023 37056 37068
+group		    	subset_CH3 id 37101 37113 37148 37160 37193 37205 37238 37250 37283 37295
+group		    	subset_CH3 id 37328 37340 37373 37385 37418 37430 37463 37475 37508 37520
+group		    	subset_CH3 id 37553 37565 37599 37611 37644 37656 37689 37701 37734 37746
+group		    	subset_CH3 id 37779 37791 37824 37836 37869 37881 37914 37926 37959 37971
+group		    	subset_CH3 id 38004 38016 38049 38061 38094 38106 38139 38151 38184 38196
+group		    	subset_CH3 id 38229 38241 38274 38286 38319 38331 38364 38376 38409 38421
+group		    	subset_CH3 id 38454 38466 38499 38511 38545 38557 38590 38602 38635 38647
+group		    	subset_CH3 id 38680 38692 38725 38737 38771 38783 38818 38830 38863 38875
+group		    	subset_CH3 id 38908 38920 38953 38965 38998 39010 39043 39055 39088 39100
+group		    	subset_CH3 id 39133 39145 39178 39190 39223 39235 39268 39280 39314 39326
+group		    	subset_CH3 id 39359 39371 39404 39416 39449 39461 39494 39506 39539 39551
+group		    	subset_CH3 id 39584 39596 39629 39641 39674 39686 39719 39731 39764 39776
+group		    	subset_CH3 id 39809 39821 39854 39866 39899 39911 39944 39956 39989 40001
+group		    	subset_CH3 id 40034 40046 40079 40091 40124 40136 40169 40181 40214 40226
+group		    	subset_CH3 id 40259 40271 40304 40316 40349 40361 40395 40407 40441 40453
+group		    	subset_CH3 id 40486 40498 40531 40543 40576 40588 40621 40633 40667 40679
+group		    	subset_CH3 id 40712 40724 40758 40770 40803 40815 40848 40860 40893 40905
+group		    	subset_CH3 id 40938 40950 40983 40995 41028 41040 41073 41085 41119 41131
+group		    	subset_CH3 id 41164 41176 41209 41221 41254 41266 41299 41311 41344 41356
+group		    	subset_CH3 id 41389 41401 41434 41446 41479 41491 41524 41536 41569 41581
+group		    	subset_CH3 id 41614 41626 41659 41671 41704 41716 41749 41761 41794 41806
+group		    	subset_CH3 id 41839 41851 41884 41896 41929 41941 41974 41986 42019 42031
+group		    	subset_CH3 id 42064 42076 42109 42121 42154 42166 42200 42212 42245 42257
+group		    	subset_CH3 id 42290 42302 42335 42347 42380 42392 42425 42437 42470 42482
+group		    	subset_CH3 id 42515 42527 42561 42573 42606 42618 42651 42663 42696 42708
+group		    	subset_CH3 id 42741 42753 42786 42798 42831 42843 42876 42888 42921 42933
+group		    	subset_CH3 id 42966 42978 43011 43023 43056 43068 43101 43113 43146 43158
+group		    	subset_CH3 id 43192 43204 43237 43249 43282 43294 43327 43339 43372 43384
+group		    	subset_CH3 id 43417 43429 43462 43474 43507 43519 43552 43564 43597 43609
+group		    	subset_CH3 id 43643 43655 43688 43700 43733 43745 43779 43791 43824 43836
+group		    	subset_CH3 id 43869 43881 43914 43926 43959 43971 44004 44016 44049 44061
+group		    	subset_CH3 id 44094 44106 44139 44151 44184 44196 44229 44241 44274 44286
+group		    	subset_CH3 id 44319 44331 44364 44376 44409 44421 44454 44466 44499 44511
+group		    	subset_CH3 id 44545 44557 44590 44602 44635 44647 44680 44692 44725 44737
+group		    	subset_CH3 id 44770 44782 44815 44827 44860 44872 44906 44918 44953 44965
+group		    	subset_CH3 id 44998 45010 45043 45055 45088 45100 45133 45145 45178 45190
+group		    	subset_CH3 id 45223 45235 45268 45280 45313 45325 45359 45371 45405 45417
+group		    	subset_CH3 id 45450 45462 45495 45507 45540 45552 45585 45597 45630 45642
+group		    	subset_CH3 id 45675 45687 45720 45732 45765 45777 45810 45822 45856 45868
+group		    	subset_CH3 id 45901 45913 45946 45958 45991 46003 46036 46048 46081 46093
+group		    	subset_CH3 id 46126 46138 46171 46183 46218 46230 46263 46275 46308 46320
+group		    	subset_CH3 id 46353 46365 46399 46411 46444 46456 46489 46501 46535 46547
+group		    	subset_CH3 id 46580 46592 46625 46637 46670 46682 46715 46727 46760 46772
+group		    	subset_CH3 id 46805 46817 46850 46862 46895 46907 46940 46952 46986 46998
+group		    	subset_CH3 id 47031 47043 47076 47088 47122 47134 47167 47179 47212 47224
+group		    	subset_CH3 id 47257 47269 47302 47314 47347 47359 47392 47404 47437 47449
+group		    	subset_CH3 id 47482 47494 47527 47539 47572 47584 47618 47630 47663 47675
+group		    	subset_CH3 id 47708 47720 47753 47765 47798 47810 47843 47855 47888 47900
+group		    	subset_CH3 id 47934 47946 47979 47991 48024 48036 48070 48082 48115 48127
+group		    	subset_CH3 id 48161 48173 48206 48218 48251 48263 48296 48308 48341 48353
+group		    	subset_CH3 id 48386 48398 48432 48444 48477 48489 48522 48534 48568 48580
+group		    	subset_CH3 id 48613 48625 48658 48670 48704 48716 48749 48761 48794 48806
+group		    	subset_CH3 id 48839 48851 48884 48896 48929 48941 48974 48986 49019 49031
+group		    	subset_CH3 id 49064 49076 49109 49121 49154 49166 49199 49211 49244 49256
+group		    	subset_CH3 id 49289 49301 49335 49347 49380 49392 49425 49437 49470 49482
+group		    	subset_CH3 id 49515 49527 49560 49572 49605 49617 49650 49662 49695 49707
+group		    	subset_CH3 id 49740 49752 49785 49797 49830 49842 49875 49887 49920 49932
+group		    	subset_CH3 id 49965 49977 50010 50022 50055 50067 50101 50113 50146 50158
+group		    	subset_CH3 id 50191 50203 50237 50249 50282 50294 50327 50339 50372 50384
+group		    	subset_CH3 id 50417 50429 50462 50474 50508 50520 50553 50565 50599 50611
+group		    	subset_CH3 id 50644 50656 50689 50701 50735 50747 50782 50794 50827 50839
+group		    	subset_CH3 id 50872 50884 50917 50929 50962 50974 51008 51020 51053 51065
+group		    	subset_CH3 id 51098 51110 51143 51155 51188 51200 51233 51245 51278 51290
+group		    	subset_CH3 id 51323 51335 51368 51380 51413 51425 51458 51470 51503 51515
+group		    	subset_CH3 id 51549 51561 51594 51606 51639 51651 51685 51697 51730 51742
+group		    	subset_CH3 id 51775 51787 51820 51832 51865 51877 51911 51923 51956 51968
+group		    	subset_CH3 id 52001 52013 52046 52058 52091 52103 52136 52148 52182 52194
+group		    	subset_CH3 id 52227 52239 52272 52284 52317 52329 52362 52374 52407 52419
+group		    	subset_CH3 id 52452 52464 52497 52509 52542 52554 52587 52599 52632 52644
+group		    	subset_CH3 id 52677 52689 52722 52734 52767 52779 52812 52824 52857 52869
+group		    	subset_CH3 id 52902 52914 52947 52959 52992 53004 53037 53049 53083 53095
+group		    	subset_CH3 id 53128 53140 53173 53185 53218 53230 53263 53275 53308 53320
+group		    	subset_CH3 id 53353 53365 53398 53410 53444 53456 53489 53501 53534 53546
+group		    	subset_CH3 id 53579 53591 53624 53636 53669 53681 53715 53727 53760 53772
+group		    	subset_CH3 id 53805 53817 53850 53862 53896 53908 53941 53953 53986 53998
+group		    	subset_CH3 id 54032 54044 54077 54089 54122 54134 54167 54179 54212 54224
+group		    	subset_CH3 id 54257 54269 54302 54314 54347 54359 54392 54404 54437 54449
+group		    	subset_CH3 id 54482 54494 54527 54539 54572 54584 54617 54629 54662 54674
+group		    	subset_CH3 id 54707 54719 54752 54764 54797 54809 54842 54854 54887 54899
+group		    	subset_CH3 id 54932 54944 54977 54989 55022 55034 55067 55079 55112 55124
+group		    	subset_CH3 id 55157 55169 55203 55215 55248 55260 55293 55305 55338 55350
+group		    	subset_CH3 id 55383 55395 55428 55440 55473 55485 55518 55530 55563 55575
+group		    	subset_CH3 id 55608 55620 55653 55665 55698 55710 55743 55755 55788 55800
+group		    	subset_CH3 id 55833 55845 55878 55890 55923 55935 55968 55980 56013 56025
+group		    	subset_CH3 id 56058 56070 56103 56115 56148 56160 56194 56206 56239 56251
+group		    	subset_CH3 id 56285 56297 56330 56342 56375 56387 56420 56432 56465 56477
+group		    	subset_CH3 id 56511 56523 56556 56568 56602 56614 56647 56659 56692 56704
+group		    	subset_CH3 id 56737 56749 56782 56794 56827 56839 56872 56884 56917 56929
+group		    	subset_CH3 id 56962 56974 57007 57019 57052 57064 57097 57109 57142 57154
+group		    	subset_CH3 id 57187 57199 57232 57244 57278 57290 57323 57335 57368 57380
+group		    	subset_CH3 id 57413 57425 57458 57470 57503 57515 57548 57560 57593 57605
+group		    	subset_CH3 id 57638 57650 57683 57695 57728 57740 57774 57786 57819 57831
+group		    	subset_CH3 id 57864 57876 57909 57921 57955 57967 58000 58012 58045 58057
+group		    	subset_CH3 id 58090 58102 58135 58147 58181 58193 58227 58239 58272 58284
+group		    	subset_CH3 id 58317 58329 58362 58374 58407 58419 58452 58464 58497 58509
+group		    	subset_CH3 id 58542 58554 58587 58599 58632 58644 58677 58689 58722 58734
+group		    	subset_CH3 id 58767 58779 58812 58824 58857 58869 58902 58914 58949 58961
+group		    	subset_CH3 id 58995 59007 59040 59052 59085 59097 59130 59142 59175 59187
+group		    	subset_CH3 id 59220 59232 59265 59277 59311 59323 59356 59368 59401 59413
+group		    	subset_CH3 id 59446 59458 59491 59503 59536 59548 59581 59593 59626 59638
+group		    	subset_CH3 id 59671 59683 59716 59728 59761 59773 59806 59818 59851 59863
+group		    	subset_CH3 id 59896 59908 59942 59954 59987 59999 60032 60044 60077 60089
+group		    	subset_CH3 id 60122 60134 60167 60179 60212 60224 60257 60269 60302 60314
+group		    	subset_CH3 id 60347 60359 60392 60404 60437 60449 60482 60494 60528 60540
+group		    	subset_CH3 id 60573 60585 60618 60630 60663 60675 60708 60720 60753 60765
+group		    	subset_CH3 id 60799 60811 60844 60856 60889 60901 60934 60946 60980 60992
+group		    	subset_CH3 id 61026 61038 61073 61085 61118 61130 61163 61175 61208 61220
+group		    	subset_CH3 id 61253 61265 61298 61310 61344 61356 61389 61401 61434 61446
+group		    	subset_CH3 id 61479 61491 61524 61536 61569 61581 61614 61626 61659 61671
+group		    	subset_CH3 id 61704 61716 61749 61761 61794 61806 61839 61851 61884 61896
+group		    	subset_CH3 id 61929 61941 61974 61986 62019 62031 62065 62077 62110 62122
+group		    	subset_CH3 id 62155 62167 62202 62214 62247 62259 62292 62304 62337 62349
+group		    	subset_CH3 id 62382 62394 62427 62439 62472 62484 62517 62529 62562 62574
+group		    	subset_CH3 id 62607 62619 62652 62664 62697 62709 62743 62755 62789 62801
+group		    	subset_CH3 id 62834 62846 62879 62891 62926 62938 62971 62983 63016 63028
+group		    	subset_CH3 id 63062 63074 63107 63119 63152 63164 63197 63209 63243 63255
+group		    	subset_CH3 id 63288 63300 63333 63345 63378 63390 63423 63435 63469 63481
+group		    	subset_CH3 id 63514 63526 63559 63571 63604 63616 63649 63661 63694 63706
+group		    	subset_CH3 id 63739 63751 63784 63796 63829 63841 63874 63886 63919 63931
+group		    	subset_CH3 id 63964 63976 64009 64021 64054 64066 64100 64112 64145 64157
+group		    	subset_CH3 id 64190 64202 64235 64247 64280 64292 64325 64337 64370 64382
+group		    	subset_CH3 id 64415 64427 64460 64472 64505 64517 64551 64563 64596 64608
+group		    	subset_CH3 id 64641 64653 64686 64698 64731 64743 64776 64788 64821 64833
+group		    	subset_CH3 id 64867 64879 64912 64924 64957 64969 65002 65014 65047 65059
+group		    	subset_CH3 id 65092 65104 65137 65149 65182 65194 65227 65239 65274 65286
+group		    	subset_CH3 id 65319 65331 65364 65376 65409 65421 65454 65466 65499 65511
+group		    	subset_CH3 id 65544 65556 65589 65601 65634 65646 65679 65691 65724 65736
+group		    	subset_CH3 id 65770 65782 65815 65827 65861 65873 65906 65918 65951 65963
+group		    	subset_CH3 id 65996 66008 66042 66054 66087 66099 66132 66144 66178 66190
+group		    	subset_CH3 id 66223 66235 66268 66280 66313 66325 66358 66370 66404 66416
+group		    	subset_CH3 id 66449 66461 66494 66506 66539 66551 66584 66596 66629 66641
+group		    	subset_CH3 id 66674 66686 66719 66731 66764 66776 66809 66821 66854 66866
+group		    	subset_CH3 id 66899 66911 66945 66957 66991 67003 67036 67048 67081 67093
+group		    	subset_CH3 id 67126 67138 67171 67183 67217 67229 67262 67274 67307 67319
+group		    	subset_CH3 id 67353 67365 67398 67410 67444 67456 67489 67501 67534 67546
+group		    	subset_CH3 id 67579 67591 67624 67636 67669 67681 67714 67726 67759 67771
+group		    	subset_CH3 id 67804 67816 67849 67861 67894 67906 67939 67951 67985 67997
+group		    	subset_CH3 id 68030 68042 68075 68087 68120 68132 68165 68177 68210 68222
+group		    	subset_CH3 id 68255 68267 68300 68312 68345 68357 68390 68402 68435 68447
+group		    	subset_CH3 id 68480 68492 68525 68537 68570 68582 68615 68627 68660 68672
+group		    	subset_CH3 id 68705 68717 68750 68762 68796 68808 68841 68853 68886 68898
+group		    	subset_CH3 id 68931 68943 68976 68988 69021 69033 69066 69078 69111 69123
+group		    	subset_CH3 id 69156 69168
+
+group		    	subset_NH2 id 69199 69210 69248 69259 69298 69309 69348 69359 69397 69408
+group		    	subset_NH2 id 69446 69457 69495 69506 69545 69556 69594 69605 69643 69654
+group		    	subset_NH2 id 69693 69704 69742 69753 69791 69802 69840 69851 69890 69901
+group		    	subset_NH2 id 69941 69952 69990 70001 70039 70050 70088 70099 70137 70148
+group		    	subset_NH2 id 70189 70200 70240 70251 70289 70300 70338 70349 70387 70398
+group		    	subset_NH2 id 70436 70447 70485 70496 70534 70545 70583 70594 70636 70647
+group		    	subset_NH2 id 70685 70696 70734 70745 70783 70794 70832 70843 70881 70892
+group		    	subset_NH2 id 70930 70941 70979 70990 71028 71039 71077 71088 71126 71137
+group		    	subset_NH2 id 71175 71186 71225 71236 71274 71285 71323 71334 71372 71383
+group		    	subset_NH2 id 71421 71432 71470 71481 71519 71530 71568 71579 71617 71628
+group		    	subset_NH2 id 71666 71677 71715 71726 71764 71775 71813 71824 71862 71873
+group		    	subset_NH2 id 71912 71923 71961 71972 72010 72021 72059 72070 72108 72119
+group		    	subset_NH2 id 72159 72170 72209 72220 72259 72270 72308 72319 72358 72369
+group		    	subset_NH2 id 72407 72418 72456 72467 72505 72516 72554 72565 72603 72614
+group		    	subset_NH2 id 72652 72663 72701 72712 72750 72761 72802 72813 72851 72862
+group		    	subset_NH2 id 72902 72913 72951 72962 73000 73011 73049 73060 73101 73112
+group		    	subset_NH2 id 73150 73161 73200 73211 73249 73260 73298 73309 73348 73359
+group		    	subset_NH2 id 73397 73408 73446 73457 73495 73506 73544 73555 73593 73604
+group		    	subset_NH2 id 73643 73654 73692 73703 73741 73752 73790 73801 73839 73850
+group		    	subset_NH2 id 73888 73899 73939 73950 73989 74000 74038 74049 74090 74101
+group		    	subset_NH2 id 74139 74150 74188 74199 74237 74248 74286 74297 74336 74347
+group		    	subset_NH2 id 74385 74396 74435 74446 74484 74495 74533 74544 74583 74594
+group		    	subset_NH2 id 74632 74643 74681 74692 74730 74741 74779 74790 74828 74839
+group		    	subset_NH2 id 74877 74888 74926 74937 74975 74986 75024 75035 75073 75084
+group		    	subset_NH2 id 75122 75133 75171 75182 75220 75231 75269 75280 75318 75329
+group		    	subset_NH2 id 75367 75378 75416 75427 75465 75476 75515 75526 75564 75575
+group		    	subset_NH2 id 75615 75626 75666 75677 75716 75727 75765 75776 75817 75828
+group		    	subset_NH2 id 75866 75877 75915 75926 75964 75975 76013 76024 76062 76073
+group		    	subset_NH2 id 76111 76122 76160 76171 76209 76220 76258 76269 76307 76318
+group		    	subset_NH2 id 76356 76367 76405 76416 76454 76465 76503 76514 76552 76563
+group		    	subset_NH2 id 76601 76612 76650 76661 76699 76710 76749 76760 76798 76809
+group		    	subset_NH2 id 76847 76858 76896 76907 76945 76956 76994 77005 77044 77055
+group		    	subset_NH2 id 77093 77104 77142 77153 77191 77202 77240 77251 77289 77300
+group		    	subset_NH2 id 77338 77349 77387 77398 77436 77447 77485 77496 77534 77545
+group		    	subset_NH2 id 77584 77595 77633 77644 77682 77693 77731 77742 77780 77791
+group		    	subset_NH2 id 77829 77840 77878 77889 77928 77939 77977 77988 78026 78037
+group		    	subset_NH2 id 78075 78086 78124 78135 78173 78184 78222 78233 78271 78282
+group		    	subset_NH2 id 78320 78331 78369 78380 78418 78429 78467 78478 78516 78527
+group		    	subset_NH2 id 78565 78576 78614 78625 78663 78674 78712 78723 78761 78772
+group		    	subset_NH2 id 78810 78821 78859 78870 78908 78919 78957 78968 79006 79017
+group		    	subset_NH2 id 79055 79066 79104 79115 79153 79164 79204 79215 79253 79264
+group		    	subset_NH2 id 79303 79314 79353 79364 79402 79413 79451 79462 79500 79511
+group		    	subset_NH2 id 79551 79562 79600 79611 79649 79660 79698 79709 79747 79758
+group		    	subset_NH2 id 79797 79808 79848 79859 79898 79909 79947 79958 79996 80007
+group		    	subset_NH2 id 80045 80056 80094 80105 80143 80154 80193 80204 80242 80253
+group		    	subset_NH2 id 80291 80302 80340 80351 80389 80400 80438 80449 80487 80498
+group		    	subset_NH2 id 80536 80547 80585 80596 80634 80645 80683 80694 80733 80744
+group		    	subset_NH2 id 80782 80793 80831 80842 80880 80891 80929 80940 80978 80989
+group		    	subset_NH2 id 81029 81040 81078 81089 81127 81138 81176 81187 81227 81238
+group		    	subset_NH2 id 81277 81288 81328 81339 81378 81389 81427 81438 81476 81487
+group		    	subset_NH2 id 81525 81536 81576 81587 81625 81636 81674 81685 81723 81734
+group		    	subset_NH2 id 81772 81783 81821 81832 81870 81881 81919 81930 81968 81979
+group		    	subset_NH2 id 82018 82029 82068 82079 82117 82128 82167 82178 82216 82227
+group		    	subset_NH2 id 82265 82276 82314 82325 82363 82374 82412 82423 82462 82473
+group		    	subset_NH2 id 82511 82522 82560 82571 82609 82620 82658 82669 82707 82718
+group		    	subset_NH2 id 82756 82767 82806 82817 82855 82866 82904 82915 82954 82965
+group		    	subset_NH2 id 83003 83014 83053 83064 83102 83113 83152 83163 83201 83212
+group		    	subset_NH2 id 83250 83261 83299 83310 83349 83360 83399 83410 83448 83459
+group		    	subset_NH2 id 83497 83508 83546 83557 83595 83606 83645 83656 83694 83705
+group		    	subset_NH2 id 83743 83754 83792 83803 83841 83852 83890 83901 83939 83950
+group		    	subset_NH2 id 83988 83999 84037 84048 84086 84097 84135 84146 84184 84195
+group		    	subset_NH2 id 84236 84247 84285 84296 84334 84345 84383 84394 84432 84443
+group		    	subset_NH2 id 84481 84492 84532 84543 84581 84592 84630 84641 84679 84690
+group		    	subset_NH2 id 84728 84739 84777 84788 84826 84837 84875 84886 84924 84935
+group		    	subset_NH2 id 84976 84987 85025 85036 85074 85085 85123 85134 85172 85183
+group		    	subset_NH2 id 85221 85232 85270 85281 85319 85330 85370 85381 85419 85430
+group		    	subset_NH2 id 85470 85481 85519 85530 85568 85579 85617 85628 85666 85677
+group		    	subset_NH2 id 85715 85726 85764 85775 85814 85825 85863 85874 85913 85924
+group		    	subset_NH2 id 85963 85974 86013 86024 86062 86073 86111 86122 86160 86171
+group		    	subset_NH2 id 86210 86221 86259 86270 86308 86319 86358 86369 86407 86418
+group		    	subset_NH2 id 86456 86467 86505 86516 86554 86565 86603 86614 86652 86663
+group		    	subset_NH2 id 86701 86712 86750 86761 86799 86810 86848 86859 86897 86908
+group		    	subset_NH2 id 86946 86957 86995 87006 87044 87055 87093 87104 87142 87153
+group		    	subset_NH2 id 87192 87203 87242 87253 87291 87302 87340 87351 87389 87400
+group		    	subset_NH2 id 87438 87449 87488 87499 87537 87548 87586 87597 87635 87646
+group		    	subset_NH2 id 87684 87695 87733 87744 87782 87793 87831 87842 87880 87891
+group		    	subset_NH2 id 87929 87940 87979 87990 88028 88039 88077 88088 88126 88137
+group		    	subset_NH2 id 88175 88186 88224 88235 88273 88284 88322 88333 88371 88382
+group		    	subset_NH2 id 88420 88431 88470 88481 88519 88530 88568 88579 88617 88628
+group		    	subset_NH2 id 88666 88677 88715 88726 88764 88775 88813 88824 88862 88873
+group		    	subset_NH2 id 88911 88922 88960 88971 89011 89022 89060 89071 89109 89120
+group		    	subset_NH2 id 89158 89169 89208 89219 89259 89270 89308 89319 89357 89368
+group		    	subset_NH2 id 89406 89417 89456 89467 89508 89519 89557 89568 89606 89617
+group		    	subset_NH2 id 89655 89666 89704 89715 89754 89765 89803 89814 89852 89863
+group		    	subset_NH2 id 89901 89912 89951 89962 90000 90011 90049 90060 90099 90110
+group		    	subset_NH2 id 90148 90159 90198 90209 90249 90260 90298 90309 90347 90358
+group		    	subset_NH2 id 90396 90407 90445 90456 90495 90506 90544 90555 90593 90604
+group		    	subset_NH2 id 90643 90654 90692 90703 90741 90752 90790 90801 90840 90851
+group		    	subset_NH2 id 90889 90900 90938 90949 90988 90999 91037 91048 91086 91097
+group		    	subset_NH2 id 91135 91146 91186 91197 91235 91246 91284 91295 91333 91344
+group		    	subset_NH2 id 91382 91393 91432 91443 91483 91494 91532 91543 91582 91593
+group		    	subset_NH2 id 91631 91642 91680 91691 91729 91740 91778 91789 91827 91838
+group		    	subset_NH2 id 91876 91887 91925 91936 91975 91986 92024 92035 92073 92084
+group		    	subset_NH2 id 92122 92133 92172 92183 92221 92232 92270 92281 92319 92330
+group		    	subset_NH2 id 92368 92379 92417 92428 92467 92478 92517 92528 92566 92577
+group		    	subset_NH2 id 92615 92626 92664 92675 92713 92724 92763 92774 92812 92823
+group		    	subset_NH2 id 92861 92872 92911 92922 92960 92971 93010 93021 93059 93070
+group		    	subset_NH2 id 93108 93119 93157 93168 93206 93217 93257 93268 93306 93317
+group		    	subset_NH2 id 93356 93367 93405 93416 93454 93465 93503 93514 93552 93563
+group		    	subset_NH2 id 93601 93612 93650 93661 93699 93710 93749 93760 93799 93810
+group		    	subset_NH2 id 93848 93859 93899 93910 93948 93959 93997 94008 94046 94057
+group		    	subset_NH2 id 94095 94106 94144 94155 94193 94204 94242 94253 94291 94302
+group		    	subset_NH2 id 94340 94351 94389 94400 94440 94451 94489 94500 94538 94549
+group		    	subset_NH2 id 94588 94599 94637 94648 94686 94697 94735 94746 94784 94795
+group		    	subset_NH2 id 94833 94844 94882 94893 94931 94942 94980 94991 95032 95043
+group		    	subset_NH2 id 95081 95092 95130 95141 95179 95190 95228 95239 95277 95288
+group		    	subset_NH2 id 95328 95339 95377 95388 95426 95437 95475 95486 95524 95535
+group		    	subset_NH2 id 95573 95584 95622 95633 95671 95682 95722 95733 95771 95782
+group		    	subset_NH2 id 95820 95831 95870 95881 95920 95931 95969 95980 96018 96029
+group		    	subset_NH2 id 96067 96078 96116 96127 96165 96176 96214 96225 96263 96274
+group		    	subset_NH2 id 96312 96323 96363 96374 96412 96423 96461 96472 96512 96523
+group		    	subset_NH2 id 96562 96573 96611 96622 96661 96672 96710 96721 96760 96771
+group		    	subset_NH2 id 96809 96820 96860 96871 96910 96921 96959 96970 97008 97019
+group		    	subset_NH2 id 97058 97069 97107 97118 97156 97167 97206 97217 97255 97266
+group		    	subset_NH2 id 97304 97315 97354 97365 97407 97418 97456 97467 97505 97516
+group		    	subset_NH2 id 97554 97565 97603 97614 97652 97663 97701 97712 97750 97761
+group		    	subset_NH2 id 97800 97811 97849 97860 97898 97909 97948 97959 97997 98008
+group		    	subset_NH2 id 98046 98057 98095 98106 98144 98155 98193 98204 98242 98253
+group		    	subset_NH2 id 98291 98302 98340 98351 98390 98401 98439 98450 98488 98499
+group		    	subset_NH2 id 98537 98548 98586 98597 98635 98646 98684 98695 98733 98744
+group		    	subset_NH2 id 98782 98793 98832 98843 98881 98892 98930 98941 98979 98990
+group		    	subset_NH2 id 99028 99039 99080 99091 99129 99140 99178 99189 99227 99238
+group		    	subset_NH2 id 99276 99287 99325 99336 99374 99385 99423 99434 99472 99483
+group		    	subset_NH2 id 99521 99532 99570 99581 99619 99630 99670 99681 99720 99731
+group		    	subset_NH2 id 99771 99782 99820 99831 99870 99881 99919 99930 99968 99979
+group		    	subset_NH2 id 100017 100028 100066 100077 100115 100126 100165 100176 100214 100225
+group		    	subset_NH2 id 100263 100274 100312 100323 100361 100372 100410 100421 100459 100470
+group		    	subset_NH2 id 100508 100519 100557 100568 100606 100617 100655 100666 100704 100715
+group		    	subset_NH2 id 100753 100764 100804 100815 100853 100864 100902 100913 100951 100962
+group		    	subset_NH2 id 101001 101012 101050 101061 101102 101113 101151 101162 101200 101211
+group		    	subset_NH2 id 101249 101260 101298 101309 101347 101358 101396 101407 101448 101459
+group		    	subset_NH2 id 101497 101508 101546 101557 101595 101606 101644 101655 101694 101705
+group		    	subset_NH2 id 101743 101754 101792 101803 101841 101852 101891 101902 101940 101951
+group		    	subset_NH2 id 101990 102001 102039 102050 102088 102099 102137 102148 102186 102197
+group		    	subset_NH2 id 102239 102250 102288 102299 102337 102348 102387 102398 102436 102447
+group		    	subset_NH2 id 102486 102497 102535 102546 102587 102598 102637 102648 102686 102697
+group		    	subset_NH2 id 102736 102747 102785 102796 102834 102845 102883 102894 102934 102945
+group		    	subset_NH2 id 102983 102994 103032 103043 103081 103092 103130 103141 103179 103190
+group		    	subset_NH2 id 103228 103239 103277 103288 103326 103337
+
+group		    	subset_Water id 103366 103367 103368 103369 103370 103371 103372 103373 103374 103375
+group		    	subset_Water id 103376 103377 103378 103379 103380 103381 103382 103383 103384 103385
+group		    	subset_Water id 103386 103387 103388 103389 103390 103391 103392 103393 103394 103395
+group		    	subset_Water id 103396 103397 103398 103399 103400 103401 103402 103403 103404 103405
+group		    	subset_Water id 103406 103407 103408 103409 103410 103411 103412 103413 103414 103415
+group		    	subset_Water id 103416 103417 103418 103419 103420 103421 103422 103423 103424 103425
+group		    	subset_Water id 103426 103427 103428 103429 103430 103431 103432 103433 103434 103435
+group		    	subset_Water id 103436 103437 103438 103439 103440 103441 103442 103443 103444 103445
+group		    	subset_Water id 103446 103447 103448 103449 103450 103451 103452 103453 103454 103455
+group		    	subset_Water id 103456 103457 103458 103459 103460 103461 103462 103463 103464 103465
+group		    	subset_Water id 103466 103467 103468 103469 103470 103471 103472 103473 103474 103475
+group		    	subset_Water id 103476 103477 103478 103479 103480 103481 103482 103483 103484 103485
+group		    	subset_Water id 103486 103487 103488 103489 103490 103491 103492 103493 103494 103495
+group		    	subset_Water id 103496 103497 103498 103499 103500 103501 103502 103503 103504 103505
+group		    	subset_Water id 103506 103507 103508 103509 103510 103511 103512 103513 103514 103515
+group		    	subset_Water id 103516 103517 103518 103519 103520 103521 103522 103523 103524 103525
+group		    	subset_Water id 103526 103527 103528 103529 103530 103531 103532 103533 103534 103535
+group		    	subset_Water id 103536 103537 103538 103539 103540 103541 103542 103543 103544 103545
+group		    	subset_Water id 103546 103547 103548 103549 103550 103551 103552 103553 103554 103555
+group		    	subset_Water id 103556 103557 103558 103559 103560 103561 103562 103563 103564 103565
+group		    	subset_Water id 103566 103567 103568 103569 103570 103571 103572 103573 103574 103575
+group		    	subset_Water id 103576 103577 103578 103579 103580 103581 103582 103583 103584 103585
+group		    	subset_Water id 103586 103587 103588 103589 103590 103591 103592 103593 103594 103595
+group		    	subset_Water id 103596 103597 103598 103599 103600 103601 103602 103603 103604 103605
+group		    	subset_Water id 103606 103607 103608 103609 103610 103611 103612 103613 103614 103615
+group		    	subset_Water id 103616 103617 103618 103619 103620 103621 103622 103623 103624 103625
+group		    	subset_Water id 103626 103627 103628 103629 103630 103631 103632 103633 103634 103635
+group		    	subset_Water id 103636 103637 103638 103639 103640 103641 103642 103643 103644 103645
+group		    	subset_Water id 103646 103647 103648 103649 103650 103651 103652 103653 103654 103655
+group		    	subset_Water id 103656 103657 103658 103659 103660 103661 103662 103663 103664 103665
+group		    	subset_Water id 103666 103667 103668 103669 103670 103671 103672 103673 103674 103675
+group		    	subset_Water id 103676 103677 103678 103679 103680 103681 103682 103683 103684 103685
+group		    	subset_Water id 103686 103687 103688 103689 103690 103691 103692 103693 103694 103695
+group		    	subset_Water id 103696 103697 103698 103699 103700 103701 103702 103703 103704 103705
+group		    	subset_Water id 103706 103707 103708 103709 103710 103711 103712 103713 103714 103715
+group		    	subset_Water id 103716 103717 103718 103719 103720 103721 103722 103723 103724 103725
+group		    	subset_Water id 103726 103727 103728 103729 103730 103731 103732 103733 103734 103735
+group		    	subset_Water id 103736 103737 103738 103739 103740 103741 103742 103743 103744 103745
+group		    	subset_Water id 103746 103747 103748 103749 103750 103751 103752 103753 103754 103755
+group		    	subset_Water id 103756 103757 103758 103759 103760 103761 103762 103763 103764 103765
+group		    	subset_Water id 103766 103767 103768 103769 103770 103771 103772 103773 103774 103775
+group		    	subset_Water id 103776 103777 103778 103779 103780 103781 103782 103783 103784 103785
+group		    	subset_Water id 103786 103787 103788 103789 103790 103791 103792 103793 103794 103795
+group		    	subset_Water id 103796 103797 103798 103799 103800 103801 103802 103803 103804 103805
+group		    	subset_Water id 103806 103807 103808 103809 103810 103811 103812 103813 103814 103815
+group		    	subset_Water id 103816 103817 103818 103819 103820 103821 103822 103823 103824 103825
+group		    	subset_Water id 103826 103827 103828 103829 103830 103831 103832 103833 103834 103835
+group		    	subset_Water id 103836 103837 103838 103839 103840 103841 103842 103843 103844 103845
+group		    	subset_Water id 103846 103847 103848 103849 103850 103851 103852 103853 103854 103855
+group		    	subset_Water id 103856 103857 103858 103859 103860 103861 103862 103863 103864 103865
+group		    	subset_Water id 103866 103867 103868 103869 103870 103871 103872 103873 103874 103875
+group		    	subset_Water id 103876 103877 103878 103879 103880 103881 103882 103883 103884 103885
+group		    	subset_Water id 103886 103887 103888 103889 103890 103891 103892 103893 103894 103895
+group		    	subset_Water id 103896 103897 103898 103899 103900 103901 103902 103903 103904 103905
+group		    	subset_Water id 103906 103907 103908 103909 103910 103911 103912 103913 103914 103915
+group		    	subset_Water id 103916 103917 103918 103919 103920 103921 103922 103923 103924 103925
+group		    	subset_Water id 103926 103927 103928 103929 103930 103931 103932 103933 103934 103935
+group		    	subset_Water id 103936 103937 103938 103939 103940 103941 103942 103943 103944 103945
+group		    	subset_Water id 103946 103947 103948 103949 103950 103951 103952 103953 103954 103955
+group		    	subset_Water id 103956 103957 103958 103959 103960 103961 103962 103963 103964 103965
+group		    	subset_Water id 103966 103967 103968 103969 103970 103971 103972 103973 103974 103975
+group		    	subset_Water id 103976 103977 103978 103979 103980 103981 103982 103983 103984 103985
+group		    	subset_Water id 103986 103987 103988 103989 103990 103991 103992 103993 103994 103995
+group		    	subset_Water id 103996 103997 103998 103999 104000 104001 104002 104003 104004 104005
+group		    	subset_Water id 104006 104007 104008 104009 104010 104011 104012 104013 104014 104015
+group		    	subset_Water id 104016 104017 104018 104019 104020 104021 104022 104023 104024 104025
+group		    	subset_Water id 104026 104027 104028 104029 104030 104031 104032 104033 104034 104035
+group		    	subset_Water id 104036 104037 104038 104039 104040 104041 104042 104043 104044 104045
+group		    	subset_Water id 104046 104047 104048 104049 104050 104051 104052 104053 104054 104055
+group		    	subset_Water id 104056 104057 104058 104059 104060 104061 104062 104063 104064 104065
+group		    	subset_Water id 104066 104067 104068 104069 104070 104071 104072 104073 104074 104075
+group		    	subset_Water id 104076 104077 104078 104079 104080 104081 104082 104083 104084 104085
+group		    	subset_Water id 104086 104087 104088 104089 104090 104091 104092 104093 104094 104095
+group		    	subset_Water id 104096 104097 104098 104099 104100 104101 104102 104103 104104 104105
+group		    	subset_Water id 104106 104107 104108 104109 104110 104111 104112 104113 104114 104115
+group		    	subset_Water id 104116 104117 104118 104119 104120 104121 104122 104123 104124 104125
+group		    	subset_Water id 104126 104127 104128 104129 104130 104131 104132 104133 104134 104135
+group		    	subset_Water id 104136 104137 104138 104139 104140 104141 104142 104143 104144 104145
+group		    	subset_Water id 104146 104147 104148 104149 104150 104151 104152 104153 104154 104155
+group		    	subset_Water id 104156 104157 104158 104159 104160 104161 104162 104163 104164 104165
+group		    	subset_Water id 104166 104167 104168 104169 104170 104171 104172 104173 104174 104175
+group		    	subset_Water id 104176 104177 104178 104179 104180 104181 104182 104183 104184 104185
+group		    	subset_Water id 104186 104187 104188 104189 104190 104191 104192 104193 104194 104195
+group		    	subset_Water id 104196 104197 104198 104199 104200 104201 104202 104203 104204 104205
+group		    	subset_Water id 104206 104207 104208 104209 104210 104211 104212 104213 104214 104215
+group		    	subset_Water id 104216 104217 104218 104219 104220 104221 104222 104223 104224 104225
+group		    	subset_Water id 104226 104227 104228 104229 104230 104231 104232 104233 104234 104235
+group		    	subset_Water id 104236 104237 104238 104239 104240 104241 104242 104243 104244 104245
+group		    	subset_Water id 104246 104247 104248 104249 104250 104251 104252 104253 104254 104255
+group		    	subset_Water id 104256 104257 104258 104259 104260 104261 104262 104263 104264 104265
+group		    	subset_Water id 104266 104267 104268 104269 104270 104271 104272 104273 104274 104275
+group		    	subset_Water id 104276 104277 104278 104279 104280 104281 104282 104283 104284 104285
+group		    	subset_Water id 104286 104287 104288 104289 104290 104291 104292 104293 104294 104295
+group		    	subset_Water id 104296 104297 104298 104299 104300 104301 104302 104303 104304 104305
+group		    	subset_Water id 104306 104307 104308 104309 104310 104311 104312 104313 104314 104315
+group		    	subset_Water id 104316 104317 104318 104319 104320 104321 104322 104323 104324 104325
+group		    	subset_Water id 104326 104327 104328 104329 104330 104331 104332 104333 104334 104335
+group		    	subset_Water id 104336 104337 104338 104339 104340 104341 104342 104343 104344 104345
+group		    	subset_Water id 104346 104347 104348 104349 104350 104351 104352 104353 104354 104355
+group		    	subset_Water id 104356 104357 104358 104359 104360 104361 104362 104363 104364 104365
+group		    	subset_Water id 104366 104367 104368 104369 104370 104371 104372 104373 104374 104375
+group		    	subset_Water id 104376 104377 104378 104379 104380 104381 104382 104383 104384 104385
+group		    	subset_Water id 104386 104387 104388 104389 104390 104391 104392 104393 104394 104395
+group		    	subset_Water id 104396 104397 104398 104399 104400 104401 104402 104403 104404 104405
+group		    	subset_Water id 104406 104407 104408 104409 104410 104411 104412 104413 104414 104415
+group		    	subset_Water id 104416 104417 104418 104419 104420 104421 104422 104423 104424 104425
+group		    	subset_Water id 104426 104427 104428 104429 104430 104431 104432 104433 104434 104435
+group		    	subset_Water id 104436 104437 104438 104439 104440 104441 104442 104443 104444 104445
+group		    	subset_Water id 104446 104447 104448 104449 104450 104451 104452 104453 104454 104455
+group		    	subset_Water id 104456 104457 104458 104459 104460 104461 104462 104463 104464 104465
+group		    	subset_Water id 104466 104467 104468 104469 104470 104471 104472 104473 104474 104475
+group		    	subset_Water id 104476 104477 104478 104479 104480 104481 104482 104483 104484 104485
+group		    	subset_Water id 104486 104487 104488 104489 104490 104491 104492 104493 104494 104495
+group		    	subset_Water id 104496 104497 104498 104499 104500 104501 104502 104503 104504 104505
+group		    	subset_Water id 104506 104507 104508 104509 104510 104511 104512 104513 104514 104515
+group		    	subset_Water id 104516 104517 104518 104519 104520 104521 104522 104523 104524 104525
+group		    	subset_Water id 104526 104527 104528 104529 104530 104531 104532 104533 104534 104535
+group		    	subset_Water id 104536 104537 104538 104539 104540 104541 104542 104543 104544 104545
+group		    	subset_Water id 104546 104547 104548 104549 104550 104551 104552 104553 104554 104555
+group		    	subset_Water id 104556 104557 104558 104559 104560 104561 104562 104563 104564 104565
+group		    	subset_Water id 104566 104567 104568 104569 104570 104571 104572 104573 104574 104575
+group		    	subset_Water id 104576 104577 104578 104579 104580 104581 104582 104583 104584 104585
+group		    	subset_Water id 104586 104587 104588 104589 104590 104591 104592 104593 104594 104595
+group		    	subset_Water id 104596 104597 104598 104599 104600 104601 104602 104603 104604 104605
+group		    	subset_Water id 104606 104607 104608 104609 104610 104611 104612 104613 104614 104615
+group		    	subset_Water id 104616 104617 104618 104619 104620 104621 104622 104623 104624 104625
+group		    	subset_Water id 104626 104627 104628 104629 104630 104631 104632 104633 104634 104635
+group		    	subset_Water id 104636 104637 104638 104639 104640 104641 104642 104643 104644 104645
+group		    	subset_Water id 104646 104647 104648 104649 104650 104651 104652 104653 104654 104655
+group		    	subset_Water id 104656 104657 104658 104659 104660 104661 104662 104663 104664 104665
+group		    	subset_Water id 104666 104667 104668 104669 104670 104671 104672 104673 104674 104675
+group		    	subset_Water id 104676 104677 104678 104679 104680 104681 104682 104683 104684 104685
+group		    	subset_Water id 104686 104687 104688 104689 104690 104691 104692 104693 104694 104695
+group		    	subset_Water id 104696 104697 104698 104699 104700 104701 104702 104703 104704 104705
+group		    	subset_Water id 104706 104707 104708 104709 104710 104711 104712 104713 104714 104715
+group		    	subset_Water id 104716 104717 104718 104719 104720 104721 104722 104723 104724 104725
+group		    	subset_Water id 104726 104727 104728 104729 104730 104731 104732 104733 104734 104735
+group		    	subset_Water id 104736 104737 104738 104739 104740 104741 104742 104743 104744 104745
+group		    	subset_Water id 104746 104747 104748 104749 104750 104751 104752 104753 104754 104755
+group		    	subset_Water id 104756 104757 104758 104759 104760 104761 104762 104763 104764 104765
+group		    	subset_Water id 104766 104767 104768 104769 104770 104771 104772 104773 104774 104775
+group		    	subset_Water id 104776 104777 104778 104779 104780 104781 104782 104783 104784 104785
+group		    	subset_Water id 104786 104787 104788 104789 104790 104791 104792 104793 104794 104795
+group		    	subset_Water id 104796 104797 104798 104799 104800 104801 104802 104803 104804 104805
+group		    	subset_Water id 104806 104807 104808 104809 104810 104811 104812 104813 104814 104815
+group		    	subset_Water id 104816 104817 104818 104819 104820 104821 104822 104823 104824 104825
+group		    	subset_Water id 104826 104827 104828 104829 104830 104831 104832 104833 104834 104835
+group		    	subset_Water id 104836 104837 104838 104839 104840 104841 104842 104843 104844 104845
+group		    	subset_Water id 104846 104847 104848 104849 104850 104851 104852 104853 104854 104855
+group		    	subset_Water id 104856 104857 104858 104859 104860 104861 104862 104863 104864 104865
+group		    	subset_Water id 104866 104867 104868 104869 104870 104871 104872 104873 104874 104875
+group		    	subset_Water id 104876 104877 104878 104879 104880 104881 104882 104883 104884 104885
+group		    	subset_Water id 104886 104887 104888 104889 104890 104891 104892 104893 104894 104895
+group		    	subset_Water id 104896 104897 104898 104899 104900 104901 104902 104903 104904 104905
+group		    	subset_Water id 104906 104907 104908 104909 104910 104911 104912 104913 104914 104915
+group		    	subset_Water id 104916 104917 104918 104919 104920 104921 104922 104923 104924 104925
+group		    	subset_Water id 104926 104927 104928 104929 104930 104931 104932 104933 104934 104935
+group		    	subset_Water id 104936 104937 104938 104939 104940 104941 104942 104943 104944 104945
+group		    	subset_Water id 104946 104947 104948 104949 104950 104951 104952 104953 104954 104955
+group		    	subset_Water id 104956 104957 104958 104959 104960 104961 104962 104963 104964 104965
+group		    	subset_Water id 104966 104967 104968 104969 104970 104971 104972 104973 104974 104975
+group		    	subset_Water id 104976 104977 104978 104979 104980 104981 104982 104983 104984 104985
+group		    	subset_Water id 104986 104987 104988 104989 104990 104991 104992 104993 104994 104995
+group		    	subset_Water id 104996 104997 104998 104999 105000 105001 105002 105003 105004 105005
+group		    	subset_Water id 105006 105007 105008 105009 105010 105011 105012 105013 105014 105015
+group		    	subset_Water id 105016 105017 105018 105019 105020 105021 105022 105023 105024 105025
+group		    	subset_Water id 105026 105027 105028 105029 105030 105031 105032 105033 105034 105035
+group		    	subset_Water id 105036 105037 105038 105039 105040 105041 105042 105043 105044 105045
+group		    	subset_Water id 105046 105047 105048 105049 105050 105051 105052 105053 105054 105055
+group		    	subset_Water id 105056 105057 105058 105059 105060 105061 105062 105063 105064 105065
+group		    	subset_Water id 105066 105067 105068 105069 105070 105071 105072 105073 105074 105075
+group		    	subset_Water id 105076 105077 105078 105079 105080 105081 105082 105083 105084 105085
+group		    	subset_Water id 105086 105087 105088 105089 105090 105091 105092 105093 105094 105095
+group		    	subset_Water id 105096 105097 105098 105099 105100 105101 105102 105103 105104 105105
+group		    	subset_Water id 105106 105107 105108 105109 105110 105111 105112 105113 105114 105115
+group		    	subset_Water id 105116 105117 105118 105119 105120 105121 105122 105123 105124 105125
+group		    	subset_Water id 105126 105127 105128 105129 105130 105131 105132 105133 105134 105135
+group		    	subset_Water id 105136 105137 105138 105139 105140 105141 105142 105143 105144 105145
+group		    	subset_Water id 105146 105147 105148 105149 105150 105151 105152 105153 105154 105155
+group		    	subset_Water id 105156 105157 105158 105159 105160 105161 105162 105163 105164 105165
+group		    	subset_Water id 105166 105167 105168 105169 105170 105171 105172 105173 105174 105175
+group		    	subset_Water id 105176 105177 105178 105179 105180 105181 105182 105183 105184 105185
+group		    	subset_Water id 105186 105187 105188 105189 105190 105191 105192 105193 105194 105195
+group		    	subset_Water id 105196 105197 105198 105199 105200 105201 105202 105203 105204 105205
+group		    	subset_Water id 105206 105207 105208 105209 105210 105211 105212 105213 105214 105215
+group		    	subset_Water id 105216 105217 105218 105219 105220 105221 105222 105223 105224 105225
+group		    	subset_Water id 105226 105227 105228 105229 105230 105231 105232 105233 105234 105235
+group		    	subset_Water id 105236 105237 105238 105239 105240 105241 105242 105243 105244 105245
+group		    	subset_Water id 105246 105247 105248 105249 105250 105251 105252 105253 105254 105255
+group		    	subset_Water id 105256 105257 105258 105259 105260 105261 105262 105263 105264 105265
+group		    	subset_Water id 105266 105267 105268 105269 105270 105271 105272 105273 105274 105275
+group		    	subset_Water id 105276 105277 105278 105279 105280 105281 105282 105283 105284 105285
+group		    	subset_Water id 105286 105287 105288 105289 105290 105291 105292 105293 105294 105295
+group		    	subset_Water id 105296 105297 105298 105299 105300 105301 105302 105303 105304 105305
+group		    	subset_Water id 105306 105307 105308 105309 105310 105311 105312 105313 105314 105315
+group		    	subset_Water id 105316 105317 105318 105319 105320 105321 105322 105323 105324 105325
+group		    	subset_Water id 105326 105327 105328 105329 105330 105331 105332 105333 105334 105335
+group		    	subset_Water id 105336 105337 105338 105339 105340 105341 105342 105343 105344 105345
+group		    	subset_Water id 105346 105347 105348 105349 105350 105351 105352 105353 105354 105355
+group		    	subset_Water id 105356 105357 105358 105359 105360 105361 105362 105363 105364 105365
+group		    	subset_Water id 105366 105367 105368 105369 105370 105371 105372 105373 105374 105375
+group		    	subset_Water id 105376 105377 105378 105379 105380 105381 105382 105383 105384 105385
+group		    	subset_Water id 105386 105387 105388 105389 105390 105391 105392 105393 105394 105395
+group		    	subset_Water id 105396 105397 105398 105399 105400 105401 105402 105403 105404 105405
+group		    	subset_Water id 105406 105407 105408 105409 105410 105411 105412 105413 105414 105415
+group		    	subset_Water id 105416 105417 105418 105419 105420 105421 105422 105423 105424 105425
+group		    	subset_Water id 105426 105427 105428 105429 105430 105431 105432 105433 105434 105435
+group		    	subset_Water id 105436 105437 105438 105439 105440 105441 105442 105443 105444 105445
+group		    	subset_Water id 105446 105447 105448 105449 105450 105451 105452 105453 105454 105455
+group		    	subset_Water id 105456 105457 105458 105459 105460 105461 105462 105463 105464 105465
+group		    	subset_Water id 105466 105467 105468 105469 105470 105471 105472 105473 105474 105475
+group		    	subset_Water id 105476 105477 105478 105479 105480 105481 105482 105483 105484 105485
+group		    	subset_Water id 105486 105487 105488 105489 105490 105491 105492 105493 105494 105495
+group		    	subset_Water id 105496 105497 105498 105499 105500 105501 105502 105503 105504 105505
+group		    	subset_Water id 105506 105507 105508 105509 105510 105511 105512 105513 105514 105515
+group		    	subset_Water id 105516 105517 105518 105519 105520 105521 105522 105523 105524 105525
+group		    	subset_Water id 105526 105527 105528 105529 105530 105531 105532 105533 105534 105535
+group		    	subset_Water id 105536 105537 105538 105539 105540 105541 105542 105543 105544 105545
+group		    	subset_Water id 105546 105547 105548 105549 105550 105551 105552 105553 105554 105555
+group		    	subset_Water id 105556 105557 105558 105559 105560 105561 105562 105563 105564 105565
+group		    	subset_Water id 105566 105567 105568 105569 105570 105571 105572 105573 105574 105575
+group		    	subset_Water id 105576 105577 105578 105579 105580 105581 105582 105583 105584 105585
+group		    	subset_Water id 105586 105587 105588 105589 105590 105591 105592 105593 105594 105595
+group		    	subset_Water id 105596 105597 105598 105599 105600 105601 105602 105603 105604 105605
+group		    	subset_Water id 105606 105607 105608 105609 105610 105611 105612 105613 105614 105615
+group		    	subset_Water id 105616 105617 105618 105619 105620 105621 105622 105623 105624 105625
+group		    	subset_Water id 105626 105627 105628 105629 105630 105631 105632 105633 105634 105635
+group		    	subset_Water id 105636 105637 105638 105639 105640 105641 105642 105643 105644 105645
+group		    	subset_Water id 105646 105647 105648 105649 105650 105651 105652 105653 105654 105655
+group		    	subset_Water id 105656 105657 105658 105659 105660 105661 105662 105663 105664 105665
+group		    	subset_Water id 105666 105667 105668 105669 105670 105671 105672 105673 105674 105675
+group		    	subset_Water id 105676 105677 105678 105679 105680 105681 105682 105683 105684 105685
+group		    	subset_Water id 105686 105687 105688 105689 105690 105691 105692 105693 105694 105695
+group		    	subset_Water id 105696 105697 105698 105699 105700 105701 105702 105703 105704 105705
+group		    	subset_Water id 105706 105707 105708 105709 105710 105711 105712 105713 105714 105715
+group		    	subset_Water id 105716 105717 105718 105719 105720 105721 105722 105723 105724 105725
+group		    	subset_Water id 105726 105727 105728 105729 105730 105731 105732 105733 105734 105735
+group		    	subset_Water id 105736 105737 105738 105739 105740 105741 105742 105743 105744 105745
+group		    	subset_Water id 105746 105747 105748 105749 105750 105751 105752 105753 105754 105755
+group		    	subset_Water id 105756 105757 105758 105759 105760 105761 105762 105763 105764 105765
+group		    	subset_Water id 105766 105767 105768 105769 105770 105771 105772 105773 105774 105775
+group		    	subset_Water id 105776 105777 105778 105779 105780 105781 105782 105783 105784 105785
+group		    	subset_Water id 105786 105787 105788 105789 105790 105791 105792 105793 105794 105795
+group		    	subset_Water id 105796 105797 105798 105799 105800 105801 105802 105803 105804 105805
+group		    	subset_Water id 105806 105807 105808 105809 105810 105811 105812 105813 105814 105815
+group		    	subset_Water id 105816 105817 105818 105819 105820 105821 105822 105823 105824 105825
+group		    	subset_Water id 105826 105827 105828 105829 105830 105831 105832 105833 105834 105835
+group		    	subset_Water id 105836 105837 105838 105839 105840 105841 105842 105843 105844 105845
+group		    	subset_Water id 105846 105847 105848 105849 105850 105851 105852 105853 105854 105855
+group		    	subset_Water id 105856 105857 105858 105859 105860 105861 105862 105863 105864 105865
+group		    	subset_Water id 105866 105867 105868 105869 105870 105871 105872 105873 105874 105875
+group		    	subset_Water id 105876 105877 105878 105879 105880 105881 105882 105883 105884 105885
+group		    	subset_Water id 105886 105887 105888 105889 105890 105891 105892 105893 105894 105895
+group		    	subset_Water id 105896 105897 105898 105899 105900 105901 105902 105903 105904 105905
+group		    	subset_Water id 105906 105907 105908 105909 105910 105911 105912 105913 105914 105915
+group		    	subset_Water id 105916 105917 105918 105919 105920 105921 105922 105923 105924 105925
+group		    	subset_Water id 105926 105927 105928 105929 105930 105931 105932 105933 105934 105935
+group		    	subset_Water id 105936 105937 105938 105939 105940 105941 105942 105943 105944 105945
+group		    	subset_Water id 105946 105947 105948 105949 105950 105951 105952 105953 105954 105955
+group		    	subset_Water id 105956 105957 105958 105959 105960 105961 105962 105963 105964 105965
+group		    	subset_Water id 105966 105967 105968 105969 105970 105971 105972 105973 105974 105975
+group		    	subset_Water id 105976 105977 105978 105979 105980 105981 105982 105983 105984 105985
+group		    	subset_Water id 105986 105987 105988 105989 105990 105991 105992 105993 105994 105995
+group		    	subset_Water id 105996 105997 105998 105999 106000 106001 106002 106003 106004 106005
+group		    	subset_Water id 106006 106007 106008 106009 106010 106011 106012 106013 106014 106015
+group		    	subset_Water id 106016 106017 106018 106019 106020 106021 106022 106023 106024 106025
+group		    	subset_Water id 106026 106027 106028 106029 106030 106031 106032 106033 106034 106035
+group		    	subset_Water id 106036 106037 106038 106039 106040 106041 106042 106043 106044 106045
+group		    	subset_Water id 106046 106047 106048 106049 106050 106051 106052 106053 106054 106055
+group		    	subset_Water id 106056 106057 106058 106059 106060 106061 106062 106063 106064 106065
+group		    	subset_Water id 106066 106067 106068 106069 106070 106071 106072 106073 106074 106075
+group		    	subset_Water id 106076 106077 106078 106079 106080 106081 106082 106083 106084 106085
+group		    	subset_Water id 106086 106087 106088 106089 106090 106091 106092 106093 106094 106095
+group		    	subset_Water id 106096 106097 106098 106099 106100 106101 106102 106103 106104 106105
+group		    	subset_Water id 106106 106107 106108 106109 106110 106111 106112 106113 106114 106115
+group		    	subset_Water id 106116 106117 106118 106119 106120 106121 106122 106123 106124 106125
+group		    	subset_Water id 106126 106127 106128 106129 106130 106131 106132 106133 106134 106135
+group		    	subset_Water id 106136 106137 106138 106139 106140 106141 106142 106143 106144 106145
+group		    	subset_Water id 106146 106147 106148 106149 106150 106151 106152 106153 106154 106155
+group		    	subset_Water id 106156 106157 106158 106159 106160 106161 106162 106163 106164 106165
+group		    	subset_Water id 106166 106167 106168 106169 106170 106171 106172 106173 106174 106175
+group		    	subset_Water id 106176 106177 106178 106179 106180 106181 106182 106183 106184 106185
+group		    	subset_Water id 106186 106187 106188 106189 106190 106191 106192 106193 106194 106195
+group		    	subset_Water id 106196 106197 106198 106199 106200 106201 106202 106203 106204 106205
+group		    	subset_Water id 106206 106207 106208 106209 106210 106211 106212 106213 106214 106215
+group		    	subset_Water id 106216 106217 106218 106219 106220 106221 106222 106223 106224 106225
+group		    	subset_Water id 106226 106227 106228 106229 106230 106231 106232 106233 106234 106235
+group		    	subset_Water id 106236 106237 106238 106239 106240 106241 106242 106243 106244 106245
+group		    	subset_Water id 106246 106247 106248 106249 106250 106251 106252 106253 106254 106255
+group		    	subset_Water id 106256 106257 106258 106259 106260 106261 106262 106263 106264 106265
+group		    	subset_Water id 106266 106267 106268 106269 106270 106271 106272 106273 106274 106275
+group		    	subset_Water id 106276 106277 106278 106279 106280 106281 106282 106283 106284 106285
+group		    	subset_Water id 106286 106287 106288 106289 106290 106291 106292 106293 106294 106295
+group		    	subset_Water id 106296 106297 106298 106299 106300 106301 106302 106303 106304 106305
+group		    	subset_Water id 106306 106307 106308 106309 106310 106311 106312 106313 106314 106315
+group		    	subset_Water id 106316 106317 106318 106319 106320 106321 106322 106323 106324 106325
+group		    	subset_Water id 106326 106327 106328 106329 106330 106331 106332 106333 106334 106335
+group		    	subset_Water id 106336 106337 106338 106339 106340 106341 106342 106343 106344 106345
+group		    	subset_Water id 106346 106347 106348 106349 106350 106351 106352 106353 106354 106355
+group		    	subset_Water id 106356 106357 106358 106359 106360 106361 106362 106363 106364 106365
+group		    	subset_Water id 106366 106367 106368 106369 106370 106371 106372 106373 106374 106375
+group		    	subset_Water id 106376 106377 106378 106379 106380 106381 106382 106383 106384 106385
+group		    	subset_Water id 106386
+
+#-------------------------------------------------------------------------------
+# Delete Atoms
+#-------------------------------------------------------------------------------
+
+shell cd ..
+
+if "${graphene} == 0" then "shell mkdir Epoxy"
+if "${graphene} == 0" then "shell cd Epoxy"
+if "${graphene} == 0" then "delete_atoms group subset_graphene"
+
+if "${graphene} == 1" then "shell mkdir Graphene"
+if "${graphene} == 1" then "shell cd Graphene"
+
+delete_atoms group subset_Water
+reset_atoms id
+
+#-------------------------------------------------------------------------------
+# Variabless
+#-------------------------------------------------------------------------------
+
+velocity                all create ${T0} ${vseed} dist gaussian mom yes rot no
+
+#-------------------------------------------------------------------------------
+# Minimization
+#-------------------------------------------------------------------------------
+
+reset_timestep		0
+thermo_style		custom step fmax fnorm press vol v_sysdensity v_sxx v_syy v_szz v_syz v_sxz v_sxy pe ke
+thermo			100
+
+min_style		sd
+min_modify		dmax 0.05 line quadratic
+minimize		0.0 1.0 1000 10000
+
+min_style		cg
+min_modify		dmax 0.05 line quadratic
+minimize		0.0 1.0 1000 10000
+
+#-------------------------------------------------------------------------------
+# NVT
+#-------------------------------------------------------------------------------
+
+# Fix shake is needed for water in pcff+
+fix			shaken all shake .0001 20 0 a 39 b 20
+
+reset_timestep		0
+thermo_style		custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+thermo			${Nthermo}
+fix			1 all nvt temp ${T0} ${T0} 100 drag 1.0
+fix			2 all ave/time 1 10000 10000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_coulomb v_etotal v_pe v_ke v_evdwl v_epair v_ebond v_eangle v_edihed v_eimp v_lx v_ly v_lz v_sxx v_syy v_szz v_syz v_sxz v_sxy file NVT-1-averages.txt
+fix			3 all ave/time 10  1     10  v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_coulomb v_etotal v_pe v_ke v_evdwl v_epair v_ebond v_eangle v_edihed v_eimp v_lx v_ly v_lz v_sxx v_syy v_szz v_syz v_sxz v_sxy file NVT-1-instantaneous.txt
+
+timestep		1
+run			1000000
+
+unfix			1
+unfix			2
+unfix			3
+unfix			shaken
+
+#-------------------------------------------------------------------------------
+# NPT
+#-------------------------------------------------------------------------------
+
+# Fix shake is needed for water in pcff+
+fix                     shaken all shake .0001 20 0 a 39 b 20
+
+reset_timestep          0
+thermo_style            custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+thermo                  ${Nthermo}
+fix                     1 all npt temp ${T0} ${T0} 100 iso 1 1 100 drag 0 mtk yes nreset 200000
+fix                     2 all ave/time 1 999999 1000000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_coulomb v_etotal v_pe v_ke v_evdwl v_epair v_ebond v_eangle v_edihed v_eimp v_lx v_ly v_lz v_sxx v_syy v_szz v_syz v_sxz v_sxy file NPT-1-averages.txt off 1
+fix                     3 all ave/time 1000  1     1000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_coulomb v_etotal v_pe v_ke v_evdwl v_epair v_ebond v_eangle v_edihed v_eimp v_lx v_ly v_lz v_sxx v_syy v_szz v_syz v_sxz v_sxy file NPT-1-instantaneous.txt
+
+timestep                1
+run                     1500000
+
+unfix                   1
+unfix                   2
+unfix                   3
+unfix                   shaken
+
+#-------------------------------------------------------------------------------
+# Minimization
+#-------------------------------------------------------------------------------
+
+reset_timestep		0
+thermo_style		custom step fmax fnorm press vol v_sysdensity v_sxx v_syy v_szz v_syz v_sxz v_sxy pe ke
+thermo			100
+
+min_style		sd
+min_modify		dmax 0.05 line quadratic
+minimize		0.0 1.0 1000 10000
+
+min_style		cg
+min_modify		dmax 0.05 line quadratic
+minimize		0.0 1.0 1000 10000
+
+#-------------------------------------------------------------------------------
+# NVT
+#-------------------------------------------------------------------------------
+
+# Fix shake is needed for water in pcff+
+fix			shaken all shake .0001 20 0 a 39 b 20
+
+reset_timestep		0
+thermo_style		custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+thermo			${Nthermo}
+fix			1 all nvt temp ${T0} ${T0} 100 drag 1.0
+fix			2 all ave/time 1 10000 10000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_coulomb v_etotal v_pe v_ke v_evdwl v_epair v_ebond v_eangle v_edihed v_eimp v_lx v_ly v_lz v_sxx v_syy v_szz v_syz v_sxz v_sxy file NVT-2-averages.txt
+fix			3 all ave/time 10  1     10  v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_coulomb v_etotal v_pe v_ke v_evdwl v_epair v_ebond v_eangle v_edihed v_eimp v_lx v_ly v_lz v_sxx v_syy v_szz v_syz v_sxz v_sxy file NVT-2-instantaneous.txt
+
+timestep		1
+run			1000000
+
+unfix			1
+unfix			2
+unfix			3
+unfix			shaken
+
+#-------------------------------------------------------------------------------
+# NPT
+#-------------------------------------------------------------------------------
+
+# Fix shake is needed for water in pcff+
+fix                     shaken all shake .0001 20 0 a 39 b 20
+
+reset_timestep          0
+thermo_style            custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+thermo                  ${Nthermo}
+fix                     1 all npt temp ${T0} ${T0} 100 iso 1 1 100 drag 0 mtk yes nreset 200000
+fix                     2 all ave/time 1 999999 1000000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_coulomb v_etotal v_pe v_ke v_evdwl v_epair v_ebond v_eangle v_edihed v_eimp v_lx v_ly v_lz v_sxx v_syy v_szz v_syz v_sxz v_sxy file NPT-2-averages.txt off 1
+fix                     3 all ave/time 1000  1     1000 v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_coulomb v_etotal v_pe v_ke v_evdwl v_epair v_ebond v_eangle v_edihed v_eimp v_lx v_ly v_lz v_sxx v_syy v_szz v_syz v_sxz v_sxy file NPT-2-instantaneous.txt
+
+timestep                1
+run                     10000000
+
+unfix                   1
+unfix                   2
+unfix                   3
+unfix                   shaken
+
+#-------------------------------------------------------------------------------
+# Write Out
+#-------------------------------------------------------------------------------
+
+shell mkdir Output
+shell cd Output
+
+write_data              data.polymer nocoeff
+write_coeff             polymer.coeff
+
+group2ndx               groups_index.ndx subset_graphene subset_CH3 subset_NH2

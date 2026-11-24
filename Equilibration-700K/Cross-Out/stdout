@@ -1,0 +1,27 @@
+Cannot load JobServer::listFiles -- invalid command name "::JobServer::listFiles"
+
+Files:
+         120548 Jan 15 19:56:49 input.dat
+          30172 Jan 15 19:56:49 parameters.dat
+           3505 Jan 15 19:56:49 script
+       30205643 Jan 15 19:56:50 structure.dat
+
+Starting LAMMPS at Sun Jan 15 19:56:50 GMT 2023
+Executing LAMMPS: /home/werner/MD/TaskServer/Tools/LAMMPS7Jan22/Linux-x86_64/LAMMPS using MPI /home/werner/MD/Linux-x86_64/IntelMPI5/bin/mpirun
+Finished LAMMPS Sun Jan 15 19:56:54 GMT 2023
+
+Files:
+         197471 Jan 15 19:56:54 7.1_Initialize.out
+           1596 Jan 15 19:56:54 7.2_Custom.out
+         199156 Jan 15 19:56:54 LAMMPS.out
+       26660746 Jan 15 19:56:54 data.polymer
+         120548 Jan 15 19:56:49 input.dat
+            144 Jan 15 19:56:50 log.lammps
+            554 Jan 15 19:56:50 mpi
+          30172 Jan 15 19:56:49 parameters.dat
+          24216 Jan 15 19:56:54 polymer.coeff
+           3505 Jan 15 19:56:49 script
+            187 Jan 15 19:56:50 state.dat
+       30205643 Jan 15 19:56:50 structure.dat
+
+

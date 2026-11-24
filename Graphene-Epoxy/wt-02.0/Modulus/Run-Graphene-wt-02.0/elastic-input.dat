@@ -1,0 +1,194 @@
+if "${rep} < 100" then "shell cd Graphene-wt-02.0-Modulus-1" else "shell cd Graphene-wt-02.0-Modulus-2"
+
+# variables
+
+variable                T0 index 300
+variable                up index 2.0e-2
+
+shell cd ${T0}K
+
+#-------------------------------------------------------------------------------
+# Initialize LAMMPS run for 3-d periodic
+#-------------------------------------------------------------------------------
+
+units			real
+boundary		p p p
+atom_style		full
+
+pair_style		lj/class2/coul/long 9.5
+pair_modify             mix sixthpower
+pair_modify		tail yes
+bond_style		class2
+angle_style		class2
+dihedral_style		class2
+improper_style		class2
+special_bonds           lj 0.0 0.0 1.0 coul 0.0 0.0 1.0
+
+read_data		data.polymer
+
+include			polymer.coeff
+
+change_box              all triclinic
+
+neighbor		2.0 bin
+neigh_modify		delay 0 every 1 check yes
+kspace_style		pppm 0.00001
+
+variable		R		equal 0.00198722
+variable		sysvol		equal vol
+variable		sysmass		equal mass(all)/6.0221367e+23
+variable		sysdensity	equal v_sysmass/v_sysvol/1.0e-24
+variable		coulomb		equal ecoul+elong
+variable		etotal		equal etotal
+variable		pe		equal pe
+variable		ke		equal ke
+variable		evdwl		equal evdwl
+variable		epair		equal epair
+variable		ebond		equal ebond
+variable		eangle		equal eangle
+variable		edihed		equal edihed
+variable		eimp		equal eimp
+variable		lx		equal lx
+variable		ly		equal ly
+variable		lz		equal lz
+variable		Nthermo		equal 0
+variable		cella		equal lx
+variable		cellb		equal sqrt(ly*ly+xy*xy)
+variable		cellc		equal sqrt(lz*lz+xz*xz+yz*yz)
+variable		cellalpha	equal acos((xy*xz+ly*yz)/(v_cellb*v_cellc))
+variable		cellbeta	equal acos(xz/v_cellc)
+variable		cellgamma	equal acos(xy/v_cellb)
+variable		p		equal press
+variable		pxx		equal pxx
+variable		pyy		equal pyy
+variable		pzz		equal pzz
+variable		pyz		equal pyz
+variable		pxz		equal pxz
+variable		pxy		equal pxy
+variable		sxx		equal -pxx
+variable		syy		equal -pyy
+variable		szz		equal -pzz
+variable		syz		equal -pyz
+variable		sxz		equal -pxz
+variable		sxy		equal -pxy
+variable		fmax		equal fmax
+variable	        fnorm		equal fnorm
+variable		time equal step*dt+0.000001
+variable		surfacetension equal 0.5*v_lz*(0.5*(v_sxx+v_syy)-v_szz)
+
+thermo_style		custom step v_time press vol v_sysdensity temp ebond eangle edihed eimp evdwl ecoul etail elong pe ke
+thermo_modify		flush yes
+
+ndx2group               groups_index.ndx
+
+shell cd ..
+
+#-------------------------------------------------------------------------------
+# Set the initial velocities for $T
+#-------------------------------------------------------------------------------
+
+velocity     	    	all create ${T0} ${vseed} dist gaussian mom yes rot no
+
+#-------------------------------------------------------------------------------
+# Set Path
+#-------------------------------------------------------------------------------
+
+#shell mkdir rep-${rep}
+shell cd rep-${rep}
+
+#shell cp ../potential.mod ../displace.mod .
+
+#print "# Cij" file EConstant.txt
+
+#-------------------------------------------------------------------------------
+# variables
+#-------------------------------------------------------------------------------
+
+variable cfac equal 1.01325e-4
+variable cunits string GPa
+
+variable nevery  equal 1                     # sampling interval
+variable nrepeat equal 10000                 # number of samples
+variable nfreq   equal ${nevery}*${nrepeat}  # length of one average
+
+variable nthermo equal ${nfreq}              # interval for thermo output
+
+variable nequil  equal 500000                # length of equilibration run
+variable nrun    equal 500000                # length of equilibrated run
+
+#-------------------------------------------------------------------------------
+# Stress
+#-------------------------------------------------------------------------------
+
+# Compute initial state
+include potential.mod
+run ${nequil}
+
+include potential.mod
+run ${nrun}
+
+variable pxx0 equal f_avp[1]
+variable pyy0 equal f_avp[2]
+variable pzz0 equal f_avp[3]
+variable pxy0 equal f_avp[4]
+variable pxz0 equal f_avp[5]
+variable pyz0 equal f_avp[6]
+
+variable tmp equal lx
+variable lx0 equal ${tmp}
+variable tmp equal ly
+variable ly0 equal ${tmp}
+variable tmp equal lz
+variable lz0 equal ${tmp}
+
+# These formulas define the derivatives w.r.t. strain components
+# Constants uses $, variables use v_ 
+variable d1 equal -(v_pxx1-${pxx0})/(v_delta/v_len0)*${cfac}
+variable d2 equal -(v_pyy1-${pyy0})/(v_delta/v_len0)*${cfac}
+variable d3 equal -(v_pzz1-${pzz0})/(v_delta/v_len0)*${cfac}
+variable d4 equal -(v_pyz1-${pyz0})/(v_delta/v_len0)*${cfac}
+variable d5 equal -(v_pxz1-${pxz0})/(v_delta/v_len0)*${cfac}
+variable d6 equal -(v_pxy1-${pxy0})/(v_delta/v_len0)*${cfac}
+
+## Write restart
+#write_restart restart.equil
+#
+## uxx Perturbation
+#
+#variable dir equal 1
+#include displace.mod
+#print "${C11},${C21},${C31},${C41},${C51},${C61}" append EConstant.txt
+#
+## uyy Perturbation
+#
+#variable dir equal 2
+#include displace.mod
+#print "${C12},${C22},${C32},${C42},${C52},${C62}" append EConstant.txt
+#
+#quit
+
+## uzz Perturbation
+#
+#variable dir equal 3
+#include displace.mod
+#print "${C13},${C23},${C33},${C43},${C53},${C63}" append EConstant.txt
+#
+## uyz Perturbation
+#
+#variable dir equal 4
+#include displace.mod
+#print "${C14},${C24},${C34},${C44},${C54},${C64}" append EConstant.txt
+#
+#quit
+
+# uxz Perturbation
+
+variable dir equal 5
+include displace.mod
+print "${C15},${C25},${C35},${C45},${C55},${C65}" append EConstant.txt
+
+# uxy Perturbation
+
+variable dir equal 6
+include displace.mod
+print "${C16},${C26},${C36},${C46},${C56},${C66}" append EConstant.txt

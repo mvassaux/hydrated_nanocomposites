@@ -1,0 +1,12 @@
+<?xml version='1.0'?>
+<!DOCTYPE MDRESULTS PUBLIC "-//MD//DTD MDRESULTS 1.0" "http://materialsdesign.com/DTD/mdresults_1_0.dtd">
+
+<MDRESULTS>
+  <System id="initial">
+    <Date>15 Jan 2023 19:55:24 GMT</Date>
+  </System>
+  <Calculation id="initial">
+    <Date>15 Jan 2023 19:55:24 GMT</Date>
+    <System>initial</System>
+  </Calculation>
+</MDRESULTS>

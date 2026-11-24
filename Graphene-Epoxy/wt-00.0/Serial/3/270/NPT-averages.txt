@@ -1,0 +1,3 @@
+# Time-averaged data for fix 2
+# TimeStep v_time c_thermo_temp c_thermo_press v_sysvol v_sysdensity v_coulomb v_etotal v_pe v_ke v_evdwl v_epair v_ebond v_eangle v_edihed v_eimp v_lx v_ly v_lz v_sxx v_syy v_szz v_syz v_sxz v_sxy
+1000000 1e+06 269.999 0.988801 996950 1.20129 7950.1 409716 326527 83189.1 -22471.6 -14521.5 43329.8 48015.3 247342 2361.15 99.8982 99.8982 99.8982 -20.047 -30.0456 47.1262 -16.2783 64.7433 19.9014

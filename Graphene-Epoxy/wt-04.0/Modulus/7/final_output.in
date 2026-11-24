@@ -1,0 +1,60 @@
+log		    	final.out  
+
+# Average moduli for cubic crystals
+
+variable C11cubic equal (${C11all}+${C22all}+${C33all})/3.0
+variable C12cubic equal (${C12all}+${C13all}+${C23all})/3.0
+variable C44cubic equal (${C44all}+${C55all}+${C66all})/3.0
+
+variable bulkmodulus equal (${C11cubic}+2*${C12cubic})/3.0
+variable shearmodulus1 equal ${C44cubic}
+variable shearmodulus2 equal (${C11cubic}-${C12cubic})/2.0
+variable poissonratio equal 1.0/(1.0+${C11cubic}/${C12cubic})
+
+variable youngmodulus equal 3.0*${bulkmodulus}*(1-2*${poissonratio})
+
+print "=========================================" 
+print "Components of the Elastic Constant Tensor"
+print "========================================="
+
+print "Elastic Constant C11all = ${C11all} ${cunits}"
+print "Elastic Constant C22all = ${C22all} ${cunits}"
+print "Elastic Constant C33all = ${C33all} ${cunits}"
+
+print "Elastic Constant C12all = ${C12all} ${cunits}"
+print "Elastic Constant C13all = ${C13all} ${cunits}"
+print "Elastic Constant C23all = ${C23all} ${cunits}"
+
+print "Elastic Constant C44all = ${C44all} ${cunits}"
+print "Elastic Constant C55all = ${C55all} ${cunits}"
+print "Elastic Constant C66all = ${C66all} ${cunits}"
+
+print "Elastic Constant C14all = ${C14all} ${cunits}"
+print "Elastic Constant C15all = ${C15all} ${cunits}"
+print "Elastic Constant C16all = ${C16all} ${cunits}"
+
+print "Elastic Constant C24all = ${C24all} ${cunits}"
+print "Elastic Constant C25all = ${C25all} ${cunits}"
+print "Elastic Constant C26all = ${C26all} ${cunits}"
+
+print "Elastic Constant C34all = ${C34all} ${cunits}"
+print "Elastic Constant C35all = ${C35all} ${cunits}"
+print "Elastic Constant C36all = ${C36all} ${cunits}"
+
+print "Elastic Constant C45all = ${C45all} ${cunits}"
+print "Elastic Constant C46all = ${C46all} ${cunits}"
+print "Elastic Constant C56all = ${C56all} ${cunits}"
+
+print "========================================="
+print "Average properties for a cubic crystal"
+print "========================================="
+
+print "Bulk Modulus = ${bulkmodulus} ${cunits}"
+print "Shear Modulus 1 = ${shearmodulus1} ${cunits}"
+print "Shear Modulus 2 = ${shearmodulus2} ${cunits}"
+print "Poisson Ratio = ${poissonratio}"
+
+print "Young Modulus = ${youngmodulus} ${cunits}"
+
+print "youngs_modulus,bulk_modulus,shear_modulus_1,shear_modulus_2,poissons_ratio" file p_properties.txt
+print "${youngmodulus},${bulkmodulus},${shearmodulus1},${shearmodulus2},${poissonratio}" append p_properties.txt

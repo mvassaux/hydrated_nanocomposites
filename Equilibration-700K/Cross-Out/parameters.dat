@@ -1,0 +1,468 @@
+bond_coeff 	         1 1.417 470.84 -627.62 1327.6	# cp	cp
+bond_coeff 	         2 1.0982 372.83 -803.45 894.32	# cp	h
+bond_coeff 	         3 1.501 321.9 -521.82 572.16	# c	cp
+bond_coeff 	         4 1.3768 428.88 -738.24 1115	# cp	o
+bond_coeff 	         5 1.42 400.4 -835.2 1313	# c	o
+bond_coeff 	         6 1.53 299.67 -501.77 679.81	# c	c
+bond_coeff 	         7 1.42 400.4 -835.2 1313	# c	o
+bond_coeff 	         8 1.53 299.67 -501.77 679.81	# c	c
+bond_coeff 	         9 1.101 345 -691.89 844.6	# c	h
+bond_coeff 	        10 1.101 345 -691.89 844.6	# c	h
+bond_coeff 	        11 1.101 345 -691.89 844.6	# c	h
+bond_coeff 	        12 0.965 532.51 -1282.9 2004.8	# h*	o
+bond_coeff 	        13 1.53 299.67 -501.77 679.81	# c	c
+bond_coeff 	        14 1.101 345 -691.89 844.6	# c	h
+bond_coeff 	        15 1.53 299.67 -501.77 679.81	# c	c
+bond_coeff 	        16 1.3912 447.04 -784.53 886.17	# cp	nn
+bond_coeff 	        17 1.0012 465.86 -1066.2 1496.6	# h*	nn
+bond_coeff 	        18 1.412 257.78 0 0	# cp_	na_
+bond_coeff 	        19 1.006 466.74 -1073.6 1251.1	# h*	na
+bond_coeff 	        20 0.97 563.28 -1428.2 1902.1	# h*	o*
+bond_coeff 	        21 1.475 336.8 0 0	# c_	np_
+angle_coeff 	         1 118.9 61.023 -34.993 0	# cp	cp	cp
+angle_coeff 	         2 117.94 35.156 -12.468 0	# cp	cp	h
+angle_coeff 	         3 111 44.323 -9.4454 0	# cp	c	cp
+angle_coeff 	         4 111 44.323 -9.4454 0	# cp	c	h
+angle_coeff 	         5 107.66 39.641 -12.921 -2.4318	# h	c	h
+angle_coeff 	         6 120.05 44.715 -22.735 0	# c	cp	cp
+angle_coeff 	         7 123.42 73.678 -21.679 0	# cp	cp	o
+angle_coeff 	         8 102.97 38.974 -6.2595 -8.171	# c	o	cp
+angle_coeff 	         9 111.27 54.538 -8.3642 -13.084	# c	c	o
+angle_coeff 	        10 108.73 58.545 -10.809 -12.401	# h	c	o
+angle_coeff 	        11 110.77 41.453 -10.604 5.129	# c	c	h
+angle_coeff 	        12 107.66 39.641 -12.921 -2.4318	# h	c	h
+angle_coeff 	        13 111.27 54.538 -8.3642 -13.084	# c	c	o
+angle_coeff 	        14 110.77 41.453 -10.604 5.129	# c	c	h
+angle_coeff 	        15 112.67 39.516 -7.443 -9.5583	# c	c	c
+angle_coeff 	        16 108.73 58.545 -10.809 -12.401	# h	c	o
+angle_coeff 	        17 111.27 54.538 -8.3642 -13.084	# c	c	o
+angle_coeff 	        18 110.77 41.453 -10.604 5.129	# c	c	h
+angle_coeff 	        19 110.77 41.453 -10.604 5.129	# c	c	h
+angle_coeff 	        20 114 50 0 0	# c_	c_	n_
+angle_coeff 	        21 109.5 60 0 0	# *	c_	*
+angle_coeff 	        22 105.8 52.706 -12.109 -9.8681	# c	o	h*
+angle_coeff 	        23 111.27 54.538 -8.3642 -13.084	# c	c	o
+angle_coeff 	        24 110.77 41.453 -10.604 5.129	# c	c	h
+angle_coeff 	        25 112.67 39.516 -7.443 -9.5583	# c	c	c
+angle_coeff 	        26 110.77 41.453 -10.604 5.129	# c	c	h
+angle_coeff 	        27 107.66 39.641 -12.921 -2.4318	# h	c	h
+angle_coeff 	        28 121.46 61.065 -21.617 0	# cp	cp	nn
+angle_coeff 	        29 108.4 43.959 -8.3924 -9.3379	# c	c	cp
+angle_coeff 	        30 110.77 41.453 -10.604 5.129	# c	c	h
+angle_coeff 	        31 110.77 41.453 -10.604 5.129	# c	c	h
+angle_coeff 	        32 120 50 0 0	# *	n_	*
+angle_coeff 	        33 120 50 0 0	# *	n_	*
+angle_coeff 	        34 111.87 40.837 -15.667 0	# cp	nn	h*
+angle_coeff 	        35 120 50 0 0	# *	n_	*
+angle_coeff 	        36 120 65 0 0	# *	cp_	*
+angle_coeff 	        37 109 80 0 0	# *	na_	*
+angle_coeff 	        38 107.07 45.252 -7.5558 -9.512	# h*	na	h*
+angle_coeff 	        39 103.7 49.84 -11.6 -8	# h*	o*	h*
+dihedral_coeff 	         1 8.3667 0 1.1932 0 0 0	# cp	cp	cp	cp
+dihedral_coeff 	         2 0 0 3.9661 0 0 0	# cp	cp	cp	h
+dihedral_coeff 	         3 0 0 1.8769 0 0 0	# h	cp	cp	h
+dihedral_coeff 	         4 -0.2802 0 -0.0678 0 -0.0122 0	# cp	c	cp	cp
+dihedral_coeff 	         5 -0.2801 0 -0.0678 0 -0.0122 0	# h	c	cp	cp
+dihedral_coeff 	         6 0 0 4.4072 0 0 0	# c	cp	cp	cp
+dihedral_coeff 	         7 0 0 1.559 0 0 0	# c	cp	cp	h
+dihedral_coeff 	         8 0 0 4.8498 0 0 0	# cp	cp	cp	o
+dihedral_coeff 	         9 0 0 1.7234 0 0 0	# h	cp	cp	o
+dihedral_coeff 	        10 0 0 1.5 0 0 0	# cp	cp	o	c
+dihedral_coeff 	        11 0 0 0 0 0.13 0	# *	c_	o_	*
+dihedral_coeff 	        12 0.9513 0 0.1155 0 0.072 0	# h	c	o	cp
+dihedral_coeff 	        13 0.7137 0 0.266 0 -0.2545 0	# o	c	c	c
+dihedral_coeff 	        14 -0.182 0 -0.1084 0 -0.7047 0	# o	c	c	o
+dihedral_coeff 	        15 -0.1435 0 0.253 0 -0.0905 0	# o	c	c	h
+dihedral_coeff 	        16 0 0 0.0316 0 -0.1681 0	# h	c	c	c
+dihedral_coeff 	        17 -0.1435 0 0.253 0 -0.0905 0	# h	c	c	o
+dihedral_coeff 	        18 -0.1432 0 0.0617 0 -0.1083 0	# h	c	c	h
+dihedral_coeff 	        19 -0.1435 0 0.253 0 -0.0905 0	# h	c	c	o
+dihedral_coeff 	        20 0 0 0 0 0.158 0	# *	c_	c_	*
+dihedral_coeff 	        21 -0.1432 0 0.0617 0 -0.1083 0	# h	c	c	h
+dihedral_coeff 	        22 0 0 0 0 0.158 0	# *	c_	c_	*
+dihedral_coeff 	        23 0 0 0.0316 0 -0.1681 0	# h	c	c	c
+dihedral_coeff 	        24 0 0 0 0 0.158 0	# *	c_	c_	*
+dihedral_coeff 	        25 -0.6732 0 -0.4778 0 -0.167 0	# c	c	o	h*
+dihedral_coeff 	        26 0.1863 0 -0.4338 0 -0.2121 0	# h	c	o	h*
+dihedral_coeff 	        27 -0.6732 0 -0.4778 0 -0.167 0	# c	c	o	h*
+dihedral_coeff 	        28 0.7137 0 0.266 0 -0.2545 0	# o	c	c	c
+dihedral_coeff 	        29 0 0 0.0316 0 -0.1681 0	# h	c	c	c
+dihedral_coeff 	        30 -0.1435 0 0.253 0 -0.0905 0	# h	c	c	o
+dihedral_coeff 	        31 -0.1432 0 0.0617 0 -0.1083 0	# h	c	c	h
+dihedral_coeff 	        32 0 0 0.0316 0 -0.1681 0	# h	c	c	c
+dihedral_coeff 	        33 -0.6732 0 -0.4778 0 -0.167 0	# c	c	o	h*
+dihedral_coeff 	        34 0 0 5.3826 0 0 0	# cp	cp	cp	nn
+dihedral_coeff 	        35 0 0 3 0 0 0	# *	cp_	cp_	*
+dihedral_coeff 	        36 -0.2802 0 -0.0678 0 -0.0122 0	# c	c	cp	cp
+dihedral_coeff 	        37 0 0 2.25 0 0 0	# *	cp_	n_	*
+dihedral_coeff 	        38 -0.0228 0 0.028 0 -0.1863 0	# cp	c	c	h
+dihedral_coeff 	        39 -0.1432 0 0.0617 0 -0.1083 0	# h	c	c	h
+dihedral_coeff 	        40 0 0 1.219 0 0 0	# cp	cp	nn	h*
+dihedral_coeff 	        41 0 0 3 0 0 0	# *	cp_	cp_	*
+dihedral_coeff 	        42 0 0 3 0 0 0	# *	cp_	cp_	*
+dihedral_coeff 	        43 0 0 2.25 0 0 0	# *	cp_	na_	*
+improper_coeff 	         1 7.1794 0	# cp	cp	cp	cp
+improper_coeff 	         2 4.8912 0	# cp	cp	cp	h
+improper_coeff 	         3 0.0 0.0	# cp	c2	cp	hc
+improper_coeff 	         4 0.0 0.0	# cp	c2	hc	hc
+improper_coeff 	         5 7.8153 0	# c	cp	cp	cp
+improper_coeff 	         6 13.042 0	# cp	cp	cp	o
+improper_coeff 	         7 0.0 0.0	# c43o	c2oe	hc	oc
+improper_coeff 	         8 0.0 0.0	# hc	c2oe	hc	oc
+improper_coeff 	         9 0.0 0.0	# c43o	c2oe	hc	hc
+improper_coeff 	        10 0.0 0.0	# c2	c43o	hc	oh
+improper_coeff 	        11 0.0 0.0	# c2	c43o	c2oe	oh
+improper_coeff 	        12 0.0 0.0	# c2	c43o	c2oe	hc
+improper_coeff 	        13 0.0 0.0	# c2oe	c43o	hc	oh
+improper_coeff 	        14 0.0 0.0	# c43o	c2	hc	hc
+improper_coeff 	        15 0.0 0.0	# c43o	c2	hc	nb
+improper_coeff 	        16 0.0 0.0	# hc	c2	hc	nb
+improper_coeff 	        17 0.0 0.0	# c3	c43o	hc	oh
+improper_coeff 	        18 0.0 0.0	# c2oe	c43o	c3	oh
+improper_coeff 	        19 0.0 0.0	# c2oe	c43o	c3	hc
+improper_coeff 	        20 0.0 0.0	# c43o	c3	hc	hc
+improper_coeff 	        21 0.0 0.0	# hc	c3	hc	hc
+improper_coeff 	        22 10.786 0	# cp	cp	cp	nn
+improper_coeff 	        23 0.0 0.0	# c3	c2	cp	hc
+improper_coeff 	        24 0.0 0.0	# c3	c2	hc	hc
+improper_coeff 	        25 0.0 0.0	# c2	c3	hc	hc
+improper_coeff 	        26 0.1 0	# *	n_	*	*
+improper_coeff 	        27 0.1 0	# *	n_	*	*
+improper_coeff 	        28 10 0	# *	cp_	*	*
+improper_coeff 	        29 0 0	# *	na_	*	*
+angle_coeff 	         1 bb 68.286 1.417 1.417	# cp	cp	cp
+angle_coeff 	         2 bb 1.0795 1.417 1.0982	# cp	cp	h
+angle_coeff 	         3 bb 0.0 1.501 1.501	# cp	c	cp
+angle_coeff 	         4 bb 2.9168 1.501 1.101	# cp	c	h
+angle_coeff 	         5 bb 5.3316 1.101 1.101	# h	c	h
+angle_coeff 	         6 bb 12.068 1.501 1.417	# c	cp	cp
+angle_coeff 	         7 bb 48.475 1.417 1.3768	# cp	cp	o
+angle_coeff 	         8 bb 0.0 1.42 1.3768	# c	o	cp
+angle_coeff 	         9 bb 11.432 1.53 1.42	# c	c	o
+angle_coeff 	        10 bb 23.198 1.101 1.42	# h	c	o
+angle_coeff 	        11 bb 3.3872 1.53 1.101	# c	c	h
+angle_coeff 	        12 bb 5.3316 1.101 1.101	# h	c	h
+angle_coeff 	        13 bb 11.432 1.53 1.42	# c	c	o
+angle_coeff 	        14 bb 3.3872 1.53 1.101	# c	c	h
+angle_coeff 	        15 bb 0 1.53 1.53	# c	c	c
+angle_coeff 	        16 bb 23.198 1.101 1.42	# h	c	o
+angle_coeff 	        17 bb 11.432 1.53 1.42	# c	c	o
+angle_coeff 	        18 bb 3.3872 1.53 1.101	# c	c	h
+angle_coeff 	        19 bb 3.3872 1.53 1.101	# c	c	h
+angle_coeff 	        20 bb 0.0 1.53 1.475	# c_	c_	n_
+angle_coeff 	        21 bb 0.0 1.101 1.475	# *	c_	*
+angle_coeff 	        22 bb -9.6879 1.42 0.965	# c	o	h*
+angle_coeff 	        23 bb 11.432 1.53 1.42	# c	c	o
+angle_coeff 	        24 bb 3.3872 1.53 1.101	# c	c	h
+angle_coeff 	        25 bb 0 1.53 1.53	# c	c	c
+angle_coeff 	        26 bb 3.3872 1.53 1.101	# c	c	h
+angle_coeff 	        27 bb 5.3316 1.101 1.101	# h	c	h
+angle_coeff 	        28 bb 46.951 1.417 1.3912	# cp	cp	nn
+angle_coeff 	        29 bb 0 1.53 1.501	# c	c	cp
+angle_coeff 	        30 bb 3.3872 1.53 1.101	# c	c	h
+angle_coeff 	        31 bb 3.3872 1.53 1.101	# c	c	h
+angle_coeff 	        32 bb 0.0 1.475 1.3912	# *	n_	*
+angle_coeff 	        33 bb 0.0 1.475 1.475	# *	n_	*
+angle_coeff 	        34 bb 4.5393 1.3912 1.0012	# cp	nn	h*
+angle_coeff 	        35 bb 0.0 1.475 1.0012	# *	n_	*
+angle_coeff 	        36 bb 0.0 1.417 1.412	# *	cp_	*
+angle_coeff 	        37 bb 0.0 1.412 1.006	# *	na_	*
+angle_coeff 	        38 bb -1.8749 1.006 1.006	# h*	na	h*
+angle_coeff 	        39 bb -9.5 0.97 0.97	# h*	o*	h*
+angle_coeff 	         1 ba 28.871 28.871 1.417 1.417	# cp	cp	cp
+angle_coeff 	         2 ba 20.003 24.218 1.417 1.0982	# cp	cp	h
+angle_coeff 	         3 ba 0.0 0.0 1.501 1.501	# cp	c	cp
+angle_coeff 	         4 ba 26.461 11.772 1.501 1.101	# cp	c	h
+angle_coeff 	         5 ba 18.103 18.103 1.101 1.101	# h	c	h
+angle_coeff 	         6 ba 47.058 31.077 1.501 1.417	# c	cp	cp
+angle_coeff 	         7 ba 58.479 107.68 1.417 1.3768	# cp	cp	o
+angle_coeff 	         8 ba 0.0 0.0 1.42 1.3768	# c	o	cp
+angle_coeff 	         9 ba 2.6868 20.403 1.53 1.42	# c	c	o
+angle_coeff 	        10 ba 4.6189 55.327 1.101 1.42	# h	c	o
+angle_coeff 	        11 ba 20.754 11.421 1.53 1.101	# c	c	h
+angle_coeff 	        12 ba 18.103 18.103 1.101 1.101	# h	c	h
+angle_coeff 	        13 ba 2.6868 20.403 1.53 1.42	# c	c	o
+angle_coeff 	        14 ba 20.754 11.421 1.53 1.101	# c	c	h
+angle_coeff 	        15 ba 8.016 8.016 1.53 1.53	# c	c	c
+angle_coeff 	        16 ba 4.6189 55.327 1.101 1.42	# h	c	o
+angle_coeff 	        17 ba 2.6868 20.403 1.53 1.42	# c	c	o
+angle_coeff 	        18 ba 20.754 11.421 1.53 1.101	# c	c	h
+angle_coeff 	        19 ba 20.754 11.421 1.53 1.101	# c	c	h
+angle_coeff 	        20 ba 0.0 0.0 1.53 1.475	# c_	c_	n_
+angle_coeff 	        21 ba 0.0 0.0 1.101 1.475	# *	c_	*
+angle_coeff 	        22 ba 28.58 18.928 1.42 0.965	# c	o	h*
+angle_coeff 	        23 ba 2.6868 20.403 1.53 1.42	# c	c	o
+angle_coeff 	        24 ba 20.754 11.421 1.53 1.101	# c	c	h
+angle_coeff 	        25 ba 8.016 8.016 1.53 1.53	# c	c	c
+angle_coeff 	        26 ba 20.754 11.421 1.53 1.101	# c	c	h
+angle_coeff 	        27 ba 18.103 18.103 1.101 1.101	# h	c	h
+angle_coeff 	        28 ba 39.404 73.655 1.417 1.3912	# cp	cp	nn
+angle_coeff 	        29 ba 0 0 1.53 1.501	# c	c	cp
+angle_coeff 	        30 ba 20.754 11.421 1.53 1.101	# c	c	h
+angle_coeff 	        31 ba 20.754 11.421 1.53 1.101	# c	c	h
+angle_coeff 	        32 ba 0.0 0.0 1.475 1.3912	# *	n_	*
+angle_coeff 	        33 ba 0.0 0.0 1.475 1.475	# *	n_	*
+angle_coeff 	        34 ba 38.57 16.552 1.3912 1.0012	# cp	nn	h*
+angle_coeff 	        35 ba 0.0 0.0 1.475 1.0012	# *	n_	*
+angle_coeff 	        36 ba 0.0 0.0 1.417 1.412	# *	cp_	*
+angle_coeff 	        37 ba 0.0 0.0 1.412 1.006	# *	na_	*
+angle_coeff 	        38 ba 28.032 28.032 1.006 1.006	# h*	na	h*
+angle_coeff 	        39 ba 22.35 22.35 0.97 0.97	# h*	o*	h*
+dihedral_coeff 	         1 mbt 27.599 -2.312 0 1.417	# cp	cp	cp	cp
+dihedral_coeff 	         2 mbt 0 -1.1521 0 1.417	# cp	cp	cp	h
+dihedral_coeff 	         3 mbt 0 4.8228 0 1.417	# h	cp	cp	h
+dihedral_coeff 	         4 mbt 0.0 0.0 0.0 1.501	# cp	c	cp	cp
+dihedral_coeff 	         5 mbt -5.5679 1.4083 0.301 1.501	# h	c	cp	cp
+dihedral_coeff 	         6 mbt 0 9.1792 0 1.417	# c	cp	cp	cp
+dihedral_coeff 	         7 mbt 0 3.9421 0 1.417	# c	cp	cp	h
+dihedral_coeff 	         8 mbt 0 4.8255 0 1.417	# cp	cp	cp	o
+dihedral_coeff 	         9 mbt 0 5.5432 0 1.417	# h	cp	cp	o
+dihedral_coeff 	        10 mbt 0.0 0.0 0.0 1.3768	# cp	cp	o	c
+dihedral_coeff 	        11 mbt 0.0 0.0 0.0 1.42	# *	c_	o_	*
+dihedral_coeff 	        12 mbt 0.0 0.0 0.0 1.42	# h	c	o	cp
+dihedral_coeff 	        13 mbt -21.884 -7.6764 -0.6868 1.53	# o	c	c	c
+dihedral_coeff 	        14 mbt -17.259 -3.6157 -0.8364 1.53	# o	c	c	o
+dihedral_coeff 	        15 mbt -16.797 -1.2296 -0.275 1.53	# o	c	c	h
+dihedral_coeff 	        16 mbt -14.879 -3.6581 -0.3138 1.53	# h	c	c	c
+dihedral_coeff 	        17 mbt -16.797 -1.2296 -0.275 1.53	# h	c	c	o
+dihedral_coeff 	        18 mbt -14.261 -0.5322 -0.4864 1.53	# h	c	c	h
+dihedral_coeff 	        19 mbt -16.797 -1.2296 -0.275 1.53	# h	c	c	o
+dihedral_coeff 	        20 mbt 0.0 0.0 0.0 1.53	# *	c_	c_	*
+dihedral_coeff 	        21 mbt -14.261 -0.5322 -0.4864 1.53	# h	c	c	h
+dihedral_coeff 	        22 mbt 0.0 0.0 0.0 1.53	# *	c_	c_	*
+dihedral_coeff 	        23 mbt -14.879 -3.6581 -0.3138 1.53	# h	c	c	c
+dihedral_coeff 	        24 mbt 0.0 0.0 0.0 1.53	# *	c_	c_	*
+dihedral_coeff 	        25 mbt 1.2472 0 0.7485 1.42	# c	c	o	h*
+dihedral_coeff 	        26 mbt 0 0.9241 -0.5889 1.42	# h	c	o	h*
+dihedral_coeff 	        27 mbt 1.2472 0 0.7485 1.42	# c	c	o	h*
+dihedral_coeff 	        28 mbt -21.884 -7.6764 -0.6868 1.53	# o	c	c	c
+dihedral_coeff 	        29 mbt -14.879 -3.6581 -0.3138 1.53	# h	c	c	c
+dihedral_coeff 	        30 mbt -16.797 -1.2296 -0.275 1.53	# h	c	c	o
+dihedral_coeff 	        31 mbt -14.261 -0.5322 -0.4864 1.53	# h	c	c	h
+dihedral_coeff 	        32 mbt -14.879 -3.6581 -0.3138 1.53	# h	c	c	c
+dihedral_coeff 	        33 mbt 1.2472 0 0.7485 1.42	# c	c	o	h*
+dihedral_coeff 	        34 mbt 0 -0.5693 0 1.417	# cp	cp	cp	nn
+dihedral_coeff 	        35 mbt 0.0 0.0 0.0 1.417	# *	cp_	cp_	*
+dihedral_coeff 	        36 mbt 0 0 0 1.501	# c	c	cp	cp
+dihedral_coeff 	        37 mbt 0.0 0.0 0.0 1.3912	# *	cp_	n_	*
+dihedral_coeff 	        38 mbt 0 0 0 1.53	# cp	c	c	h
+dihedral_coeff 	        39 mbt -14.261 -0.5322 -0.4864 1.53	# h	c	c	h
+dihedral_coeff 	        40 mbt 0 3.2085 0 1.3912	# cp	cp	nn	h*
+dihedral_coeff 	        41 mbt 0.0 0.0 0.0 1.417	# *	cp_	cp_	*
+dihedral_coeff 	        42 mbt 0.0 0.0 0.0 1.417	# *	cp_	cp_	*
+dihedral_coeff 	        43 mbt 0.0 0.0 0.0 1.412	# *	cp_	na_	*
+dihedral_coeff 	         1 ebt -0.1185 6.3204 0 -0.1185 6.3204 0 1.417 1.417	# cp	cp	cp	cp
+dihedral_coeff 	         2 ebt 0 -6.8958 0 0 -0.4669 0 1.417 1.0982	# cp	cp	cp	h
+dihedral_coeff 	         3 ebt 0 -0.689 0 0 -0.689 0 1.0982 1.0982	# h	cp	cp	h
+dihedral_coeff 	         4 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.501 1.417	# cp	c	cp	cp
+dihedral_coeff 	         5 ebt 1.3997 0.7756 0 -0.5835 1.122 0.3978 1.101 1.417	# h	c	cp	cp
+dihedral_coeff 	         6 ebt 0 0.2421 0 0 -0.6918 0 1.501 1.417	# c	cp	cp	cp
+dihedral_coeff 	         7 ebt 0 -1.797 0 0 -0.4879 0 1.501 1.0982	# c	cp	cp	h
+dihedral_coeff 	         8 ebt 0 0.2655 0 0 4.8905 0 1.417 1.3768	# cp	cp	cp	o
+dihedral_coeff 	         9 ebt 0 -1.5867 0 0 4.2641 0 1.0982 1.3768	# h	cp	cp	o
+dihedral_coeff 	        10 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.417 1.42	# cp	cp	o	c
+dihedral_coeff 	        11 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.53 1.3768	# *	c_	o_	*
+dihedral_coeff 	        12 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.101 1.3768	# h	c	o	cp
+dihedral_coeff 	        13 ebt 1.1538 0.8409 -0.9138 -0.319 0.4411 -0.7174 1.42 1.53	# o	c	c	c
+dihedral_coeff 	        14 ebt 1.0165 0.7553 -0.4609 1.0165 0.7553 -0.4609 1.42 1.42	# o	c	c	o
+dihedral_coeff 	        15 ebt 0.5903 0.6669 0.8584 0.9681 0.9551 0.0436 1.42 1.101	# o	c	c	h
+dihedral_coeff 	        16 ebt 0.0814 0.0591 0.2219 0.2486 0.2422 -0.0925 1.101 1.53	# h	c	c	c
+dihedral_coeff 	        17 ebt 0.9681 0.9551 0.0436 0.5903 0.6669 0.8584 1.101 1.42	# h	c	c	o
+dihedral_coeff 	        18 ebt 0.213 0.312 0.0777 0.213 0.312 0.0777 1.101 1.101	# h	c	c	h
+dihedral_coeff 	        19 ebt 0.9681 0.9551 0.0436 0.5903 0.6669 0.8584 1.101 1.42	# h	c	c	o
+dihedral_coeff 	        20 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.475 1.42	# *	c_	c_	*
+dihedral_coeff 	        21 ebt 0.213 0.312 0.0777 0.213 0.312 0.0777 1.101 1.101	# h	c	c	h
+dihedral_coeff 	        22 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.475 1.101	# *	c_	c_	*
+dihedral_coeff 	        23 ebt 0.0814 0.0591 0.2219 0.2486 0.2422 -0.0925 1.101 1.53	# h	c	c	c
+dihedral_coeff 	        24 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.475 1.53	# *	c_	c_	*
+dihedral_coeff 	        25 ebt -0.58 0.9004 0 0 0.5343 0.9025 1.53 0.965	# c	c	o	h*
+dihedral_coeff 	        26 ebt -1.7554 1.3145 0.2263 0.2493 0.6803 0 1.101 0.965	# h	c	o	h*
+dihedral_coeff 	        27 ebt -0.58 0.9004 0 0 0.5343 0.9025 1.53 0.965	# c	c	o	h*
+dihedral_coeff 	        28 ebt 1.1538 0.8409 -0.9138 -0.319 0.4411 -0.7174 1.42 1.53	# o	c	c	c
+dihedral_coeff 	        29 ebt 0.0814 0.0591 0.2219 0.2486 0.2422 -0.0925 1.101 1.53	# h	c	c	c
+dihedral_coeff 	        30 ebt 0.9681 0.9551 0.0436 0.5903 0.6669 0.8584 1.101 1.42	# h	c	c	o
+dihedral_coeff 	        31 ebt 0.213 0.312 0.0777 0.213 0.312 0.0777 1.101 1.101	# h	c	c	h
+dihedral_coeff 	        32 ebt 0.0814 0.0591 0.2219 0.2486 0.2422 -0.0925 1.101 1.53	# h	c	c	c
+dihedral_coeff 	        33 ebt -0.58 0.9004 0 0 0.5343 0.9025 1.53 0.965	# c	c	o	h*
+dihedral_coeff 	        34 ebt 0 -6.5404 0 0 -7.3477 0 1.417 1.3912	# cp	cp	cp	nn
+dihedral_coeff 	        35 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.501 1.3912	# *	cp_	cp_	*
+dihedral_coeff 	        36 ebt 0 0 0 0 0 0 1.53 1.417	# c	c	cp	cp
+dihedral_coeff 	        37 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.417 1.475	# *	cp_	n_	*
+dihedral_coeff 	        38 ebt 0 0 0 0 0 0 1.501 1.101	# cp	c	c	h
+dihedral_coeff 	        39 ebt 0.213 0.312 0.0777 0.213 0.312 0.0777 1.101 1.101	# h	c	c	h
+dihedral_coeff 	        40 ebt 0 -3.7281 0 0 0.2849 0 1.417 1.0012	# cp	cp	nn	h*
+dihedral_coeff 	        41 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.417 1.412	# *	cp_	cp_	*
+dihedral_coeff 	        42 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.501 1.412	# *	cp_	cp_	*
+dihedral_coeff 	        43 ebt 0.0 0.0 0.0 0.0 0.0 0.0 1.417 1.006	# *	cp_	na_	*
+dihedral_coeff 	         1 at 1.9767 1.0239 0 1.9767 1.0239 0 118.9 118.9	# cp	cp	cp	cp
+dihedral_coeff 	         2 at 0 2.5014 0 0 2.7147 0 118.9 117.94	# cp	cp	cp	h
+dihedral_coeff 	         3 at 0 2.4501 0 0 2.4501 0 117.94 117.94	# h	cp	cp	h
+dihedral_coeff 	         4 at 0.0 0.0 0.0 0.0 0.0 0.0 111 120.05	# cp	c	cp	cp
+dihedral_coeff 	         5 at 4.6266 0.1632 0.0461 0.2251 0.6548 0.1237 111 120.05	# h	c	cp	cp
+dihedral_coeff 	         6 at 0 -4.4683 0 0 3.8987 0 120.05 118.9	# c	cp	cp	cp
+dihedral_coeff 	         7 at 0 -0.1242 0 0 3.4601 0 120.05 117.94	# c	cp	cp	h
+dihedral_coeff 	         8 at 0 10.015 0 0 1.7404 0 118.9 123.42	# cp	cp	cp	o
+dihedral_coeff 	         9 at 0 1.8729 0 0 2.5706 0 117.94 123.42	# h	cp	cp	o
+dihedral_coeff 	        10 at 0.0 0.0 0.0 0.0 0.0 0.0 123.42 102.97	# cp	cp	o	c
+dihedral_coeff 	        11 at 0.0 0.0 0.0 0.0 0.0 0.0 111.27 102.97	# *	c_	o_	*
+dihedral_coeff 	        12 at 0.0 0.0 0.0 0.0 0.0 0.0 108.73 102.97	# h	c	o	cp
+dihedral_coeff 	        13 at 0.9672 -0.7566 -1.2331 0.5623 -0.3041 -0.4015 111.27 112.67	# o	c	c	c
+dihedral_coeff 	        14 at 0.5511 0.9737 -0.6673 0.5511 0.9737 -0.6673 111.27 111.27	# o	c	c	o
+dihedral_coeff 	        15 at -0.1892 0.4918 0.7273 2.3668 2.492 -1.0122 111.27 110.77	# o	c	c	h
+dihedral_coeff 	        16 at 0.3113 0.4516 -0.1988 -0.2454 0 -0.1136 110.77 112.67	# h	c	c	c
+dihedral_coeff 	        17 at 2.3668 2.492 -1.0122 -0.1892 0.4918 0.7273 110.77 111.27	# h	c	c	o
+dihedral_coeff 	        18 at -0.8085 0.5569 -0.2466 -0.8085 0.5569 -0.2466 110.77 110.77	# h	c	c	h
+dihedral_coeff 	        19 at 2.3668 2.492 -1.0122 -0.1892 0.4918 0.7273 110.77 111.27	# h	c	c	o
+dihedral_coeff 	        20 at 0.0 0.0 0.0 0.0 0.0 0.0 114 111.27	# *	c_	c_	*
+dihedral_coeff 	        21 at -0.8085 0.5569 -0.2466 -0.8085 0.5569 -0.2466 110.77 110.77	# h	c	c	h
+dihedral_coeff 	        22 at 0.0 0.0 0.0 0.0 0.0 0.0 114 110.77	# *	c_	c_	*
+dihedral_coeff 	        23 at 0.3113 0.4516 -0.1988 -0.2454 0 -0.1136 110.77 112.67	# h	c	c	c
+dihedral_coeff 	        24 at 0.0 0.0 0.0 0.0 0.0 0.0 114 112.67	# *	c_	c_	*
+dihedral_coeff 	        25 at -3.5903 2.5225 0.4888 0.8726 -0.3577 0.3888 111.27 105.8	# c	c	o	h*
+dihedral_coeff 	        26 at -3.406 1.6396 0.0737 0 -0.281 -0.5944 108.73 105.8	# h	c	o	h*
+dihedral_coeff 	        27 at -3.5903 2.5225 0.4888 0.8726 -0.3577 0.3888 111.27 105.8	# c	c	o	h*
+dihedral_coeff 	        28 at 0.9672 -0.7566 -1.2331 0.5623 -0.3041 -0.4015 111.27 112.67	# o	c	c	c
+dihedral_coeff 	        29 at 0.3113 0.4516 -0.1988 -0.2454 0 -0.1136 110.77 112.67	# h	c	c	c
+dihedral_coeff 	        30 at 2.3668 2.492 -1.0122 -0.1892 0.4918 0.7273 110.77 111.27	# h	c	c	o
+dihedral_coeff 	        31 at -0.8085 0.5569 -0.2466 -0.8085 0.5569 -0.2466 110.77 110.77	# h	c	c	h
+dihedral_coeff 	        32 at 0.3113 0.4516 -0.1988 -0.2454 0 -0.1136 110.77 112.67	# h	c	c	c
+dihedral_coeff 	        33 at -3.5903 2.5225 0.4888 0.8726 -0.3577 0.3888 111.27 105.8	# c	c	o	h*
+dihedral_coeff 	        34 at 0 9.0901 0 0 -6.0882 0 118.9 121.46	# cp	cp	cp	nn
+dihedral_coeff 	        35 at 0.0 0.0 0.0 0.0 0.0 0.0 120.05 121.46	# *	cp_	cp_	*
+dihedral_coeff 	        36 at 0 0 0 0 0 0 108.4 120.05	# c	c	cp	cp
+dihedral_coeff 	        37 at 0.0 0.0 0.0 0.0 0.0 0.0 121.46 120	# *	cp_	n_	*
+dihedral_coeff 	        38 at 0 0 0 0 0 0 108.4 110.77	# cp	c	c	h
+dihedral_coeff 	        39 at -0.8085 0.5569 -0.2466 -0.8085 0.5569 -0.2466 110.77 110.77	# h	c	c	h
+dihedral_coeff 	        40 at 0 1.2616 0 0 0.7744 0 121.46 111.87	# cp	cp	nn	h*
+dihedral_coeff 	        41 at 0.0 0.0 0.0 0.0 0.0 0.0 118.9 120	# *	cp_	cp_	*
+dihedral_coeff 	        42 at 0.0 0.0 0.0 0.0 0.0 0.0 120.05 120	# *	cp_	cp_	*
+dihedral_coeff 	        43 at 0.0 0.0 0.0 0.0 0.0 0.0 120 109	# *	cp_	na_	*
+dihedral_coeff 	         1 aat 0 118.9 118.9	# cp	cp	cp	cp
+dihedral_coeff 	         2 aat -4.8141 118.9 117.94	# cp	cp	cp	h
+dihedral_coeff 	         3 aat 0.3598 117.94 117.94	# h	cp	cp	h
+dihedral_coeff 	         4 aat 0.0 111 120.05	# cp	c	cp	cp
+dihedral_coeff 	         5 aat -5.8888 111 120.05	# h	c	cp	cp
+dihedral_coeff 	         6 aat -14.41 120.05 118.9	# c	cp	cp	cp
+dihedral_coeff 	         7 aat 4.4444 120.05 117.94	# c	cp	cp	h
+dihedral_coeff 	         8 aat -21.025 118.9 123.42	# cp	cp	cp	o
+dihedral_coeff 	         9 aat 4.2296 117.94 123.42	# h	cp	cp	o
+dihedral_coeff 	        10 aat 0.0 123.42 102.97	# cp	cp	o	c
+dihedral_coeff 	        11 aat 0.0 111.27 102.97	# *	c_	o_	*
+dihedral_coeff 	        12 aat 0.0 108.73 102.97	# h	c	o	cp
+dihedral_coeff 	        13 aat -29.042 111.27 112.67	# o	c	c	c
+dihedral_coeff 	        14 aat -14.048 111.27 111.27	# o	c	c	o
+dihedral_coeff 	        15 aat -20.201 111.27 110.77	# o	c	c	h
+dihedral_coeff 	        16 aat -16.164 110.77 112.67	# h	c	c	c
+dihedral_coeff 	        17 aat -20.201 110.77 111.27	# h	c	c	o
+dihedral_coeff 	        18 aat -12.564 110.77 110.77	# h	c	c	h
+dihedral_coeff 	        19 aat -20.201 110.77 111.27	# h	c	c	o
+dihedral_coeff 	        20 aat 0.0 114 111.27	# *	c_	c_	*
+dihedral_coeff 	        21 aat -12.564 110.77 110.77	# h	c	c	h
+dihedral_coeff 	        22 aat 0.0 114 110.77	# *	c_	c_	*
+dihedral_coeff 	        23 aat -16.164 110.77 112.67	# h	c	c	c
+dihedral_coeff 	        24 aat 0.0 114 112.67	# *	c_	c_	*
+dihedral_coeff 	        25 aat -12.104 111.27 105.8	# c	c	o	h*
+dihedral_coeff 	        26 aat -10.509 108.73 105.8	# h	c	o	h*
+dihedral_coeff 	        27 aat -12.104 111.27 105.8	# c	c	o	h*
+dihedral_coeff 	        28 aat -29.042 111.27 112.67	# o	c	c	c
+dihedral_coeff 	        29 aat -16.164 110.77 112.67	# h	c	c	c
+dihedral_coeff 	        30 aat -20.201 110.77 111.27	# h	c	c	o
+dihedral_coeff 	        31 aat -12.564 110.77 110.77	# h	c	c	h
+dihedral_coeff 	        32 aat -16.164 110.77 112.67	# h	c	c	c
+dihedral_coeff 	        33 aat -12.104 111.27 105.8	# c	c	o	h*
+dihedral_coeff 	        34 aat 0 118.9 121.46	# cp	cp	cp	nn
+dihedral_coeff 	        35 aat 0.0 120.05 121.46	# *	cp_	cp_	*
+dihedral_coeff 	        36 aat 0 108.4 120.05	# c	c	cp	cp
+dihedral_coeff 	        37 aat 0.0 121.46 120	# *	cp_	n_	*
+dihedral_coeff 	        38 aat 0 108.4 110.77	# cp	c	c	h
+dihedral_coeff 	        39 aat -12.564 110.77 110.77	# h	c	c	h
+dihedral_coeff 	        40 aat -7.1755 121.46 111.87	# cp	cp	nn	h*
+dihedral_coeff 	        41 aat 0.0 118.9 120	# *	cp_	cp_	*
+dihedral_coeff 	        42 aat 0.0 120.05 120	# *	cp_	cp_	*
+dihedral_coeff 	        43 aat 0.0 120 109	# *	cp_	na_	*
+dihedral_coeff 	         1 bb13 53 1.417 1.417	# cp	cp	cp	cp
+dihedral_coeff 	         2 bb13 -6.2741 1.417 1.0982	# cp	cp	cp	h
+dihedral_coeff 	         3 bb13 -1.7077 1.0982 1.0982	# h	cp	cp	h
+dihedral_coeff 	         4 bb13 0.0 1.501 1.417	# cp	c	cp	cp
+dihedral_coeff 	         5 bb13 -3.4826 1.101 1.417	# h	c	cp	cp
+dihedral_coeff 	         6 bb13 2.5085 1.501 1.417	# c	cp	cp	cp
+dihedral_coeff 	         7 bb13 0.8743 1.501 1.0982	# c	cp	cp	h
+dihedral_coeff 	         8 bb13 -2.2436 1.417 1.3768	# cp	cp	cp	o
+dihedral_coeff 	         9 bb13 2.0517 1.0982 1.3768	# h	cp	cp	o
+dihedral_coeff 	        10 bb13 0.0 1.417 1.42	# cp	cp	o	c
+dihedral_coeff 	        11 bb13 0.0 1.53 1.3768	# *	c_	o_	*
+dihedral_coeff 	        12 bb13 0.0 1.101 1.3768	# h	c	o	cp
+dihedral_coeff 	        13 bb13 0.0 1.42 1.53	# o	c	c	c
+dihedral_coeff 	        14 bb13 0.0 1.42 1.42	# o	c	c	o
+dihedral_coeff 	        15 bb13 0.0 1.42 1.101	# o	c	c	h
+dihedral_coeff 	        16 bb13 0.0 1.101 1.53	# h	c	c	c
+dihedral_coeff 	        17 bb13 0.0 1.101 1.42	# h	c	c	o
+dihedral_coeff 	        18 bb13 0.0 1.101 1.101	# h	c	c	h
+dihedral_coeff 	        19 bb13 0.0 1.101 1.42	# h	c	c	o
+dihedral_coeff 	        20 bb13 0.0 1.475 1.42	# *	c_	c_	*
+dihedral_coeff 	        21 bb13 0.0 1.101 1.101	# h	c	c	h
+dihedral_coeff 	        22 bb13 0.0 1.475 1.101	# *	c_	c_	*
+dihedral_coeff 	        23 bb13 0.0 1.101 1.53	# h	c	c	c
+dihedral_coeff 	        24 bb13 0.0 1.475 1.53	# *	c_	c_	*
+dihedral_coeff 	        25 bb13 0.0 1.53 0.965	# c	c	o	h*
+dihedral_coeff 	        26 bb13 0.0 1.101 0.965	# h	c	o	h*
+dihedral_coeff 	        27 bb13 0.0 1.53 0.965	# c	c	o	h*
+dihedral_coeff 	        28 bb13 0.0 1.42 1.53	# o	c	c	c
+dihedral_coeff 	        29 bb13 0.0 1.101 1.53	# h	c	c	c
+dihedral_coeff 	        30 bb13 0.0 1.101 1.42	# h	c	c	o
+dihedral_coeff 	        31 bb13 0.0 1.101 1.101	# h	c	c	h
+dihedral_coeff 	        32 bb13 0.0 1.101 1.53	# h	c	c	c
+dihedral_coeff 	        33 bb13 0.0 1.53 0.965	# c	c	o	h*
+dihedral_coeff 	        34 bb13 -9.7999 1.417 1.3912	# cp	cp	cp	nn
+dihedral_coeff 	        35 bb13 0.0 1.501 1.3912	# *	cp_	cp_	*
+dihedral_coeff 	        36 bb13 0.0 1.53 1.417	# c	c	cp	cp
+dihedral_coeff 	        37 bb13 0.0 1.417 1.475	# *	cp_	n_	*
+dihedral_coeff 	        38 bb13 0.0 1.501 1.101	# cp	c	c	h
+dihedral_coeff 	        39 bb13 0.0 1.101 1.101	# h	c	c	h
+dihedral_coeff 	        40 bb13 4.2366 1.417 1.0012	# cp	cp	nn	h*
+dihedral_coeff 	        41 bb13 0.0 1.417 1.412	# *	cp_	cp_	*
+dihedral_coeff 	        42 bb13 0.0 1.501 1.412	# *	cp_	cp_	*
+dihedral_coeff 	        43 bb13 0.0 1.417 1.006	# *	cp_	na_	*
+improper_coeff 	         1 aa 0 0 0 118.9 118.9 118.9	# cp	cp	cp	cp
+improper_coeff 	         2 aa 0 0 0 118.9 117.94 117.94	# cp	cp	cp	h
+improper_coeff 	         3 aa 0.0 0.0 0.0 120.0 120.0 120.0	# cp	c2	cp	hc
+improper_coeff 	         4 aa 2.3794 3.0118 2.3794 111 111 107.66	# cp	c	h	h
+improper_coeff 	         5 aa 0 0 0 120.05 120.05 118.9	# c	cp	cp	cp
+improper_coeff 	         6 aa 0 0 0 118.9 123.42 123.42	# cp	cp	cp	o
+improper_coeff 	         7 aa 3.9177 2.5926 0.1689 110.77 111.27 108.73	# c	c	h	o
+improper_coeff 	         8 aa 2.4259 2.4259 2.1283 107.66 108.73 108.73	# h	c	h	o
+improper_coeff 	         9 aa 0.2738 -0.4825 0.2738 110.77 110.77 107.66	# c	c	h	h
+improper_coeff 	        10 aa 3.9177 2.5926 0.1689 110.77 111.27 108.73	# c	c	h	o
+improper_coeff 	        11 aa -0.833 -0.833 -3.5744 112.67 111.27 111.27	# c	c	c	o
+improper_coeff 	        12 aa -1.3199 -1.3199 0.1184 112.67 110.77 110.77	# c	c	c	h
+improper_coeff 	        13 aa 3.9177 2.5926 0.1689 110.77 111.27 108.73	# c	c	h	o
+improper_coeff 	        14 aa 0.2738 -0.4825 0.2738 110.77 110.77 107.66	# c	c	h	h
+improper_coeff 	        15 aa 0.0 0.0 0.0 120.0 120.0 120.0	# c43o	c2	hc	nb
+improper_coeff 	        16 aa 0.0 0.0 0.0 120.0 120.0 120.0	# hc	c2	hc	nb
+improper_coeff 	        17 aa 3.9177 2.5926 0.1689 110.77 111.27 108.73	# c	c	h	o
+improper_coeff 	        18 aa -0.833 -0.833 -3.5744 112.67 111.27 111.27	# c	c	c	o
+improper_coeff 	        19 aa -1.3199 -1.3199 0.1184 112.67 110.77 110.77	# c	c	c	h
+improper_coeff 	        20 aa 0.2738 -0.4825 0.2738 110.77 110.77 107.66	# c	c	h	h
+improper_coeff 	        21 aa -0.3157 -0.3157 -0.3157 107.66 107.66 107.66	# h	c	h	h
+improper_coeff 	        22 aa 0 0 0 118.9 121.46 121.46	# cp	cp	cp	nn
+improper_coeff 	        23 aa 2.0403 -1.8202 1.0827 108.4 110.77 111	# c	c	cp	h
+improper_coeff 	        24 aa 0.2738 -0.4825 0.2738 110.77 110.77 107.66	# c	c	h	h
+improper_coeff 	        25 aa 0.2738 -0.4825 0.2738 110.77 110.77 107.66	# c	c	h	h
+improper_coeff 	        26 aa 0.0 0.0 0.0 120.0 120.0 120.0	# *	n_	*	*
+improper_coeff 	        27 aa 0.0 0.0 0.0 120.0 120.0 120.0	# *	n_	*	*
+improper_coeff 	        28 aa 0.0 0.0 0.0 120.0 120.0 120.0	# *	cp_	*	*
+improper_coeff 	        29 aa 0.0 0.0 0.0 120.0 120.0 120.0	# *	na_	*	*
+pair_coeff			    1     1 0.0634 3.7584	# c2 - 
+pair_coeff			    2     2 0.0674 3.6348	# c2oe - 
+pair_coeff			    3     3 0.071 3.884	# c3 - 
+pair_coeff			    4     4 0.0498 3.67	# c43o - 
+pair_coeff			    5     5 0.0668 3.9147	# cp - 
+pair_coeff			    6     6 0.023 2.878	# h - 
+pair_coeff			    7     7 0.008 1.087	# h* - 
+pair_coeff			    8     8 0.008 1.087	# h* - 
+pair_coeff			    9     9 0 1.098	# hw - 
+pair_coeff			   10    10 0.0946 3.937	# na - 
+pair_coeff			   11    11 0.092 3.89	# nn - 
+pair_coeff			   12    12 0.148 3.7824	# o* - 
+pair_coeff			   13    13 0.12 3.3	# oc - 
+pair_coeff			   14    14 0.096 3.58	# o - 

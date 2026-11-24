@@ -1,0 +1,12 @@
+Starting background task at Wed Jan 11 09:00:28 GMT 2023
+
+LD_LIBRARY_PATH:
+/home/werner/MD/Linux-x86_64:/home/werner/MD/Linux-x86_64/IntelMPI5/lib:/home/werner/MD/bin/Linux-x86_64
+
+
+PATH:
+/home/werner/MD/Linux-x86_64:/home/werner/MD/Linux-x86_64/IntelMPI5/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+
+Executing mdBackground: /home/werner/MD/bin/Linux-x86_64/mdBackground
+Finished background task Sun Jan 15 19:54:03 GMT 2023
+

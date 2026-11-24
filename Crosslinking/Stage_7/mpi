@@ -1,0 +1,6 @@
+#!/bin/bash
+cd "/home/werner/MD/TaskServer/Tasks/localhost-32000-task01400"
+export PATH="/home/werner/MD/Linux-x86_64/IntelMPI5/bin:$PATH"
+export LD_LIBRARY_PATH="/home/werner/MD/Linux-x86_64/IntelMPI5/lib:/home/werner/MD/TaskServer/Tools/LAMMPS7Jan22/Linux-x86_64:/home/werner/MD/Linux-x86_64:$LD_LIBRARY_PATH"
+export PLUMED_KERNEL="/home/werner/MD/TaskServer/Tools/LAMMPS7Jan22/Linux-x86_64/libplumedKernel.so"
+"/home/werner/MD/Linux-x86_64/IntelMPI5/bin/mpirun"  -np 1 "/home/werner/MD/TaskServer/Tools/LAMMPS7Jan22/Linux-x86_64/LAMMPS" -in input.dat

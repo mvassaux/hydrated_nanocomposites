@@ -1,0 +1,570 @@
+# LAMMPS coeff file via write_coeff, version 7 Feb 2024
+# pair_style lj/class2/coul/long
+pair_coeff 1 1 0.0634 3.7584 9.5
+pair_coeff 1 2 0.0650419 3.69918 9.5
+pair_coeff 1 3 0.0667675 3.82378 9.5
+pair_coeff 1 4 0.0560471 3.71551 9.5
+pair_coeff 1 5 0.0645946 3.84052 9.5
+pair_coeff 1 6 0.0285388 3.45244 9.5
+pair_coeff 1 7 0.00108904 3.34868 9.5
+pair_coeff 1 8 0.00108904 3.34868 9.5
+pair_coeff 1 9 0 3.3487 9.5
+pair_coeff 1 10 0.0766993 3.85287 9.5
+pair_coeff 1 11 0.0759675 3.82703 9.5
+pair_coeff 1 12 0.0968493 3.7705 9.5
+pair_coeff 1 13 0.08098 3.56562 9.5
+pair_coeff 1 14 0.0771924 3.6746 9.5
+pair_coeff 2 2 0.0674 3.6348 9.5
+pair_coeff 2 3 0.06783 3.76967 9.5
+pair_coeff 2 4 0.0579113 3.65261 9.5
+pair_coeff 2 5 0.0654712 3.78763 9.5
+pair_coeff 2 6 0.0313612 3.35933 9.5
+pair_coeff 2 7 0.0012412 3.23862 9.5
+pair_coeff 2 8 0.0012412 3.23862 9.5
+pair_coeff 2 9 0 3.23865 9.5
+pair_coeff 2 10 0.0776118 3.80085 9.5
+pair_coeff 2 11 0.0771413 3.77315 9.5
+pair_coeff 2 12 0.099168 3.71226 9.5
+pair_coeff 2 13 0.0862823 3.48736 9.5
+pair_coeff 2 14 0.0803553 3.60792 9.5
+pair_coeff 3 3 0.071 3.884 9.5
+pair_coeff 3 4 0.0586134 3.78455 9.5
+pair_coeff 3 5 0.0688488 3.8995 9.5
+pair_coeff 3 6 0.0282121 3.54972 9.5
+pair_coeff 3 7 0.00104435 3.46053 9.5
+pair_coeff 3 8 0.00104435 3.46053 9.5
+pair_coeff 3 9 0 3.46054 9.5
+pair_coeff 3 10 0.0818872 3.91095 9.5
+pair_coeff 3 11 0.0808199 3.88701 9.5
+pair_coeff 3 12 0.102185 3.83488 9.5
+pair_coeff 3 13 0.0822764 3.64939 9.5
+pair_coeff 3 14 0.0801512 3.74734 9.5
+pair_coeff 4 4 0.0498 3.67 9.5
+pair_coeff 4 5 0.0566123 3.80216 9.5
+pair_coeff 4 6 0.0264833 3.38555 9.5
+pair_coeff 4 7 0.00103654 3.26997 9.5
+pair_coeff 4 8 0.00103654 3.26997 9.5
+pair_coeff 4 9 0 3.26999 9.5
+pair_coeff 4 10 0.0671417 3.81514 9.5
+pair_coeff 4 11 0.0666681 3.78797 9.5
+pair_coeff 4 12 0.0855006 3.72832 9.5
+pair_coeff 4 13 0.0735358 3.5092 9.5
+pair_coeff 4 14 0.068952 3.6264 9.5
+pair_coeff 5 5 0.0668 3.9147 9.5
+pair_coeff 5 6 0.0269025 3.57386 9.5
+pair_coeff 5 7 0.000989367 3.48787 9.5
+pair_coeff 5 8 0.000989367 3.48787 9.5
+pair_coeff 5 9 0 3.48788 9.5
+pair_coeff 5 10 0.0794824 3.92593 9.5
+pair_coeff 5 11 0.0783797 3.90245 9.5
+pair_coeff 5 12 0.0989038 3.85139 9.5
+pair_coeff 5 13 0.0789385 3.67047 9.5
+pair_coeff 5 14 0.0772852 3.76584 9.5
+pair_coeff 6 6 0.023 2.878 9.5
+pair_coeff 6 7 0.00145746 2.56525 9.5
+pair_coeff 6 8 0.00145746 2.56525 9.5
+pair_coeff 6 9 0 2.56532 9.5
+pair_coeff 6 10 0.0316182 3.59148 9.5
+pair_coeff 6 11 0.032008 3.55443 9.5
+pair_coeff 6 12 0.0430495 3.47083 9.5
+pair_coeff 6 13 0.0484005 3.12418 9.5
+pair_coeff 6 14 0.038448 3.319 9.5
+pair_coeff 7 7 0.008 1.087 9.5
+pair_coeff 7 8 0.008 1.087 9.5
+pair_coeff 7 9 0 1.09257 9.5
+pair_coeff 7 10 0.0011575 3.50773 9.5
+pair_coeff 7 11 0.00118332 3.46587 9.5
+pair_coeff 7 12 0.00163248 3.37005 9.5
+pair_coeff 7 13 0.00221186 2.94059 9.5
+pair_coeff 7 14 0.00155028 3.18983 9.5
+pair_coeff 8 8 0.008 1.087 9.5
+pair_coeff 8 9 0 1.09257 9.5
+pair_coeff 8 10 0.0011575 3.50773 9.5
+pair_coeff 8 11 0.00118332 3.46587 9.5
+pair_coeff 8 12 0.00163248 3.37005 9.5
+pair_coeff 8 13 0.00221186 2.94059 9.5
+pair_coeff 8 14 0.00155028 3.18983 9.5
+pair_coeff 9 9 0 1.098 9.5
+pair_coeff 9 10 0 3.50774 9.5
+pair_coeff 9 11 0 3.46589 9.5
+pair_coeff 9 12 0 3.37007 9.5
+pair_coeff 9 13 0 2.94063 9.5
+pair_coeff 9 14 0 3.18986 9.5
+pair_coeff 10 10 0.0946 3.937 9.5
+pair_coeff 10 11 0.0932304 3.91385 9.5
+pair_coeff 10 12 0.117476 3.86356 9.5
+pair_coeff 10 13 0.0931763 3.68591 9.5
+pair_coeff 10 14 0.0915497 3.77945 9.5
+pair_coeff 11 11 0.092 3.89 9.5
+pair_coeff 11 12 0.116276 3.83808 9.5
+pair_coeff 11 13 0.0934598 3.65349 9.5
+pair_coeff 11 14 0.0911357 3.75094 9.5
+pair_coeff 12 12 0.148 3.7824 9.5
+pair_coeff 12 13 0.122833 3.58131 9.5
+pair_coeff 12 14 0.117593 3.68813 9.5
+pair_coeff 13 13 0.12 3.3 9.5
+pair_coeff 13 14 0.104206 3.45412 9.5
+pair_coeff 14 14 0.096 3.58 9.5
+
+# bond_style class2
+bond_coeff 1 1.417 470.84 -627.62 1327.6
+bond_coeff 2 1.0982 372.83 -803.45 894.32
+bond_coeff 3 1.501 321.9 -521.82 572.16
+bond_coeff 4 1.3768 428.88 -738.24 1115
+bond_coeff 5 1.42 400.4 -835.2 1313
+bond_coeff 6 1.53 299.67 -501.77 679.81
+bond_coeff 7 1.42 400.4 -835.2 1313
+bond_coeff 8 1.53 299.67 -501.77 679.81
+bond_coeff 9 1.101 345 -691.89 844.6
+bond_coeff 10 1.101 345 -691.89 844.6
+bond_coeff 11 1.101 345 -691.89 844.6
+bond_coeff 12 0.965 532.51 -1282.9 2004.8
+bond_coeff 13 1.53 299.67 -501.77 679.81
+bond_coeff 14 1.101 345 -691.89 844.6
+bond_coeff 15 1.53 299.67 -501.77 679.81
+bond_coeff 16 1.3912 447.04 -784.53 886.17
+bond_coeff 17 1.0012 465.86 -1066.2 1496.6
+bond_coeff 18 1.412 257.78 0 0
+bond_coeff 19 1.006 466.74 -1073.6 1251.1
+bond_coeff 20 0.97 563.28 -1428.2 1902.1
+bond_coeff 21 1.475 336.8 0 0
+
+# angle_style class2
+angle_coeff 1   118.9 61.023 -34.993 0
+angle_coeff 2   117.94 35.156 -12.468 0
+angle_coeff 3   111 44.323 -9.4454 0
+angle_coeff 4   111 44.323 -9.4454 0
+angle_coeff 5   107.66 39.641 -12.921 -2.4318
+angle_coeff 6   120.05 44.715 -22.735 0
+angle_coeff 7   123.42 73.678 -21.679 0
+angle_coeff 8   102.97 38.974 -6.2595 -8.171
+angle_coeff 9   111.27 54.538 -8.3642 -13.084
+angle_coeff 10   108.73 58.545 -10.809 -12.401
+angle_coeff 11   110.77 41.453 -10.604 5.129
+angle_coeff 12   107.66 39.641 -12.921 -2.4318
+angle_coeff 13   111.27 54.538 -8.3642 -13.084
+angle_coeff 14   110.77 41.453 -10.604 5.129
+angle_coeff 15   112.67 39.516 -7.443 -9.5583
+angle_coeff 16   108.73 58.545 -10.809 -12.401
+angle_coeff 17   111.27 54.538 -8.3642 -13.084
+angle_coeff 18   110.77 41.453 -10.604 5.129
+angle_coeff 19   110.77 41.453 -10.604 5.129
+angle_coeff 20   114 50 0 0
+angle_coeff 21   109.5 60 0 0
+angle_coeff 22   105.8 52.706 -12.109 -9.8681
+angle_coeff 23   111.27 54.538 -8.3642 -13.084
+angle_coeff 24   110.77 41.453 -10.604 5.129
+angle_coeff 25   112.67 39.516 -7.443 -9.5583
+angle_coeff 26   110.77 41.453 -10.604 5.129
+angle_coeff 27   107.66 39.641 -12.921 -2.4318
+angle_coeff 28   121.46 61.065 -21.617 0
+angle_coeff 29   108.4 43.959 -8.3924 -9.3379
+angle_coeff 30   110.77 41.453 -10.604 5.129
+angle_coeff 31   110.77 41.453 -10.604 5.129
+angle_coeff 32   120 50 0 0
+angle_coeff 33   120 50 0 0
+angle_coeff 34   111.87 40.837 -15.667 0
+angle_coeff 35   120 50 0 0
+angle_coeff 36   120 65 0 0
+angle_coeff 37   109 80 0 0
+angle_coeff 38   107.07 45.252 -7.5558 -9.512
+angle_coeff 39   103.7 49.84 -11.6 -8
+angle_coeff 1 bb  68.286 1.417 1.417
+angle_coeff 2 bb  1.0795 1.417 1.0982
+angle_coeff 3 bb  0 1.501 1.501
+angle_coeff 4 bb  2.9168 1.501 1.101
+angle_coeff 5 bb  5.3316 1.101 1.101
+angle_coeff 6 bb  12.068 1.501 1.417
+angle_coeff 7 bb  48.475 1.417 1.3768
+angle_coeff 8 bb  0 1.42 1.3768
+angle_coeff 9 bb  11.432 1.53 1.42
+angle_coeff 10 bb  23.198 1.101 1.42
+angle_coeff 11 bb  3.3872 1.53 1.101
+angle_coeff 12 bb  5.3316 1.101 1.101
+angle_coeff 13 bb  11.432 1.53 1.42
+angle_coeff 14 bb  3.3872 1.53 1.101
+angle_coeff 15 bb  0 1.53 1.53
+angle_coeff 16 bb  23.198 1.101 1.42
+angle_coeff 17 bb  11.432 1.53 1.42
+angle_coeff 18 bb  3.3872 1.53 1.101
+angle_coeff 19 bb  3.3872 1.53 1.101
+angle_coeff 20 bb  0 1.53 1.475
+angle_coeff 21 bb  0 1.101 1.475
+angle_coeff 22 bb  -9.6879 1.42 0.965
+angle_coeff 23 bb  11.432 1.53 1.42
+angle_coeff 24 bb  3.3872 1.53 1.101
+angle_coeff 25 bb  0 1.53 1.53
+angle_coeff 26 bb  3.3872 1.53 1.101
+angle_coeff 27 bb  5.3316 1.101 1.101
+angle_coeff 28 bb  46.951 1.417 1.3912
+angle_coeff 29 bb  0 1.53 1.501
+angle_coeff 30 bb  3.3872 1.53 1.101
+angle_coeff 31 bb  3.3872 1.53 1.101
+angle_coeff 32 bb  0 1.475 1.3912
+angle_coeff 33 bb  0 1.475 1.475
+angle_coeff 34 bb  4.5393 1.3912 1.0012
+angle_coeff 35 bb  0 1.475 1.0012
+angle_coeff 36 bb  0 1.417 1.412
+angle_coeff 37 bb  0 1.412 1.006
+angle_coeff 38 bb  -1.8749 1.006 1.006
+angle_coeff 39 bb  -9.5 0.97 0.97
+angle_coeff 1 ba  28.871 28.871 1.417 1.417
+angle_coeff 2 ba  20.003 24.218 1.417 1.0982
+angle_coeff 3 ba  0 0 1.501 1.501
+angle_coeff 4 ba  26.461 11.772 1.501 1.101
+angle_coeff 5 ba  18.103 18.103 1.101 1.101
+angle_coeff 6 ba  47.058 31.077 1.501 1.417
+angle_coeff 7 ba  58.479 107.68 1.417 1.3768
+angle_coeff 8 ba  0 0 1.42 1.3768
+angle_coeff 9 ba  2.6868 20.403 1.53 1.42
+angle_coeff 10 ba  4.6189 55.327 1.101 1.42
+angle_coeff 11 ba  20.754 11.421 1.53 1.101
+angle_coeff 12 ba  18.103 18.103 1.101 1.101
+angle_coeff 13 ba  2.6868 20.403 1.53 1.42
+angle_coeff 14 ba  20.754 11.421 1.53 1.101
+angle_coeff 15 ba  8.016 8.016 1.53 1.53
+angle_coeff 16 ba  4.6189 55.327 1.101 1.42
+angle_coeff 17 ba  2.6868 20.403 1.53 1.42
+angle_coeff 18 ba  20.754 11.421 1.53 1.101
+angle_coeff 19 ba  20.754 11.421 1.53 1.101
+angle_coeff 20 ba  0 0 1.53 1.475
+angle_coeff 21 ba  0 0 1.101 1.475
+angle_coeff 22 ba  28.58 18.928 1.42 0.965
+angle_coeff 23 ba  2.6868 20.403 1.53 1.42
+angle_coeff 24 ba  20.754 11.421 1.53 1.101
+angle_coeff 25 ba  8.016 8.016 1.53 1.53
+angle_coeff 26 ba  20.754 11.421 1.53 1.101
+angle_coeff 27 ba  18.103 18.103 1.101 1.101
+angle_coeff 28 ba  39.404 73.655 1.417 1.3912
+angle_coeff 29 ba  0 0 1.53 1.501
+angle_coeff 30 ba  20.754 11.421 1.53 1.101
+angle_coeff 31 ba  20.754 11.421 1.53 1.101
+angle_coeff 32 ba  0 0 1.475 1.3912
+angle_coeff 33 ba  0 0 1.475 1.475
+angle_coeff 34 ba  38.57 16.552 1.3912 1.0012
+angle_coeff 35 ba  0 0 1.475 1.0012
+angle_coeff 36 ba  0 0 1.417 1.412
+angle_coeff 37 ba  0 0 1.412 1.006
+angle_coeff 38 ba  28.032 28.032 1.006 1.006
+angle_coeff 39 ba  22.35 22.35 0.97 0.97
+
+# dihedral_style class2
+dihedral_coeff 1   8.3667 0 1.1932 0 0 0
+dihedral_coeff 2   0 0 3.9661 0 0 0
+dihedral_coeff 3   0 0 1.8769 0 0 0
+dihedral_coeff 4   -0.2802 0 -0.0678 0 -0.0122 0
+dihedral_coeff 5   -0.2801 0 -0.0678 0 -0.0122 0
+dihedral_coeff 6   0 0 4.4072 0 0 0
+dihedral_coeff 7   0 0 1.559 0 0 0
+dihedral_coeff 8   0 0 4.8498 0 0 0
+dihedral_coeff 9   0 0 1.7234 0 0 0
+dihedral_coeff 10   0 0 1.5 0 0 0
+dihedral_coeff 11   0 0 0 0 0.13 0
+dihedral_coeff 12   0.9513 0 0.1155 0 0.072 0
+dihedral_coeff 13   0.7137 0 0.266 0 -0.2545 0
+dihedral_coeff 14   -0.182 0 -0.1084 0 -0.7047 0
+dihedral_coeff 15   -0.1435 0 0.253 0 -0.0905 0
+dihedral_coeff 16   0 0 0.0316 0 -0.1681 0
+dihedral_coeff 17   -0.1435 0 0.253 0 -0.0905 0
+dihedral_coeff 18   -0.1432 0 0.0617 0 -0.1083 0
+dihedral_coeff 19   -0.1435 0 0.253 0 -0.0905 0
+dihedral_coeff 20   0 0 0 0 0.158 0
+dihedral_coeff 21   -0.1432 0 0.0617 0 -0.1083 0
+dihedral_coeff 22   0 0 0 0 0.158 0
+dihedral_coeff 23   0 0 0.0316 0 -0.1681 0
+dihedral_coeff 24   0 0 0 0 0.158 0
+dihedral_coeff 25   -0.6732 0 -0.4778 0 -0.167 0
+dihedral_coeff 26   0.1863 0 -0.4338 0 -0.2121 0
+dihedral_coeff 27   -0.6732 0 -0.4778 0 -0.167 0
+dihedral_coeff 28   0.7137 0 0.266 0 -0.2545 0
+dihedral_coeff 29   0 0 0.0316 0 -0.1681 0
+dihedral_coeff 30   -0.1435 0 0.253 0 -0.0905 0
+dihedral_coeff 31   -0.1432 0 0.0617 0 -0.1083 0
+dihedral_coeff 32   0 0 0.0316 0 -0.1681 0
+dihedral_coeff 33   -0.6732 0 -0.4778 0 -0.167 0
+dihedral_coeff 34   0 0 5.3826 0 0 0
+dihedral_coeff 35   0 0 3 0 0 0
+dihedral_coeff 36   -0.2802 0 -0.0678 0 -0.0122 0
+dihedral_coeff 37   0 0 2.25 0 0 0
+dihedral_coeff 38   -0.0228 0 0.028 0 -0.1863 0
+dihedral_coeff 39   -0.1432 0 0.0617 0 -0.1083 0
+dihedral_coeff 40   0 0 1.219 0 0 0
+dihedral_coeff 41   0 0 3 0 0 0
+dihedral_coeff 42   0 0 3 0 0 0
+dihedral_coeff 43   0 0 2.25 0 0 0
+dihedral_coeff 1 aat  0 118.9 118.9
+dihedral_coeff 2 aat  -4.8141 118.9 117.94
+dihedral_coeff 3 aat  0.3598 117.94 117.94
+dihedral_coeff 4 aat  0 111 120.05
+dihedral_coeff 5 aat  -5.8888 111 120.05
+dihedral_coeff 6 aat  -14.41 120.05 118.9
+dihedral_coeff 7 aat  4.4444 120.05 117.94
+dihedral_coeff 8 aat  -21.025 118.9 123.42
+dihedral_coeff 9 aat  4.2296 117.94 123.42
+dihedral_coeff 10 aat  0 123.42 102.97
+dihedral_coeff 11 aat  0 111.27 102.97
+dihedral_coeff 12 aat  0 108.73 102.97
+dihedral_coeff 13 aat  -29.042 111.27 112.67
+dihedral_coeff 14 aat  -14.048 111.27 111.27
+dihedral_coeff 15 aat  -20.201 111.27 110.77
+dihedral_coeff 16 aat  -16.164 110.77 112.67
+dihedral_coeff 17 aat  -20.201 110.77 111.27
+dihedral_coeff 18 aat  -12.564 110.77 110.77
+dihedral_coeff 19 aat  -20.201 110.77 111.27
+dihedral_coeff 20 aat  0 114 111.27
+dihedral_coeff 21 aat  -12.564 110.77 110.77
+dihedral_coeff 22 aat  0 114 110.77
+dihedral_coeff 23 aat  -16.164 110.77 112.67
+dihedral_coeff 24 aat  0 114 112.67
+dihedral_coeff 25 aat  -12.104 111.27 105.8
+dihedral_coeff 26 aat  -10.509 108.73 105.8
+dihedral_coeff 27 aat  -12.104 111.27 105.8
+dihedral_coeff 28 aat  -29.042 111.27 112.67
+dihedral_coeff 29 aat  -16.164 110.77 112.67
+dihedral_coeff 30 aat  -20.201 110.77 111.27
+dihedral_coeff 31 aat  -12.564 110.77 110.77
+dihedral_coeff 32 aat  -16.164 110.77 112.67
+dihedral_coeff 33 aat  -12.104 111.27 105.8
+dihedral_coeff 34 aat  0 118.9 121.46
+dihedral_coeff 35 aat  0 120.05 121.46
+dihedral_coeff 36 aat  0 108.4 120.05
+dihedral_coeff 37 aat  0 121.46 120
+dihedral_coeff 38 aat  0 108.4 110.77
+dihedral_coeff 39 aat  -12.564 110.77 110.77
+dihedral_coeff 40 aat  -7.1755 121.46 111.87
+dihedral_coeff 41 aat  0 118.9 120
+dihedral_coeff 42 aat  0 120.05 120
+dihedral_coeff 43 aat  0 120 109
+dihedral_coeff 1 ebt  -0.1185 6.3204 0 -0.1185 6.3204 0 1.417 1.417
+dihedral_coeff 2 ebt  0 -6.8958 0 0 -0.4669 0 1.417 1.0982
+dihedral_coeff 3 ebt  0 -0.689 0 0 -0.689 0 1.0982 1.0982
+dihedral_coeff 4 ebt  0 0 0 0 0 0 1.501 1.417
+dihedral_coeff 5 ebt  1.3997 0.7756 0 -0.5835 1.122 0.3978 1.101 1.417
+dihedral_coeff 6 ebt  0 0.2421 0 0 -0.6918 0 1.501 1.417
+dihedral_coeff 7 ebt  0 -1.797 0 0 -0.4879 0 1.501 1.0982
+dihedral_coeff 8 ebt  0 0.2655 0 0 4.8905 0 1.417 1.3768
+dihedral_coeff 9 ebt  0 -1.5867 0 0 4.2641 0 1.0982 1.3768
+dihedral_coeff 10 ebt  0 0 0 0 0 0 1.417 1.42
+dihedral_coeff 11 ebt  0 0 0 0 0 0 1.53 1.3768
+dihedral_coeff 12 ebt  0 0 0 0 0 0 1.101 1.3768
+dihedral_coeff 13 ebt  1.1538 0.8409 -0.9138 -0.319 0.4411 -0.7174 1.42 1.53
+dihedral_coeff 14 ebt  1.0165 0.7553 -0.4609 1.0165 0.7553 -0.4609 1.42 1.42
+dihedral_coeff 15 ebt  0.5903 0.6669 0.8584 0.9681 0.9551 0.0436 1.42 1.101
+dihedral_coeff 16 ebt  0.0814 0.0591 0.2219 0.2486 0.2422 -0.0925 1.101 1.53
+dihedral_coeff 17 ebt  0.9681 0.9551 0.0436 0.5903 0.6669 0.8584 1.101 1.42
+dihedral_coeff 18 ebt  0.213 0.312 0.0777 0.213 0.312 0.0777 1.101 1.101
+dihedral_coeff 19 ebt  0.9681 0.9551 0.0436 0.5903 0.6669 0.8584 1.101 1.42
+dihedral_coeff 20 ebt  0 0 0 0 0 0 1.475 1.42
+dihedral_coeff 21 ebt  0.213 0.312 0.0777 0.213 0.312 0.0777 1.101 1.101
+dihedral_coeff 22 ebt  0 0 0 0 0 0 1.475 1.101
+dihedral_coeff 23 ebt  0.0814 0.0591 0.2219 0.2486 0.2422 -0.0925 1.101 1.53
+dihedral_coeff 24 ebt  0 0 0 0 0 0 1.475 1.53
+dihedral_coeff 25 ebt  -0.58 0.9004 0 0 0.5343 0.9025 1.53 0.965
+dihedral_coeff 26 ebt  -1.7554 1.3145 0.2263 0.2493 0.6803 0 1.101 0.965
+dihedral_coeff 27 ebt  -0.58 0.9004 0 0 0.5343 0.9025 1.53 0.965
+dihedral_coeff 28 ebt  1.1538 0.8409 -0.9138 -0.319 0.4411 -0.7174 1.42 1.53
+dihedral_coeff 29 ebt  0.0814 0.0591 0.2219 0.2486 0.2422 -0.0925 1.101 1.53
+dihedral_coeff 30 ebt  0.9681 0.9551 0.0436 0.5903 0.6669 0.8584 1.101 1.42
+dihedral_coeff 31 ebt  0.213 0.312 0.0777 0.213 0.312 0.0777 1.101 1.101
+dihedral_coeff 32 ebt  0.0814 0.0591 0.2219 0.2486 0.2422 -0.0925 1.101 1.53
+dihedral_coeff 33 ebt  -0.58 0.9004 0 0 0.5343 0.9025 1.53 0.965
+dihedral_coeff 34 ebt  0 -6.5404 0 0 -7.3477 0 1.417 1.3912
+dihedral_coeff 35 ebt  0 0 0 0 0 0 1.501 1.3912
+dihedral_coeff 36 ebt  0 0 0 0 0 0 1.53 1.417
+dihedral_coeff 37 ebt  0 0 0 0 0 0 1.417 1.475
+dihedral_coeff 38 ebt  0 0 0 0 0 0 1.501 1.101
+dihedral_coeff 39 ebt  0.213 0.312 0.0777 0.213 0.312 0.0777 1.101 1.101
+dihedral_coeff 40 ebt  0 -3.7281 0 0 0.2849 0 1.417 1.0012
+dihedral_coeff 41 ebt  0 0 0 0 0 0 1.417 1.412
+dihedral_coeff 42 ebt  0 0 0 0 0 0 1.501 1.412
+dihedral_coeff 43 ebt  0 0 0 0 0 0 1.417 1.006
+dihedral_coeff 1 mbt  27.599 -2.312 0 1.417
+dihedral_coeff 2 mbt  0 -1.1521 0 1.417
+dihedral_coeff 3 mbt  0 4.8228 0 1.417
+dihedral_coeff 4 mbt  0 0 0 1.501
+dihedral_coeff 5 mbt  -5.5679 1.4083 0.301 1.501
+dihedral_coeff 6 mbt  0 9.1792 0 1.417
+dihedral_coeff 7 mbt  0 3.9421 0 1.417
+dihedral_coeff 8 mbt  0 4.8255 0 1.417
+dihedral_coeff 9 mbt  0 5.5432 0 1.417
+dihedral_coeff 10 mbt  0 0 0 1.3768
+dihedral_coeff 11 mbt  0 0 0 1.42
+dihedral_coeff 12 mbt  0 0 0 1.42
+dihedral_coeff 13 mbt  -21.884 -7.6764 -0.6868 1.53
+dihedral_coeff 14 mbt  -17.259 -3.6157 -0.8364 1.53
+dihedral_coeff 15 mbt  -16.797 -1.2296 -0.275 1.53
+dihedral_coeff 16 mbt  -14.879 -3.6581 -0.3138 1.53
+dihedral_coeff 17 mbt  -16.797 -1.2296 -0.275 1.53
+dihedral_coeff 18 mbt  -14.261 -0.5322 -0.4864 1.53
+dihedral_coeff 19 mbt  -16.797 -1.2296 -0.275 1.53
+dihedral_coeff 20 mbt  0 0 0 1.53
+dihedral_coeff 21 mbt  -14.261 -0.5322 -0.4864 1.53
+dihedral_coeff 22 mbt  0 0 0 1.53
+dihedral_coeff 23 mbt  -14.879 -3.6581 -0.3138 1.53
+dihedral_coeff 24 mbt  0 0 0 1.53
+dihedral_coeff 25 mbt  1.2472 0 0.7485 1.42
+dihedral_coeff 26 mbt  0 0.9241 -0.5889 1.42
+dihedral_coeff 27 mbt  1.2472 0 0.7485 1.42
+dihedral_coeff 28 mbt  -21.884 -7.6764 -0.6868 1.53
+dihedral_coeff 29 mbt  -14.879 -3.6581 -0.3138 1.53
+dihedral_coeff 30 mbt  -16.797 -1.2296 -0.275 1.53
+dihedral_coeff 31 mbt  -14.261 -0.5322 -0.4864 1.53
+dihedral_coeff 32 mbt  -14.879 -3.6581 -0.3138 1.53
+dihedral_coeff 33 mbt  1.2472 0 0.7485 1.42
+dihedral_coeff 34 mbt  0 -0.5693 0 1.417
+dihedral_coeff 35 mbt  0 0 0 1.417
+dihedral_coeff 36 mbt  0 0 0 1.501
+dihedral_coeff 37 mbt  0 0 0 1.3912
+dihedral_coeff 38 mbt  0 0 0 1.53
+dihedral_coeff 39 mbt  -14.261 -0.5322 -0.4864 1.53
+dihedral_coeff 40 mbt  0 3.2085 0 1.3912
+dihedral_coeff 41 mbt  0 0 0 1.417
+dihedral_coeff 42 mbt  0 0 0 1.417
+dihedral_coeff 43 mbt  0 0 0 1.412
+dihedral_coeff 1 bb13  53 1.417 1.417
+dihedral_coeff 2 bb13  -6.2741 1.417 1.0982
+dihedral_coeff 3 bb13  -1.7077 1.0982 1.0982
+dihedral_coeff 4 bb13  0 1.501 1.417
+dihedral_coeff 5 bb13  -3.4826 1.101 1.417
+dihedral_coeff 6 bb13  2.5085 1.501 1.417
+dihedral_coeff 7 bb13  0.8743 1.501 1.0982
+dihedral_coeff 8 bb13  -2.2436 1.417 1.3768
+dihedral_coeff 9 bb13  2.0517 1.0982 1.3768
+dihedral_coeff 10 bb13  0 1.417 1.42
+dihedral_coeff 11 bb13  0 1.53 1.3768
+dihedral_coeff 12 bb13  0 1.101 1.3768
+dihedral_coeff 13 bb13  0 1.42 1.53
+dihedral_coeff 14 bb13  0 1.42 1.42
+dihedral_coeff 15 bb13  0 1.42 1.101
+dihedral_coeff 16 bb13  0 1.101 1.53
+dihedral_coeff 17 bb13  0 1.101 1.42
+dihedral_coeff 18 bb13  0 1.101 1.101
+dihedral_coeff 19 bb13  0 1.101 1.42
+dihedral_coeff 20 bb13  0 1.475 1.42
+dihedral_coeff 21 bb13  0 1.101 1.101
+dihedral_coeff 22 bb13  0 1.475 1.101
+dihedral_coeff 23 bb13  0 1.101 1.53
+dihedral_coeff 24 bb13  0 1.475 1.53
+dihedral_coeff 25 bb13  0 1.53 0.965
+dihedral_coeff 26 bb13  0 1.101 0.965
+dihedral_coeff 27 bb13  0 1.53 0.965
+dihedral_coeff 28 bb13  0 1.42 1.53
+dihedral_coeff 29 bb13  0 1.101 1.53
+dihedral_coeff 30 bb13  0 1.101 1.42
+dihedral_coeff 31 bb13  0 1.101 1.101
+dihedral_coeff 32 bb13  0 1.101 1.53
+dihedral_coeff 33 bb13  0 1.53 0.965
+dihedral_coeff 34 bb13  -9.7999 1.417 1.3912
+dihedral_coeff 35 bb13  0 1.501 1.3912
+dihedral_coeff 36 bb13  0 1.53 1.417
+dihedral_coeff 37 bb13  0 1.417 1.475
+dihedral_coeff 38 bb13  0 1.501 1.101
+dihedral_coeff 39 bb13  0 1.101 1.101
+dihedral_coeff 40 bb13  4.2366 1.417 1.0012
+dihedral_coeff 41 bb13  0 1.417 1.412
+dihedral_coeff 42 bb13  0 1.501 1.412
+dihedral_coeff 43 bb13  0 1.417 1.006
+dihedral_coeff 1 at  1.9767 1.0239 0 1.9767 1.0239 0 118.9 118.9
+dihedral_coeff 2 at  0 2.5014 0 0 2.7147 0 118.9 117.94
+dihedral_coeff 3 at  0 2.4501 0 0 2.4501 0 117.94 117.94
+dihedral_coeff 4 at  0 0 0 0 0 0 111 120.05
+dihedral_coeff 5 at  4.6266 0.1632 0.0461 0.2251 0.6548 0.1237 111 120.05
+dihedral_coeff 6 at  0 -4.4683 0 0 3.8987 0 120.05 118.9
+dihedral_coeff 7 at  0 -0.1242 0 0 3.4601 0 120.05 117.94
+dihedral_coeff 8 at  0 10.015 0 0 1.7404 0 118.9 123.42
+dihedral_coeff 9 at  0 1.8729 0 0 2.5706 0 117.94 123.42
+dihedral_coeff 10 at  0 0 0 0 0 0 123.42 102.97
+dihedral_coeff 11 at  0 0 0 0 0 0 111.27 102.97
+dihedral_coeff 12 at  0 0 0 0 0 0 108.73 102.97
+dihedral_coeff 13 at  0.9672 -0.7566 -1.2331 0.5623 -0.3041 -0.4015 111.27 112.67
+dihedral_coeff 14 at  0.5511 0.9737 -0.6673 0.5511 0.9737 -0.6673 111.27 111.27
+dihedral_coeff 15 at  -0.1892 0.4918 0.7273 2.3668 2.492 -1.0122 111.27 110.77
+dihedral_coeff 16 at  0.3113 0.4516 -0.1988 -0.2454 0 -0.1136 110.77 112.67
+dihedral_coeff 17 at  2.3668 2.492 -1.0122 -0.1892 0.4918 0.7273 110.77 111.27
+dihedral_coeff 18 at  -0.8085 0.5569 -0.2466 -0.8085 0.5569 -0.2466 110.77 110.77
+dihedral_coeff 19 at  2.3668 2.492 -1.0122 -0.1892 0.4918 0.7273 110.77 111.27
+dihedral_coeff 20 at  0 0 0 0 0 0 114 111.27
+dihedral_coeff 21 at  -0.8085 0.5569 -0.2466 -0.8085 0.5569 -0.2466 110.77 110.77
+dihedral_coeff 22 at  0 0 0 0 0 0 114 110.77
+dihedral_coeff 23 at  0.3113 0.4516 -0.1988 -0.2454 0 -0.1136 110.77 112.67
+dihedral_coeff 24 at  0 0 0 0 0 0 114 112.67
+dihedral_coeff 25 at  -3.5903 2.5225 0.4888 0.8726 -0.3577 0.3888 111.27 105.8
+dihedral_coeff 26 at  -3.406 1.6396 0.0737 0 -0.281 -0.5944 108.73 105.8
+dihedral_coeff 27 at  -3.5903 2.5225 0.4888 0.8726 -0.3577 0.3888 111.27 105.8
+dihedral_coeff 28 at  0.9672 -0.7566 -1.2331 0.5623 -0.3041 -0.4015 111.27 112.67
+dihedral_coeff 29 at  0.3113 0.4516 -0.1988 -0.2454 0 -0.1136 110.77 112.67
+dihedral_coeff 30 at  2.3668 2.492 -1.0122 -0.1892 0.4918 0.7273 110.77 111.27
+dihedral_coeff 31 at  -0.8085 0.5569 -0.2466 -0.8085 0.5569 -0.2466 110.77 110.77
+dihedral_coeff 32 at  0.3113 0.4516 -0.1988 -0.2454 0 -0.1136 110.77 112.67
+dihedral_coeff 33 at  -3.5903 2.5225 0.4888 0.8726 -0.3577 0.3888 111.27 105.8
+dihedral_coeff 34 at  0 9.0901 0 0 -6.0882 0 118.9 121.46
+dihedral_coeff 35 at  0 0 0 0 0 0 120.05 121.46
+dihedral_coeff 36 at  0 0 0 0 0 0 108.4 120.05
+dihedral_coeff 37 at  0 0 0 0 0 0 121.46 120
+dihedral_coeff 38 at  0 0 0 0 0 0 108.4 110.77
+dihedral_coeff 39 at  -0.8085 0.5569 -0.2466 -0.8085 0.5569 -0.2466 110.77 110.77
+dihedral_coeff 40 at  0 1.2616 0 0 0.7744 0 121.46 111.87
+dihedral_coeff 41 at  0 0 0 0 0 0 118.9 120
+dihedral_coeff 42 at  0 0 0 0 0 0 120.05 120
+dihedral_coeff 43 at  0 0 0 0 0 0 120 109
+
+# improper_style class2
+improper_coeff 1   7.1794 0
+improper_coeff 2   4.8912 0
+improper_coeff 3   0 0
+improper_coeff 4   0 0
+improper_coeff 5   7.8153 0
+improper_coeff 6   13.042 0
+improper_coeff 7   0 0
+improper_coeff 8   0 0
+improper_coeff 9   0 0
+improper_coeff 10   0 0
+improper_coeff 11   0 0
+improper_coeff 12   0 0
+improper_coeff 13   0 0
+improper_coeff 14   0 0
+improper_coeff 15   0 0
+improper_coeff 16   0 0
+improper_coeff 17   0 0
+improper_coeff 18   0 0
+improper_coeff 19   0 0
+improper_coeff 20   0 0
+improper_coeff 21   0 0
+improper_coeff 22   10.786 0
+improper_coeff 23   0 0
+improper_coeff 24   0 0
+improper_coeff 25   0 0
+improper_coeff 26   0.1 0
+improper_coeff 27   0.1 0
+improper_coeff 28   10 0
+improper_coeff 29   0 0
+improper_coeff 1 aa  0 0 0 118.9 118.9 118.9
+improper_coeff 2 aa  0 0 0 118.9 117.94 117.94
+improper_coeff 3 aa  0 0 0 120 120 120
+improper_coeff 4 aa  2.3794 3.0118 2.3794 111 111 107.66
+improper_coeff 5 aa  0 0 0 120.05 120.05 118.9
+improper_coeff 6 aa  0 0 0 118.9 123.42 123.42
+improper_coeff 7 aa  3.9177 2.5926 0.1689 110.77 111.27 108.73
+improper_coeff 8 aa  2.4259 2.4259 2.1283 107.66 108.73 108.73
+improper_coeff 9 aa  0.2738 -0.4825 0.2738 110.77 110.77 107.66
+improper_coeff 10 aa  3.9177 2.5926 0.1689 110.77 111.27 108.73
+improper_coeff 11 aa  -0.833 -0.833 -3.5744 112.67 111.27 111.27
+improper_coeff 12 aa  -1.3199 -1.3199 0.1184 112.67 110.77 110.77
+improper_coeff 13 aa  3.9177 2.5926 0.1689 110.77 111.27 108.73
+improper_coeff 14 aa  0.2738 -0.4825 0.2738 110.77 110.77 107.66
+improper_coeff 15 aa  0 0 0 120 120 120
+improper_coeff 16 aa  0 0 0 120 120 120
+improper_coeff 17 aa  3.9177 2.5926 0.1689 110.77 111.27 108.73
+improper_coeff 18 aa  -0.833 -0.833 -3.5744 112.67 111.27 111.27
+improper_coeff 19 aa  -1.3199 -1.3199 0.1184 112.67 110.77 110.77
+improper_coeff 20 aa  0.2738 -0.4825 0.2738 110.77 110.77 107.66
+improper_coeff 21 aa  -0.3157 -0.3157 -0.3157 107.66 107.66 107.66
+improper_coeff 22 aa  0 0 0 118.9 121.46 121.46
+improper_coeff 23 aa  2.0403 -1.8202 1.0827 108.4 110.77 111
+improper_coeff 24 aa  0.2738 -0.4825 0.2738 110.77 110.77 107.66
+improper_coeff 25 aa  0.2738 -0.4825 0.2738 110.77 110.77 107.66
+improper_coeff 26 aa  0 0 0 120 120 120
+improper_coeff 27 aa  0 0 0 120 120 120
+improper_coeff 28 aa  0 0 0 120 120 120
+improper_coeff 29 aa  0 0 0 120 120 120
+

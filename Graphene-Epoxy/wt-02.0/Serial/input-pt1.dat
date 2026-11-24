@@ -1,0 +1,14 @@
+#-------------------------------------------------------------------------------
+# Variables
+#-------------------------------------------------------------------------------
+
+variable        rep world 1 5
+variable        TStart world 310 330
+
+variable T0 equal "v_TStart"
+variable TNew equal "v_T0 - 10"
+
+shell cd ${rep}
+shell cd ${TStart}
+
+include			../../input-loop.dat
